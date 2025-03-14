@@ -36,8 +36,11 @@ DotName C++ Template is a comprehensive, modern C++ project template designed fo
   - Advanced feature to debug [**CMake configurations**](https://devblogs.microsoft.com/cppblog/introducing-cmake-debugger-in-vs-code-debug-your-cmake-scripts-using-open-source-cmake-debugger/)
 - Compatible with [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
 
-## Important
-You can manually add dependencies one by one, which might be the more complex but better option for already used systems, or you can use **automatic installation scripts**, which are most suitable for a freshly installed system, as the scripts will install everything from scratch to a functional solution.
+## Open Template in GitHub Codespace
+You can open the template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Click the **"Use this template / Open in a codespace"** button. Simply install `Conan 2` using the command `pip install conan`, and you can use the `build.sh` bash script for CLI compilation. This method is suitable for simple use cases that require command-line control of the entire workflow.
+
+## Local development 
+You can manually add dependencies one by one to your development environment, which might be the more complex but better option for already used systems, or you can use **automatic installation scripts**, which are most suitable for a freshly installed system (or virtuals), as the scripts will install everything from scratch to a functional solution.
 
 ## Getting Started 
 
