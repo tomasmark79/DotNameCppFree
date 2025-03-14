@@ -9,10 +9,11 @@
 namespace library {
 
 DotNameLib::DotNameLib(const std::string &assetsPath) {
-  LOG.important("DotNameLib v." + std::string(DOTNAMELIB_VERSION) + " constructed.");
-  LOG.debug("Assets Path: " + assetsPath);
+  LOG_IMPORTANT("DotNameLib v." + std::string(DOTNAMELIB_VERSION) +
+                " constructed.");
+  LOG_DEBUG("Assets Path: " + assetsPath);
 }
 
-DotNameLib::~DotNameLib() { LOG.debug("DotNameLib deconstructed."); }
+DotNameLib::~DotNameLib() { LOG_DEBUG("DotNameLib deconstructed."); }
 
 } // namespace library

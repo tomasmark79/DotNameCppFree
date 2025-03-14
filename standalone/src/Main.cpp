@@ -18,10 +18,9 @@ std::string standaloneExecutableDirectory =
 /// @brief Main Standalone entry point
 int main(int argc, const char *argv[]) {
   // ---basic-information------is-safe-to-delete 👇🏻
-  LOG << Logger::Level::LOG_IMPORTANT << standaloneName << " / C++ " << __cplusplus
-      << std::endl;
-  LOG << Logger::Level::LOG_DEBUG
-      << "Executable Directory: " << standaloneExecutableDirectory << std::endl;
+  LOG_I << standaloneName << " / C++ " << __cplusplus << std::endl;
+  LOG_D << "Executable Directory: " << standaloneExecutableDirectory
+        << std::endl;
   // ----------------------------------delete me 👆🏻
 
   // ---assets-testing---------is-safe-to-delete 👇🏻
@@ -31,12 +30,12 @@ int main(int argc, const char *argv[]) {
   std::ifstream file(assetFp);
   try {
     if (file.is_open()) {
-      LOG.debug("Opened first asset file: " + assetFp);
+      LOG_DEBUG("Opened first asset file: " + assetFp);
     } else {
-      LOG.error("No assets found: " + assetFp);
+      LOG_ERROR("No assets found: " + assetFp);
     }
   } catch (const std::exception &e) {
-    LOG.error("Error opening first asset file: " + assetFp);
+    LOG_ERROR("Error opening first asset file: " + assetFp);
   }
   // ----------------------------------delete me 👆🏻
 
@@ -54,8 +53,7 @@ int main(int argc, const char *argv[]) {
     const auto result = options->parse(argc, argv);
 
     if (result.count("help")) {
-      LOG << Logger::Level::LOG_INFO << options->help({"", "Group"})
-          << std::endl;
+      LOG_I << options->help({"", "Group"}) << std::endl;
       return 0;
     }
     if (!result.count("omit")) {
@@ -64,11 +62,10 @@ int main(int argc, const char *argv[]) {
       std::unique_ptr<library::DotNameLib> lib =
           std::make_unique<library::DotNameLib>(assetsPath);
     } else {
-      LOG << Logger::Level::LOG_WARNING << "Loading library omitted [-o]"
-          << std::endl;
+      LOG_W << "Loading library omitted [-o]" << std::endl;
     }
   } catch (const cxxopts::exceptions::exception &e) {
-    LOG << Logger::Level::LOG_ERROR << "error parsing options: " << e.what();
+    LOG_E << "error parsing options: " << e.what();
     return 1;
   }
   // ----------------------------------delete me 👆🏻
