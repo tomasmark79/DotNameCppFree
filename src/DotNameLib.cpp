@@ -8,10 +8,11 @@
 
 namespace library {
 
-DotNameLib::DotNameLib(const std::string &assetsPath) {
+DotNameLib::DotNameLib(const std::string &assetsPath)
+    : m_assetsPath(assetsPath) {
   LOG_IMPORTANT("DotNameLib v." + std::string(DOTNAMELIB_VERSION) +
                 " constructed.");
-  LOG_DEBUG("Assets Path: " + assetsPath);
+  LOG_DEBUG("Assets Path: " + this->m_assetsPath);
 }
 
 DotNameLib::~DotNameLib() { LOG_DEBUG("DotNameLib deconstructed."); }
