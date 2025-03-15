@@ -6,16 +6,6 @@
 // CMAKE generating definitions
 // ../cmake/tmplt-assets.cmake)
 
-#ifndef UTILS_ASSET_PATH
-  #define UTILS_ASSET_PATH ""
-#endif
-#ifndef UTILS_FIRST_ASSET_FILE
-  #define UTILS_FIRST_ASSET_FILE ""
-#endif
-#ifndef UTILS_ASSET_FILES_DIVIDED_BY_COMMAS
-  #define UTILS_ASSET_FILES_DIVIDED_BY_COMMAS ""
-#endif
-
 #ifdef _WIN32
   #include <windows.h>
 #elif defined(__APPLE__)
