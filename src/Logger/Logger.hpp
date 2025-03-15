@@ -20,7 +20,31 @@
   // Disable min/max macros in windows.h to avoid conflicts with std::min/max
   // cxxopts.hpp uses std::min/max
   #endif
+
+  // Undefine Raylib functions to avoid conflicts
+  #define Rectangle WindowsRectangle
+  #define CloseWindow WindowsCloseWindow
+  #define ShowCursor WindowsShowCursor
+  #define DrawText WindowsDrawText
+  #define PlaySound WindowsPlaySound
+  #define PlaySoundA WindowsPlaySoundA
+  #define PlaySoundW WindowsPlaySoundW
+  #define LoadImage WindowsLoadImage
+  #define DrawTextEx WindowsDrawTextEx
+
   #include <windows.h>
+  
+  // Restore Raylib functions
+  #undef Rectangle
+  #undef CloseWindow
+  #undef ShowCursor
+  #undef DrawText
+  #undef PlaySound
+  #undef PlaySoundA
+  #undef PlaySoundW
+  #undef LoadImage
+  #undef DrawTextEx
+
 #endif
 
 // Function name macros for different compilers
