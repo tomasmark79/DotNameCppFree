@@ -1,6 +1,6 @@
 # DotName C++ Template
 
-[![Ubuntu](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/ubuntu.yml)
+[![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
 
