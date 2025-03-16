@@ -1,6 +1,8 @@
+import os
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 from conan.tools.system import package_manager
+from conan.tools.files import copy
 
 # In Pro Template DO NOT use cmake_layout(self) in the recipe.
 # It is self implemented in SolutionController.py
