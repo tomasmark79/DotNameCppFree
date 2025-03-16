@@ -2,6 +2,13 @@
 // Copyright (c) 2024-2025 Tomáš Mark
 
 #include "Utils.hpp"
+#include "Logger/Logger.hpp"
+
+#include <fstream>
+#include <iostream>
+#include <memory>
+#include <sstream>
+#include <string>
 
 // CMAKE generating definitions
 // ../cmake/tmplt-assets.cmake)
@@ -17,6 +24,20 @@
 #endif
 
 namespace FileSystemManager {
+
+std::string read(const std::string &filename) {
+  std::ifstream file;
+  file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+  std::stringstream file_stream;
+  try {
+    file.open(filename.c_str());
+    file_stream << file.rdbuf();
+    file.close();
+  } catch (const std::ifstream::failure &e) {
+    LOG_ERROR("Error reading Shader File!");
+  }
+  return file_stream.str();
+}
 
 std::string getExecutableDirectory() {
   std::string path;

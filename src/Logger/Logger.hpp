@@ -33,7 +33,7 @@
   #define DrawTextEx WindowsDrawTextEx
 
   #include <windows.h>
-  
+
   // Restore Raylib functions
   #undef Rectangle
   #undef CloseWindow
