@@ -1,5 +1,6 @@
 # DotName C++ Template
 
+[![Fedora](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/Fedora.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/Fedora.yml)
 [![Ubuntu](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
