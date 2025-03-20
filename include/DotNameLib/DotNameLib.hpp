@@ -7,19 +7,21 @@
 #include <string>
 // Public API
 
-namespace library {
+namespace library
+{
 
-class DotNameLib {
-public:
-  DotNameLib(const std::string &assetsPath);
-  ~DotNameLib();
+  class DotNameLib
+  {
+  public:
+    DotNameLib (const std::string &assetsPath);
+    ~DotNameLib ();
 
-  // alternatively, you can use a getter function
-  const std::string getAssetsPath() const { return m_assetsPath; }
+    // alternatively, you can use a getter function
+    const std::string getAssetsPath () const { return m_assetsPath; }
 
-private:
-  std::string m_assetsPath;
-};
+  private:
+    std::string m_assetsPath;
+  };
 
 } // namespace library
 

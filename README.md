@@ -58,9 +58,11 @@ Tools
 - [pyenv](https://github.com/pyenv/pyenv) (optional) (.python-version)
   - [python 3](https://www.python.org)
     - [pip](https://pypi.org/project/pip/) - [PipHub](https://pypi.org)
-      - [clang tidy](https://clang.llvm.org/extra/clang-tidy/)
-      - [clang format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0- [WebClangConfigurator](https://clang-format-configurator.site)
-      - [cmake format](https://cmake-format.readthedocs.io/en/latest/)
+      - [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
+      - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
+      - [clanf-format configurator](https://clang-format-configurator.site)
+      - [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
+      - [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
     - [conan 2](https://conan.io/center) - [ConanHub](https://conan.io/center)
 - [vcpkg](https://vcpkg.io/en/) (not implemented yet)
 - [doxygen](https://www.doxygen.nl) (not implemented yet)
@@ -99,6 +101,27 @@ or
 git clone git@github.com:tomasmark79/DotNameCppFree.git ./ && rm -rf .git && git init -b main && .init/initializers/MakeFreeClone.sh init
 ```
 ---
+
+### C++ code formatting
+
+Formatting is based on included `.clang-format`
+
+```txt
+BasedOnStyle: GNU
+```
+
+My prefered changes also attached
+
+```txt
+BreakBeforeBraces: Allman
+ColumnLimit: 79
+SortIncludes: Never
+BreakAfterReturnType: Automatic
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+IndentWidth: 2
+NamespaceIndentation: All
+```
 
 ### Folders overview
 
