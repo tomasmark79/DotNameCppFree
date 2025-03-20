@@ -151,6 +151,7 @@ DotNameCppFree/
 The C++ source code uses a basic [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation described below.
 
   - `-o` omit library loading
+  - `-l` log to file
   - `-h` show help
 
 ### Configurable CMakeLists.txt Options
