@@ -23,7 +23,6 @@ class DotNameCppRecipe(ConanFile):
     # ----------------------------------------------------------
     # Consuming recipe
     # ----------------------------------------------------------
-    
     def configure(self):
         self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
 
@@ -35,6 +34,10 @@ class DotNameCppRecipe(ConanFile):
 
     def build_requirements(self):
         self.tool_requires("cmake/[>3.14]")
+
+    # it will store all the found License files inside the local licenses folder, which will contain one subfolder per dependency with the license file inside
+    def imports(self):
+     self.copy("license*", dst="licenses", folder=True, ignore_case=True)
 
     # def system_requirements(self):
         # dnf = package_manager.Dnf(self)
