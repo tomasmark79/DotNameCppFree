@@ -73,7 +73,7 @@ int main (int argc, const char *argv[])
       LOG.enableFileLogging (std::string (standaloneName) + ".log");
       LOG_I << "Logging to file enabled [-l]" << std::endl;
     }
-    
+
     if (!result.count ("omit"))
     {
       const std::string assetsPath
