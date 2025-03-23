@@ -93,11 +93,15 @@ conan profile detect --force
 
 ### Cloning the Repository 
 
+
+#### Just Clone
+
 ```bash
-git clone https://github.com/tomasmark79/DotNameCppFree ./ && rm -rf .git
+git clone https://github.com/tomasmark79/DotNameCppFree ./
+```
 
-or
-
+#### Clone + remove original .git config + init new git + init free clone
+```bash
 git clone git@github.com:tomasmark79/DotNameCppFree.git ./ && rm -rf .git && git init -b main && .init/initializers/MakeFreeClone.sh init
 ```
 ---
@@ -150,13 +154,16 @@ DotNameCppFree/
 
 The C++ source code uses a basic [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation described below.
 
-  - `-o` omit library loading
+  - `-o` omit library
+    - loading (using just standalone project
   - `-l` log to file
-  - `-h` show help
+    - implemented logger support log to file as well
+  - `-h` show usage
+  
 
 ### Configurable CMakeLists.txt Options
 
-The following CMake options can be configured to tailor the build process to your specific needs:
+The following CMake options can be configured to tailor the build process to your specific needs. Provide flexibility and control over the build configuration, allowing you to optimize for performance, security, and development efficiency.
 
 - `BUILD_SHARED_LIBS`: Build shared libraries instead of static ones.
 - `USE_STATIC_RUNTIME`: Use the static runtime library.
@@ -168,7 +175,6 @@ The following CMake options can be configured to tailor the build process to you
 - `ENABLE_IPO`: Enable interprocedural optimization.
 - `ENABLE_CCACHE`: Enable ccache for faster recompilation.
 
-These options provide flexibility and control over the build configuration, allowing you to optimize for performance, security, and development efficiency.
 
 ### CLI Preparing Dependencies, Configuring, Building, Installation
 
@@ -264,6 +270,7 @@ One of the first things you should do when you open VSCode is to install the nec
 
 ### Keyboard Shortcuts (🛸 Pro)
 
+- `F8` or `Shift+F8` jumps to the next or previous error  
 - `Shift+F7`: TASK MENU (standalone, library, both)  
 - `F7`: 🔨 Quick build Standalone  
 - `F5`: 🪲 Quick debug Standalone  
