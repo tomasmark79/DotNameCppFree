@@ -21,6 +21,7 @@
 [Library Source](#library-source)  
 [VSCode WorkFlow Tuning - Keybindings](#keybindings)  
 [VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks)  
+[VSCode WorkFlow Tuning - Recomended Extensions](#recomended-vscode-extensions)  
 [CMake Options](#cmake-options)  
 [Environment Installers](#environment-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
@@ -236,6 +237,8 @@ requiring copy content of keybindings.json to system part of configuration
 - `Ctrl+Alt+F`: 📐 clang-format  
 - `Ctrl+Alt+M`: 📏 cmake-format 
 
+[👆🏻](#index)
+
 ### Automatic Tasks
 
 By `Shift+F7` invoked **TASK MENU** includes the following automation commands:  
@@ -255,6 +258,30 @@ By `Shift+F7` invoked **TASK MENU** includes the following automation commands:
 - 📊 Conan dependencies in graph.html  
 - 🔍 CLang-tidy  
 - 📐📏 CLang & CMake formatting  
+
+[👆🏻](#index)
+
+### Recomended VSCode Extensions
+
+```url
+ms-vscode.cpptools
+ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
+FleeXo.cpp-class-creator
+amiralizadeh9480.cpp-helper
+twxs.cmake
+ms-vscode.cmake-tools
+cheshirekow.cmake-format
+Guyutongxue.cpp-reference
+tamasfe.even-better-toml
+github.vscode-github-actions
+GitHub.copilot
+GitHub.copilot-chat
+ms-python.python
+natqe.reload
+foxundermoon.shell-format
+jeff-hykin.better-cpp-syntax
+```
 
 [👆🏻](#index)
 
