@@ -122,9 +122,9 @@ Crosstools
 
 [👆🏻](#index)
 
-## Get & Prepare Template
+## Clone template
 
-#### by classic way
+#### Variant 1
 
 ```bash
 git clone https://github.com/tomasmark79/DotNameCppFree
@@ -137,16 +137,20 @@ code .
 .init/initializers/MakeFreeClone.sh init
 ```
 
-#### by curl
+#### Variant 2
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/cpp.sh | bash
+curl -sSL rb.gy/srph8e | bash
+# or
+curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
 ```
 
-#### by wget
+#### Variant 3
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/cpp.sh | bash
+wget -qO- https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
+# or
+wget -qO- rb.gy/srph8e " | bash
 ```
 
 [👆🏻](#index)
