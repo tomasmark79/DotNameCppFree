@@ -27,10 +27,9 @@
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
-[Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles) 
-[FAQ](#faq)  
+[Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
+[**FAQ**](#faq)  
 [Thanks](#thanks)  
-
 
 ## Overview
 
