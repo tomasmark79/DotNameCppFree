@@ -140,17 +140,17 @@ code .
 #### Variant 2
 
 ```bash
-curl -sSL rb.gy/srph8e | bash
+curl -sSL rb.gy/xb0p89 | bash
 # or
-curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
+curl -sSL raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
 ```
 
 #### Variant 3
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
+wget -qO- raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
 # or
-wget -qO- rb.gy/srph8e " | bash
+wget -qO- rb.gy/xb0p89 | bash
 ```
 
 [👆🏻](#index)
