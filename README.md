@@ -10,11 +10,10 @@
 
 [Overview](#overview)  
 [🚀 Key Features in **Free** Template ](#free--key-features)  
-[🛸 Key Features in **Pro** Template](#pro--key-features)  
-[**Get Pro**](#get-pro)  
+[🛸 Key Features in **Pro** Template](#pro--key-features)  [**Get Pro**](#get-pro)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
-[Download](#download)  
+[**Download**](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
 [Building using commands](#building-using-commands)  
 [Template Structure](#template-structure)  
@@ -122,27 +121,15 @@ Crosstools
 
 ## Download
 
-#### git clone
-
 ```bash
-git clone https://github.com/tomasmark79/DotNameCppFree
-cd DotNameCppFree
-rm -rf .git
-git init -b main
-code .
+git clone https://github.com/tomasmark79/DotNameCppFree.git ./
 ```
 
-#### shorten clone script
+or
 
-free edition
-
-`curl -sSL rb.gy/p3vvs7 | bash`  
-`wget -qO- rb.gy/p3vvs7 | bash`  
-
-pro edition  
-
-`curl -sSL rb.gy/xb0p89 | bash`  
-`wget -qO- rb.gy/xb0p89 | bash`  
+```bash
+git clone git@github.com:tomasmark79/DotNameCppFree.git ./
+```
 
 [👆🏻](#index)
 
