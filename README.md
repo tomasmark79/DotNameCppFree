@@ -22,7 +22,7 @@
 [VSCode WorkFlow Tuning - Keybindings](#keybindings)  
 [VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks)  
 [CMake Options](#cmake-options)  
-[Automatic Installers](#automatic-installers)  
+[Environment Installers](#environment-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
@@ -274,7 +274,7 @@ You need advanced knowledge to use these options.
 
 [👆🏻](#index)
 
-### Automatic Installers  
+### Environment Installers  
 
 Linux installer scripts are using [setup-cpp](https://github.com/aminya/setup-cpp).
 
