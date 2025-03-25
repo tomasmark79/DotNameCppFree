@@ -1,10 +1,10 @@
+<img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
+
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
 
 # DotName C++ Template
-
-<img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
 
 # Index
 
