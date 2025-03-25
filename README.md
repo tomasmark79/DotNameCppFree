@@ -14,11 +14,9 @@
 [**Get Pro**](#get-pro)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
-
-[Get & Prepare Template - classic way](#by-classic-way)  
-[Get & Prepare Template - by curl](#by-curl)
-[Get & Prepare Template - by wget](#by-wget)
-
+[Get & Prepare Template - classic way](#by-classic-way)   
+[Get & Prepare Template - by curl](#by-curl)  
+[Get & Prepare Template - by wget](#by-wget)  
 [CMake and Conan 2](#cmake-and-conan-2)  
 [Building using commands](#building-using-commands)  
 [Template Structure](#template-structure)  
@@ -142,13 +140,13 @@ code .
 #### by curl
 
 ```bash
-curl -sSL digitalspace.name/cpp.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/cpp.sh | bash
 ```
 
 #### by wget
 
 ```bash
-wget -qO- digitalspace.name/cpp.sh | bash
+wget -qO- https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/cpp.sh | bash
 ```
 
 [👆🏻](#index)
