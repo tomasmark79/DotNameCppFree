@@ -9,9 +9,9 @@
 # Index
 
 [Overview](#overview)  
-[Key Features - Free 🚀 Edition](#free--key-features)  
-[Key Features - Pro  🛸 Edition](#pro--key-features)  
-[How to get Pro Template](#-how-to-get-pro-template-version)  
+[🚀 Key Features in **Free** Template ](#free--key-features)  
+[🛸 Key Features in **Pro** Template](#pro--key-features)  
+[**Get Pro**](#get-pro)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
 [Template Clone](#template-clone)  
@@ -21,17 +21,16 @@
 [Standalone Source](#standalone-source)  
 [Library Source](#library-source)  
 [VSCode WorkFlow Tuning - Keybindings](#keybindings)  
-[VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks--pro)  
-[Useful Information](#useful-information)  
+[VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks)  
 [CMake Options](#cmake-options)  
 [Automatic Installers](#automatic-installers)
-[Template Maintenance](#template-maintenance)  
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
-[Cross-Compilation with Conan profiles](#cross-compilation-with-conan-profiles)  
+[Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles) 
 [FAQ](#faq)  
 [Thanks](#thanks)  
+
 
 ## Overview
 
@@ -71,9 +70,17 @@ In the Pro 🛸 Edition Template, you gain significantly expanded development fe
 
 [👆🏻](#index)
 
+## Get Pro
+
+Contribute [💶](https://paypal.me/TomasMark) to support my further development and contact me by [email](mailto:tomas@digitalspace.name).  
+Afterward I will send you full Pro version of the Template 🙂.  
+Thanks in advance.
+
+[👆🏻](#index)
+
 ## Using Github Codespace
 
-    Github Codespace is suitable for simple use cases that require command-line control of the entire solution workflow. (In Pro 🛸 is existing way to use advanced features)
+  Github Codespace is suitable for simple use cases that require command-line control of the entire solution workflow. (In Pro 🛸 is existing way to use advanced features)
 
   Open the template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build.sh" script for basic command-line compilation.
 
@@ -232,7 +239,7 @@ requiring copy content of keybindings.json to system part of configuration
 - `Ctrl+Alt+F`: 📐 clang-format  
 - `Ctrl+Alt+M`: 📏 cmake-format 
 
-### Automatic Tasks (🛸 Pro)
+### Automatic Tasks
 
 By `Shift+F7` invoked **TASK MENU** includes the following automation commands:  
 
@@ -358,7 +365,7 @@ rm .git/hooks/post-commit
 ```
 [👆🏻](#index)
 
-## Cross-Compilation with Conan profiles
+## Cross-Compilation by Conan profiles
 
 Architectures for which you want to use the Conan tool profile can be entered in the field below. They will then appear in the list of architectures in the VSCode menu.
 
@@ -382,14 +389,11 @@ snippet from task.json
 
 ## FAQ
 
-`Q:` **Build task error**  
-Error: /home/.../Build/Standalone/default/Debug is not a directory  
-Error: /home/.../Build/Library/default/Debug is not a directory  
-- `A:` There is nothing to build. You must first create the configurations for the product, and only then can you compile separately with the build task. The "Zero to Build," "Zero to Hero," or CMake configuration tasks will help you create the configuration, which can then be compiled.
+**Question**: What scenarios is this template suited for?  
+**Answer**: This solution is suitable for a wide range of projects of all sizes. This template was not originally created as a public project but as something I used for my own iterative development of small applications. Over time, I discovered that the benefit of such a template is enormous, provided that it maintains the ability to be flexible and configurable even in more complex projects. For this reason, the template is designed so that it can be adapted to various needs throughout the development cycle. Ultimately, this means that I spent a considerable amount of time seeking a balance between optimization, clarity, and the potential for future code flexibility.
 
-`Q:` **CMake-tidy error**  
-Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
-- `A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
+**Question**: What is the recommended procedure for working with the project template?  
+**Answer**: I usually start by cloning a fresh copy into my local repository. Then I rename the library and the standalone components as needed and perform the first successful build of the project. Next, I pause at the dependency definitions in the conanfile.py to configure the required packages to be integrated into my project. After that, I move on to both CMakeLists.txt files, where I set additional parameters—such as linking the dependencies provided by Conan and specifying whether they should be private or public. I might also enable static linking in the CMake options before diving into development. I really like using keyboard shortcuts, so I hardly ever need to work with terminal commands. Finally, I build tarballs and upload them to GitHub as binary releases. If needed, I can, for example, build with aarch64 to port my program to devices like the Raspberry Pi with an ARM processor.
 
 [👆🏻](#index)
 
@@ -397,12 +401,6 @@ Error while trying to load a compilation database: Could not auto-detect compila
 
 **To everyone** who supported me in creating this template.  
 Thank you very much!  
-
-[👆🏻](#index)
-
-## 🛸 How to get Pro Edition of the Template
-
-Contribute [any 💶 amount](https://paypal.me/TomasMark) to support my further development and contact me by [email](mailto:tomas@digitalspace.name).
 
 [👆🏻](#index)
 
