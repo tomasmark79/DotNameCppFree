@@ -14,9 +14,7 @@
 [**Get Pro**](#get-pro)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
-[Get & Prepare Template - classic way](#by-classic-way)   
-[Get & Prepare Template - by curl](#by-curl)  
-[Get & Prepare Template - by wget](#by-wget)  
+[Download](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
 [Building using commands](#building-using-commands)  
 [Template Structure](#template-structure)  
@@ -25,7 +23,7 @@
 [VSCode WorkFlow Tuning - Keybindings](#keybindings)  
 [VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks)  
 [CMake Options](#cmake-options)  
-[Automatic Installers](#automatic-installers)
+[Automatic Installers](#automatic-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
@@ -122,9 +120,9 @@ Crosstools
 
 [👆🏻](#index)
 
-## Clone template
+## Download
 
-#### Variant 1
+#### git clone
 
 ```bash
 git clone https://github.com/tomasmark79/DotNameCppFree
@@ -132,26 +130,19 @@ cd DotNameCppFree
 rm -rf .git
 git init -b main
 code .
-
-# lightweight clone generation
-.init/initializers/MakeFreeClone.sh init
 ```
 
-#### Variant 2
+#### shorten clone script
 
-```bash
-curl -sSL rb.gy/xb0p89 | bash
-# or
-curl -sSL raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
-```
+free edition
 
-#### Variant 3
+`curl -sSL rb.gy/p3vvs7 | bash`  
+`wget -qO- rb.gy/p3vvs7 | bash`  
 
-```bash
-wget -qO- raw.githubusercontent.com/tomasmark79/DotNameCppFree/refs/heads/main/cpp.sh | bash
-# or
-wget -qO- rb.gy/xb0p89 | bash
-```
+pro edition  
+
+`curl -sSL rb.gy/xb0p89 | bash`  
+`wget -qO- rb.gy/xb0p89 | bash`  
 
 [👆🏻](#index)
 
