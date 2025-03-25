@@ -4,7 +4,7 @@
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
 
-![alt text](assets/logo.png)
+<img src="assets/logo.png" alt="alt text" width="40%" height="40%">
 
 # Index
 
