@@ -6,7 +6,7 @@
 
 # DotName C++ Template
 
-# Index
+## Index
 
 [Overview](#overview)  
 [🚀 Key Features in **Free** Template ](#free--key-features)  
