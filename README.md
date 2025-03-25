@@ -14,7 +14,11 @@
 [**Get Pro**](#get-pro)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
-[Template Clone](#template-clone)  
+
+[Get & Prepare Template - classic way](#by-classic-way)  
+[Get & Prepare Template - by curl](#by-curl)
+[Get & Prepare Template - by wget](#by-wget)
+
 [CMake and Conan 2](#cmake-and-conan-2)  
 [Building using commands](#building-using-commands)  
 [Template Structure](#template-structure)  
@@ -120,7 +124,9 @@ Crosstools
 
 [👆🏻](#index)
 
-## Template Clone
+## Get & Prepare Template
+
+#### by classic way
 
 ```bash
 git clone https://github.com/tomasmark79/DotNameCppFree
@@ -131,6 +137,18 @@ code .
 
 # lightweight clone generation
 .init/initializers/MakeFreeClone.sh init
+```
+
+#### by curl
+
+```bash
+curl -sSL digitalspace.name/cpp.sh | bash
+```
+
+#### by wget
+
+```bash
+wget -qO- digitalspace.name/cpp.sh | bash
 ```
 
 [👆🏻](#index)
