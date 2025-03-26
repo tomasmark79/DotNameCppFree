@@ -396,16 +396,15 @@ Architectures for which you want to use the Conan tool profile can be entered in
 snippet from task.json
 ```json
 {
-    "id": "buildArch",
-    "type": "pickString",
-    "description": "Select target architecture",
-    "options": [
-        "default", 
-        "x86_64-clang-linux-gnu",
-        "x86_64-w64-mingw32",
-        "aarch64-rpi4-linux-gnu"
-    ],
-    "default": "default"
+  "default",
+  "default-clang",
+  "x86_64-w64-mingw32",
+  "rpi4_glibc2.17_gcc10.5",
+  "rpi4_glibc2.36_gcc12.4",
+  "rpi4_glibc2.41_gcc14.2",
+  "fedora_glibc2.17_gcc10.5",
+  "fedora_glibc2.36_gcc12.4",
+  "fedora_glibc2.41_gcc14.2"
 }
 ```
 
