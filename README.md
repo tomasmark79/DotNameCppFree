@@ -71,9 +71,9 @@ In the Pro 🛸 Edition Template, you gain significantly expanded development fe
 
 ## Get Pro
 
-Contribute [💶](https://paypal.me/TomasMark) to support my further development and contact me by [email](mailto:tomas@digitalspace.name).  
-Afterward I will send you full Pro version of the Template 🙂.  
-Thanks in advance.
+Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
+
+Thank you in advance.
 
 [👆🏻](#index)
 
