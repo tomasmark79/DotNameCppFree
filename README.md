@@ -15,14 +15,13 @@
 [References Used](#references-used)  
 [**Download**](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
-[Building using raw commands](#building-using-commands)  
+[Building using raw CMake commands](#building-using-commands)  
 [Building with CMake Presets](#building-with-cmake-presets)  
 [Template Structure](#template-structure)  
 [Standalone Source](#standalone-source)  
 [Library Source](#library-source)  
-[VSCode WorkFlow Tuning - Keybindings](#keybindings)  
-[VSCode WorkFlow Tuning - Automatic Tasks](#automatic-tasks)  
-[VSCode WorkFlow Tuning - Recomended Extensions](#recomended-vscode-extensions)  
+[VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
+[VSCode Recomended Extensions](#vscode-recomended-extensions)  
 [CMake Options](#cmake-options)  
 [Environment Installers](#environment-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
@@ -147,7 +146,7 @@ conan profile detect --force
 
 [👆🏻](#index)
 
-## Building using raw commands
+## Building using raw CMake commands
 
   Using such long commands is unappealing - they make development a tedious and slow 🦥 process. This template was primarily created for use with 🎢 VSCode, where a workflow using tasks triggered by keyboard 🎯 shortcuts was developed. However, in some scenarios, this manual process might come in handy.
 
@@ -240,46 +239,45 @@ CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 [👆🏻](#index)
 
-## VSCode WorkFlow Tuning
+## VSCode Tasks and Keybindings
 
-### Keybindings
+**Building Tasks** invoked by `Shift+F7` or `Ctrl+Shift+C`  
+dependent on build type  
 
-requiring copy content of keybindings.json to system part of configuration
-
-- `F8` or `Shift+F8` jumps to the next or previous error  
-- `Shift+F7`: TASK MENU (standalone, library, both)  
-- `F7`: 🔨 Quick build Standalone  
-- `F5`: 🪲 Quick debug Standalone  
-- `Ctrl+Alt+R`: just Launch Standalone binary  
-- `Ctrl+Alt+L`: 🔍 clang-tidy
-- `Ctrl+Alt+F`: 📐 clang-format  
-- `Ctrl+Alt+M`: 📏 cmake-format 
-
-[👆🏻](#index)
-
-### Automatic Tasks
-
-By `Shift+F7` invoked **TASK MENU** includes the following automation commands:  
-
-- 🚀 Zero to Build means 🧹 🗡️ 🔧 🔨
-- 🦸 Zero to Hero means  🧹 🗡️ 🔧 🔨 📌 🗜️
-- 🧹 Clean build directories  
-- 🗡️ Dependency installation with Conan 2  
-- 🔧 CMake configuration  
-- 🪲 CMake configuration with CMake 🦉 debugger  
-- 🔨 Build (Re-Build F7)  
-- 📜 License collection with CPM for CPM  
+- 🚀 Zero to Build 🧹 🗡️ 🔧 🔨  
+- 🦸 Zero to Hero 🧹 🗡️ 🔧 🔨 📌 🗜️  
+- 🧹 Clean selected folder  
+- 🗡️ Conan install  
+- 🔧 CMake configure  
+- 🪲 CMake configure with CMake 🦉 debugger  
+- 🔨 Build  
+- 📜 Collect Licenses cpm  
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  
 - 🛸 Run CPack  
+- 🔍 clang-tidy linting : `Ctrl+Alt+L`  
+- 🔨 Quick build Standalone : `F7`  
+- 🪲 Quick debug Standalone : `F5`  
+
+**Other Tasks** invoked by `Ctrl+Shift+F7` or `Ctrl+Shift+V`   
+independent on build type
+
+- 🔨 Build All CMakeUserPresets.json : `Ctrl+Alt+P`
+- 🚀 Launch Standalone binary : `Ctrl+Alt+R`
+- 📐 clang-format : `Ctrl+Alt+F`
+- 📏 cmake-format : `Ctrl+Alt+M`
 - ⚔️ Conan create library recipe
 - 📊 Conan dependencies in graph.html  
-- 🔍 CLang-tidy  
-- 📐📏 CLang & CMake formatting  
+
+**Other shortcuts**
+
+- `F8` or `Shift+F8` jumps to the next or previous error  
+
+> 💡 For the keyboard shortcuts to work, the contents of keybindings.json must be copied into the system configuration.
 
 [👆🏻](#index)
 
-### Recomended VSCode Extensions
+## VSCode Recomended Extensions
 
 ```url
 ms-vscode.cpptools
