@@ -51,6 +51,8 @@ In the Pro 🛸 Edition Template, you gain significantly expanded development fe
 - Predefined GitHub [Actions](https://docs.github.com/en/actions) workflows for continuous integration
 - Provided basic commands for **installing**, **configuring**, **building**, and **installing** the project via *CLI*.
 
+https://github.com/user-attachments/assets/f7564f75-f57d-431a-9313-4db26a2197a2
+
 [👆🏻](#index)
 
 ## Pro 🛸 Key Features
@@ -66,6 +68,8 @@ In the Pro 🛸 Edition Template, you gain significantly expanded development fe
 - Integrated **Native C++ debugging** in VSCode by Microsoft [C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
   - Advanced feature to debug [**CMake configurations**](https://devblogs.microsoft.com/cppblog/introducing-cmake-debugger-in-vs-code-debug-your-cmake-scripts-using-open-source-cmake-debugger/)
 - Compatible with [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
+
+https://github.com/user-attachments/assets/344f30f9-9f19-4dee-a300-239e04584efb
 
 [👆🏻](#index)
 
