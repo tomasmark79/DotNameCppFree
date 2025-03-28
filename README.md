@@ -180,7 +180,7 @@ source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./buil
 
 Solution is using Conan, and Conan automatically creates the **CMake*User*Presets.json** and **CMakePreset.json** files. The **CMakePreset** file defines the build configuration for the current folder, while the **CMake*User*Presets** file in the main project folder references all available **CMakePreset** files. Another advantage of these files is that **you can Build all targets at once**, eliminating the need to build each target separately.
 
-Commands like these should work within workspace dir ...
+you may list all existing CMake presets
 
 ```bash
 cmake --list-presets
@@ -198,6 +198,8 @@ Available configure presets:
   "conan-relwithdebinfo-x86_64-6d462a88" - 'conan-relwithdebinfo' config (x86_64-6d462a88)
   "conan-debug-armv8-8b031f0f"           - 'conan-debug' config (armv8-8b031f0f)
 ```
+
+you may build only some one or all at once
 
 ```bash
 cmake --build --preset <preset_name>
