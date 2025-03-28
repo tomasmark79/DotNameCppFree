@@ -1,6 +1,8 @@
 import os
+import json
+import uuid
 from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps
 from conan.tools.system import package_manager
 from conan.tools.files import copy
 
@@ -8,21 +10,37 @@ from conan.tools.files import copy
 # It is self implemented in SolutionController.py
 
 class DotNameCppRecipe(ConanFile):
-    
     name = "dotnamelib"
     version = "1.0"
-    
-    # Settings
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
-    
-    # Binary configuration
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-    
-    # ----------------------------------------------------------
+
+    def generate(self):
+        #cmake_toolchain = CMakeToolchain(self)
+        #cmake_toolchain.generate()
+     
+     # Dynamická úprava CMakePresets.json
+        preset_file = "CMakePresets.json"
+        if os.path.exists(preset_file):
+            with open(preset_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            # Získání unikátního identifikátoru buildu
+            build_suffix = str(uuid.uuid4())
+
+            # Úprava jmen presetů
+            for preset in data.get("configurePresets", []):
+                if preset["name"].startswith("conan-"):
+                    preset["name"] = f"{preset['name']}-{build_suffix}"
+                    preset["displayName"] = f"{preset['displayName']} ({build_suffix})"
+
+            # Uložení zpět do JSON souboru
+            with open(preset_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+
     # Consuming recipe
-    # ----------------------------------------------------------
     def configure(self):
         self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
 
@@ -35,9 +53,8 @@ class DotNameCppRecipe(ConanFile):
     def build_requirements(self):
         self.tool_requires("cmake/[>3.14]")
 
-    # it will store all the found License files inside the local licenses folder, which will contain one subfolder per dependency with the license file inside
     def imports(self):
-     self.copy("license*", dst="licenses", folder=True, ignore_case=True)
+        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
 
     # def system_requirements(self):
         # dnf = package_manager.Dnf(self)
