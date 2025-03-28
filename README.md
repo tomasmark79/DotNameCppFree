@@ -81,7 +81,7 @@ Thanks in advance.
 
   Github Codespace is suitable for simple use cases that require command-line control of the entire solution workflow. (In Pro 🛸 is existing way to use advanced features)
 
-  Open the template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build.sh" script for basic command-line compilation.
+  Open the template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build_default_debug.sh" script for basic command-line compilation.
 
 [👆🏻](#index)
 
