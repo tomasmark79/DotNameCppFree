@@ -15,8 +15,8 @@
 [References Used](#references-used)  
 [**Download**](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
-[Building using raw CMake commands](#building-using-commands)  
-[Building with CMake Presets](#building-with-cmake-presets)  
+[Building using raw CMake commands](#building-using-raw-cmake-commands)  
+[Building by CMake Presets](#building-by-cmake-presets)  
 [Template Structure](#template-structure)  
 [Standalone Source](#standalone-source)  
 [Library Source](#library-source)  
@@ -176,20 +176,37 @@ source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./buil
 
 [👆🏻](#index)
 
-### Building with CMake Presets
+## Building by CMake Presets
 
-When using VSCode task triggers in Pro edition of template or manual builds by raw commands, Conan automatically creates the files **CMakeUserPresets.json** and **CMakePreset.json**. The **CMakePreset.json** file defines build configuration for the current folder, while the **CMakeUserPresets.json** in the main project folder references all available **CMakePreset.json** files. A further benefit of these files is that **you can rebuild all targets at once**, avoiding the need to build each target separately. The shell script **build_all_presets.sh** (yet Linux only) handles building all presets.  
+Solution is using Conan, and Conan automatically creates the **CMake*User*Presets.json** and **CMakePreset.json** files. The **CMakePreset** file defines the build configuration for the current folder, while the **CMake*User*Presets** file in the main project folder references all available **CMakePreset** files. Another advantage of these files is that **you can Build all targets at once**, eliminating the need to build each target separately.
 
-In the workspace root you may do something like
+Commands like these should work within workspace dir ...
 
 ```bash
 cmake --list-presets
 cmake --build --preset <preset_name>
-# or all at once
-./build_all_presets.sh
 ```
 
-Note: **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.
+example output
+```bash
+DotNameCppFree on  main [!?] via △ v3.31.4 via 🐍 v3.13.1 (env3131) 
+❯ cmake --list-presets  
+Available configure presets:  
+
+  "conan-debug-x86_64-fa690d22"          - 'conan-debug' config (x86_64-fa690d22)
+  "conan-release-x86_64-a7ca6aaa"        - 'conan-release' config (x86_64-a7ca6aaa)
+  "conan-minsizerel-x86_64-b9d7b0af"     - 'conan-minsizerel' config (x86_64-b9d7b0af)
+  "conan-relwithdebinfo-x86_64-6d462a88" - 'conan-relwithdebinfo' config (x86_64-6d462a88)
+  "conan-debug-armv8-8b031f0f"           - 'conan-debug' config (armv8-8b031f0f)
+```
+
+```bash
+./build_all_presets.sh  
+```
+
+> 💡 The Pro edition includes 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
+
+> 💡 **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.  
 
 [👆🏻](#index)
 
@@ -272,7 +289,6 @@ CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 **Other shortcuts**  
 
 - **F8** or **Shift+F8** jumps to the next or previous error  
-
 
 [👆🏻](#index)
 
