@@ -42,7 +42,7 @@ In the Pro 🛸 Edition Template, you gain significantly expanded development fe
 [👆🏻](#index)
 
 ## Free 🚀 Key Features
-
+- From GitHub source code to local binary tarballs in under 🦅 one minute 
 - Works in **Linux**, **MacOS**, **Windows**
 - Modern projects design **Standalone** & **Library**
   - With integrated wrappers [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
