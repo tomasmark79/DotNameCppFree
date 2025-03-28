@@ -179,21 +179,18 @@ source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./buil
 
 ### Building with CMake Presets
 
-When using VSCode task triggers or manual builds, Conan automatically creates the files **CMakeUserPresets.json** and **CMakePreset.json**. The **CMakePreset.json** file defines different build types for the current folder, while the **CMakeUserPresets.json** in the main project folder references all available **CMakePreset.json** files.
+When using VSCode task triggers in Pro edition of template or manual builds by raw commands, Conan automatically creates the files **CMakeUserPresets.json** and **CMakePreset.json**. The **CMakePreset.json** file defines build configuration for the current folder, while the **CMakeUserPresets.json** in the main project folder references all available **CMakePreset.json** files. A further benefit of these files is that **you can rebuild all targets at once**, avoiding the need to build each target separately. The shell script **build_all_presets.sh** (yet Linux only) handles building all presets.  
 
-A further benefit is that you can rebuild all targets at once after making code changes, avoiding the need to build each target separately. The shell script **build_all_presets.sh** handles building all presets.
+In the workspace root you may do something like
 
-These presets let you easily build using the command
-```bash
-cmake --build --preset <preset_name>
-```
-
-List of available presets
 ```bash
 cmake --list-presets
+cmake --build --preset <preset_name>
+# or all at once
+./build_all_presets.sh
 ```
 
-Note: conanfile.py ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.
+Note: **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.
 
 [👆🏻](#index)
 
