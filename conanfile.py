@@ -1,6 +1,4 @@
-import os
-import json
-import uuid
+import os, json, uuid
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps
 from conan.tools.system import package_manager
@@ -17,26 +15,30 @@ class DotNameCppRecipe(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
-    def generate(self):
-        #cmake_toolchain = CMakeToolchain(self)
-        #cmake_toolchain.generate()
-     
-     # Dynamická úprava CMakePresets.json
+    def generate(self): 
+        cmake_toolchain = CMakeToolchain(self)
+    
+        # Dynamic change of names of CMakePresets.json
         preset_file = "CMakePresets.json"
         if os.path.exists(preset_file):
             with open(preset_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-
-            # Získání unikátního identifikátoru buildu
-            build_suffix = str(uuid.uuid4())
-
-            # Úprava jmen presetů
+            build_suffix = f"{self.settings.arch}-{uuid.uuid4().hex[:8]}"
+            name_mapping = {}
             for preset in data.get("configurePresets", []):
-                if preset["name"].startswith("conan-"):
-                    preset["name"] = f"{preset['name']}-{build_suffix}"
-                    preset["displayName"] = f"{preset['displayName']} ({build_suffix})"
-
-            # Uložení zpět do JSON souboru
+                old_name = preset["name"]
+                new_name = f"{old_name}-{build_suffix}"
+                preset["name"] = new_name
+                preset["displayName"] = f"{preset['displayName']} ({build_suffix})"
+                name_mapping[old_name] = new_name  # Uložení pro reference
+            for preset in data.get("buildPresets", []):
+                if preset["configurePreset"] in name_mapping:
+                    preset["name"] = name_mapping[preset["configurePreset"]]
+                    preset["configurePreset"] = name_mapping[preset["configurePreset"]]
+            for preset in data.get("testPresets", []):
+                if preset["configurePreset"] in name_mapping:
+                    preset["name"] = name_mapping[preset["configurePreset"]]
+                    preset["configurePreset"] = name_mapping[preset["configurePreset"]]
             with open(preset_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
 
