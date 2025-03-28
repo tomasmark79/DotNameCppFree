@@ -17,7 +17,7 @@ std::string executablePath = Utils::FSManager::getExecutePath ();
 /// @brief Main Standalone entry point
 int main (int argc, const char *argv[])
 {
-
+  int a=0;
   // ---basic-information------is-safe-to-delete 👇🏻
   LOG_I << standaloneName << " / C++ = " << __cplusplus << std::endl;
   LOG_I << "executablePath = " << executablePath << std::endl;
