@@ -427,7 +427,7 @@ rm .git/hooks/post-commit
 
 Architectures for which you want to use the Conan tool profile can be entered in the field below. They will then appear in the list of architectures in the VSCode menu.
 
-snippet from task.json
+example snippet of toolchains from task.json
 ```json
 {
   "default",
