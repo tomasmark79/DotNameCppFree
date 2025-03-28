@@ -241,8 +241,9 @@ CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 ## VSCode Tasks and Keybindings
 
-**Building Tasks** invoked by `Shift+F7` or `Ctrl+Shift+C`  
-dependent on build type  
+> 💡 For the keyboard shortcuts to work, the contents of keybindings.json must be copied into the system configuration.
+
+**Building Tasks** dependent on build type invoked by **Shift+F7** or **Ctrl+Shift+C**  
 
 - 🚀 Zero to Build 🧹 🗡️ 🔧 🔨  
 - 🦸 Zero to Hero 🧹 🗡️ 🔧 🔨 📌 🗜️  
@@ -255,25 +256,23 @@ dependent on build type
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  
 - 🛸 Run CPack  
-- 🔍 clang-tidy linting : `Ctrl+Alt+L`  
-- 🔨 Quick build Standalone : `F7`  
-- 🪲 Quick debug Standalone : `F5`  
+- 🔍 clang-tidy linting : **Ctrl+Alt+L**  
+- 🔨 Quick build Standalone : **F7**  
+- 🪲 Quick debug Standalone : **F5**  
 
-**Other Tasks** invoked by `Ctrl+Shift+F7` or `Ctrl+Shift+V`   
-independent on build type
+**Other Tasks** independent on build type invoked by **Ctrl+F7** or **Ctrl+Shift+V**   
 
-- 🔨 Build All CMakeUserPresets.json : `Ctrl+Alt+P`
-- 🚀 Launch Standalone binary : `Ctrl+Alt+R`
-- 📐 clang-format : `Ctrl+Alt+F`
-- 📏 cmake-format : `Ctrl+Alt+M`
+- 🔨 Build All CMakeUserPresets.json : **Ctrl+Alt+P**
+- 🚀 Launch Standalone binary : **Ctrl+Alt+R**
+- 📐 clang-format : **Ctrl+Alt+F**
+- 📏 cmake-format : **Ctrl+Alt+M**
 - ⚔️ Conan create library recipe
 - 📊 Conan dependencies in graph.html  
 
-**Other shortcuts**
+**Other shortcuts**  
 
-- `F8` or `Shift+F8` jumps to the next or previous error  
+- **F8** or **Shift+F8** jumps to the next or previous error  
 
-> 💡 For the keyboard shortcuts to work, the contents of keybindings.json must be copied into the system configuration.
 
 [👆🏻](#index)
 
