@@ -15,7 +15,8 @@
 [References Used](#references-used)  
 [**Download**](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
-[Building using commands](#building-using-commands)  
+[Building using raw commands](#building-using-commands)  
+[Building with CMake Presets](#building-with-cmake-presets)  
 [Template Structure](#template-structure)  
 [Standalone Source](#standalone-source)  
 [Library Source](#library-source)  
@@ -146,7 +147,7 @@ conan profile detect --force
 
 [👆🏻](#index)
 
-## Building using commands
+## Building using raw commands
 
   Using such long commands is unappealing - they make development a tedious and slow 🦥 process. This template was primarily created for use with 🎢 VSCode, where a workflow using tasks triggered by keyboard 🎯 shortcuts was developed. However, in some scenarios, this manual process might come in handy.
 
@@ -173,6 +174,26 @@ source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./buil
 ```bash
 source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug" --target install -j 16
 ```
+
+[👆🏻](#index)
+
+### Building with CMake Presets
+
+When using VSCode task triggers or manual builds, Conan automatically creates the files **CMakeUserPresets.json** and **CMakePreset.json**. The **CMakePreset.json** file defines different build types for the current folder, while the **CMakeUserPresets.json** in the main project folder references all available **CMakePreset.json** files.
+
+A further benefit is that you can rebuild all targets at once after making code changes, avoiding the need to build each target separately. The shell script **build_all_presets.sh** handles building all presets.
+
+These presets let you easily build using the command
+```bash
+cmake --build --preset <preset_name>
+```
+
+List of available presets
+```bash
+cmake --list-presets
+```
+
+Note: conanfile.py ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.
 
 [👆🏻](#index)
 
