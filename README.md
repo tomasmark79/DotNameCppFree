@@ -184,7 +184,6 @@ Commands like these should work within workspace dir ...
 
 ```bash
 cmake --list-presets
-cmake --build --preset <preset_name>
 ```
 
 example output
@@ -201,10 +200,12 @@ Available configure presets:
 ```
 
 ```bash
+cmake --build --preset <preset_name>
+# or
 ./build_all_presets.sh  
 ```
 
-> 💡 The Pro edition includes 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
+> 💡 The Pro edition includes task item 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
 
 > 💡 **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.  
 
