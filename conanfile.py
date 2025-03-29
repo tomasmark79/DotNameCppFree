@@ -4,8 +4,16 @@ from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps
 from conan.tools.system import package_manager
 from conan.tools.files import copy
 
-# In Pro Template DO NOT use cmake_layout(self) in the recipe.
-# It is self implemented in SolutionController.py
+# DO NOT use cmake_layout(self) in the recipe.
+# ----------------------------------------- --
+    # DotNameCpp is using self layout       --
+    # to define build ouput layout!         --
+    # ├── Build                             --
+    #     ├── Artefacts - tarballs          --
+    #     ├── Install - final installation  --
+    #     ├── Library - library build       --
+    #     └── Standalone - standalone build --
+# ----------------------------------------- --
 
 class DotNameCppRecipe(ConanFile):
     name = "dotnamelib"
