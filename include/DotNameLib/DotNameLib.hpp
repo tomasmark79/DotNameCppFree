@@ -5,13 +5,14 @@
 // Copyright (c) 2024-2025 Tomáš Mark
 
 #include <string>
-// Public API
 
 namespace library
 {
 
   class DotNameLib
   {
+
+    // Public API
   public:
     DotNameLib (const std::string &assetsPath);
     ~DotNameLib ();
