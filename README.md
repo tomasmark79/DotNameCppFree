@@ -342,11 +342,13 @@ You need advanced knowledge to use these options.
 
 ## Project as a Library
 
-One of the advantages of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
+One of the **advantages** of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
 
-Simply use the commands provided below.
+> 💡 Keep in mind that the class constructor of connected projects (libs connected via CPM or CMake) must accept the current standalone path to the assets folder. The standalone assets folder will always include all required assets from the connected libraries.
 
-  ### CMakeLists.txt
+### Simply use the commands provided below.
+
+  #### CMakeLists.txt
 
   ```cmake
   CPMAddPackage(
@@ -362,14 +364,12 @@ Simply use the commands provided below.
   )
   ```
 
-  ### C++
+  #### C++
 
   ```cpp
     std::shared_ptr<EmojiSpace::EmojiTools> /*💋*/ emojiTools
       = std::make_shared<EmojiSpace::EmojiTools> (m_assetsPath);
   ```
-
->💡 If your library uses the contents of the `/assets` folder, the command mentioned above will automatically copy the contents of the `/assets` folder from the library to the target `/assets` folder in the current project. This step is necessary. The connected library receives the exact file path to its assets through the constructor. This design ensures the universal usability of libraries and their assets during both build-time and runtime.
 
 [👆🏻](#index)
 
