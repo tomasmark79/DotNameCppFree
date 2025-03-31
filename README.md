@@ -23,7 +23,7 @@
 [VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
 [VSCode Recomended Extensions](#vscode-recomended-extensions)  
 [CMake Options](#cmake-options)  
-[DotNameCppFree as a Library for another CMake project](#dotnamecpp-as-a-library-for-another-cmake-project)  
+[Project as a Library](#project-as-a-library)  
 [Environment Installers](#environment-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
@@ -340,26 +340,15 @@ You need advanced knowledge to use these options.
 
 [👆🏻](#index)
 
-## DotNameCppFree as a Library for another CMake project
+## Project as a Library
 
-This solution includes a library design that can be used as a library component and later integrated into another project. For example, a project named **DotNameCppFreeA** can later be connected to a project **DotNameCppFreeB**. Or the project **DotNameCppFreeC** can be linked with **DotNameCppFreeA** and **DotNameCppFreeB**. The library part of the project can be replicated in many different variations and interconnected.
+One of the advantages of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
 
-**Important:**  
-To ensure smooth operation during **Build-Time** and **Runtime-Time**, proper handling of the **/assets** folder is crucial.  
+Simply use the commands provided below.
 
-- **Default Template Development:**  
-  When using the default template from the repository, no additional work is required. The **/assets** folder is automatically managed CMake scripts included in this template solution.
-
-- **Custom Library Integration:**  
-  If you are integrating (CPM.cmake) a custom library developed in a previous project, it is essential to make the contents of the **/assets** folder accessible to all involved components.  
-
-  **How to Achieve This:**  
-  CMake command bellow will simply copy the contents of the **/assets** folder from the integrated library source code into the main executable project. This ensures that all components have access to the required assets during both **build** and **runtime**.  
-
-  ### exmaple how to link DotNameCppFree library downloaded from GitHub
+  ### CMakeLists.txt
 
   ```cmake
-  
   CPMAddPackage(
     NAME EmojiTools
     GITHUB_REPOSITORY tomasmark79/EmojiToolsFree
@@ -371,8 +360,16 @@ To ensure smooth operation during **Build-Time** and **Runtime-Time**, proper ha
     ${LIBRARY_NAME}
     PUBLIC dsdotname::EmojiTools
   )
-
   ```
+
+  ### C++
+
+  ```cpp
+    std::shared_ptr<EmojiSpace::EmojiTools> /*💋*/ emojiTools
+      = std::make_shared<EmojiSpace::EmojiTools> (m_assetsPath);
+  ```
+
+>💡 If your library uses the contents of the `/assets` folder, the command mentioned above will automatically copy the contents of the `/assets` folder from the library to the target `/assets` folder in the current project. This step is necessary. The connected library receives the exact file path to its assets through the constructor. This design ensures the universal usability of libraries and their assets during both build-time and runtime.
 
 [👆🏻](#index)
 
