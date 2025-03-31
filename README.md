@@ -356,14 +356,22 @@ To ensure smooth operation during **Build-Time** and **Runtime-Time**, proper ha
   **How to Achieve This:**  
   CMake command bellow will simply copy the contents of the **/assets** folder from the integrated library source code into the main executable project. This ensures that all components have access to the required assets during both **build** and **runtime**.  
 
-  ### link DotNameCppFree library from GitHub
+  ### exmaple how to link DotNameCppFree library downloaded from GitHub
 
   ```cmake
+  
   CPMAddPackage(
-      NAME EmojiTools
-      GITHUB_REPOSITORY tomasmark79/EmojiToolsFree
-      GIT_TAG main)
-      file(COPY ${EmojiTools_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+    NAME EmojiTools
+    GITHUB_REPOSITORY tomasmark79/EmojiToolsFree
+    GIT_TAG main
+  )
+  file(COPY ${EmojiTools_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+
+  target_link_libraries(
+    ${LIBRARY_NAME}
+    PUBLIC dsdotname::EmojiTools
+  )
+
   ```
 
 [👆🏻](#index)
