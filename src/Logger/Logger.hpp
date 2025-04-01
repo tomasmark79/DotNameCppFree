@@ -57,138 +57,130 @@
   #define FUNCTION_NAME __func__
 #endif
 
-class Logger
-{
-public:
-  enum class Level
-  {
-    LOG_DEBUG,
-    LOG_INFO,
-    LOG_WARNING,
-    LOG_ERROR,
-    LOG_CRITICAL
-  };
+class Logger {
+private:
+  std::string name_ = "DotNameLib";
 
-  static Logger &getInstance () // Meyers' Singleton
+private:
+  std::mutex logMutex_;
+
+private:
+  std::string callingFunction_;
+  std::ostringstream messageStream_;
+  std::ofstream logFile_;
+
+protected:
+  Logger () = default;
+  ~Logger () {
+    std::lock_guard<std::mutex> lock (logMutex_);
+    if (logFile_.is_open ()) {
+      logFile_.close ();
+    }
+  }
+
+public:
+  Logger (const Logger &) = delete;            // Logger a; Logger b(a);
+  Logger (Logger &&) = delete;                 // Logger a; Logger b(std::move(a));
+  Logger &operator= (const Logger &) = delete; // Logger a, b; a = b;
+  Logger &operator= (Logger &&) = delete;      // Logger a, b; a = std::move(b);
+  static Logger &getInstance ()                // Singleton pattern
   {
     static Logger instance;
     return instance;
   }
 
-  Logger (const Logger &) = delete;            // Delete copy constructor
-  Logger &operator= (const Logger &) = delete; // Delete copy assignment
-  Logger &operator<< (Level level)             // Set log level
-  {
-    m_currentLevel = level;
-    return *this; // Return reference to Logger
-  }
+public:
+  enum class Level { LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_CRITICAL };
 
-  Logger &setCallingFunction (const std::string &caller)
+private:
+  Level currentLevel_ = Level::LOG_INFO;
+
+public:
+  Logger &operator<< (Level level) // Logger a; a << Logger::Level::LOG_DEBUG;
   {
-    m_callingFunction = caller;
+    currentLevel_ = level;
     return *this;
   }
 
   Logger &
-  operator<< (std::ostream &(*manip) (std::ostream &)) // Handle std::endl
+  setCallingFunction (const std::string &caller) // Logger a; a.setCallingFunction(FUNCTION_NAME);
   {
-    if (manip == static_cast<std::ostream &(*)(std::ostream &)> (std::endl))
-    {
-      log (m_currentLevel, m_messageStream.str (), m_callingFunction);
+    std::lock_guard<std::mutex> lock (logMutex_);
+    if (caller.empty ()) {
+      callingFunction_ = FUNCTION_NAME;
+    } else {
+      callingFunction_ = caller;
+    }
+    return *this;
+  }
+
+  Logger &operator<< (std::ostream &(*manip) (std::ostream &)) // Handle std::endl
+  {
+    if (manip == static_cast<std::ostream &(*)(std::ostream &)> (std::endl)) {
+      log (currentLevel_, messageStream_.str (), callingFunction_);
       // Reset state
-      m_messageStream.str ("");
-      m_messageStream.clear ();
-      m_callingFunction = "";
-    }
-    else
-    {
-      m_messageStream << manip;
+      messageStream_.str ("");
+      messageStream_.clear ();
+      callingFunction_ = "";
+    } else {
+      messageStream_ << manip;
     }
     return *this;
   }
 
-  template <typename T> Logger &operator<< (const T &message) // Handle message
+  template <typename T>
+  Logger &operator<< (const T &message) // Handle message
   {
-    std::lock_guard<std::mutex> lock (m_logMutex);
-    m_messageStream << message;
+    std::lock_guard<std::mutex> lock (logMutex_);
+    messageStream_ << message;
     return *this;
   }
 
-  void debug (const std::string &message, const std::string &caller = "")
-  {
+  void debug (const std::string &message, const std::string &caller = "") {
     log (Level::LOG_DEBUG, message, caller);
   }
 
-  void info (const std::string &message, const std::string &caller = "")
-  {
+  void info (const std::string &message, const std::string &caller = "") {
     log (Level::LOG_INFO, message, caller);
   }
 
-  void warning (const std::string &message, const std::string &caller = "")
-  {
+  void warning (const std::string &message, const std::string &caller = "") {
     log (Level::LOG_WARNING, message, caller);
   }
 
-  void error (const std::string &message, const std::string &caller = "")
-  {
+  void error (const std::string &message, const std::string &caller = "") {
     log (Level::LOG_ERROR, message, caller);
   }
 
-  void critical (const std::string &message, const std::string &caller = "")
-  {
+  void critical (const std::string &message, const std::string &caller = "") {
     log (Level::LOG_CRITICAL, message, caller);
   }
 
-  bool enableFileLogging (const std::string &filename)
-  {
-    std::lock_guard<std::mutex> lock (m_logMutex);
-    try
-    {
-      m_logFile.open (filename, std::ios::out | std::ios::app);
-      return m_logFile.is_open ();
-    }
-    catch (...)
-    {
+  bool enableFileLogging (const std::string &filename) {
+    std::lock_guard<std::mutex> lock (logMutex_);
+    try {
+      logFile_.open (filename, std::ios::out | std::ios::app);
+      return logFile_.is_open ();
+    } catch (...) {
+      std::cerr << "Failed to open log file: " << filename << std::endl;
       return false;
     }
   }
 
-  void disableFileLogging ()
-  {
-    std::lock_guard<std::mutex> lock (m_logMutex);
-    if (m_logFile.is_open ())
-    {
-      m_logFile.close ();
+  void disableFileLogging () {
+    std::lock_guard<std::mutex> lock (logMutex_);
+    if (logFile_.is_open ()) {
+      logFile_.close ();
     }
   }
 
-  void setApplicationName (const std::string &appName)
-  {
-    std::lock_guard<std::mutex> lock (m_logMutex);
-    m_name = appName;
+  void setApplicationName (const std::string &appName) {
+    std::lock_guard<std::mutex> lock (logMutex_);
+    name_ = appName;
   }
 
-private:
-  std::string m_name = "DotNameLib";
-  std::mutex m_logMutex;
-  std::string m_callingFunction;
-  std::ostringstream m_messageStream;
-  std::ofstream m_logFile;
-  Level m_currentLevel = Level::LOG_INFO;
-
-  Logger () = default;
-  ~Logger ()
-  {
-    if (m_logFile.is_open ())
-    {
-      m_logFile.close ();
-    }
-  }
-
-  std::string levelToString (Level level) const
-  {
-    switch (level)
-    {
+  std::string levelToString (Level level) const {
+    switch (level) {
     case Level::LOG_DEBUG:
       return "DBG";
     case Level::LOG_INFO:
@@ -204,12 +196,10 @@ private:
     }
   }
 
-  void resetConsoleColor ()
-  {
+  void resetConsoleColor () {
 #ifdef _WIN32
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE),
-                             FOREGROUND_RED | FOREGROUND_GREEN
-                               | FOREGROUND_BLUE);
+                             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 #else
     std::cout << "\033[0m"; // Reset
 #endif
@@ -217,54 +207,41 @@ private:
 
 #ifdef _WIN32
   // Pomocná funkce pro Windows
-  void setConsoleColorWindows (Level level)
-  {
+  void setConsoleColorWindows (Level level) {
     const std::map<Level, WORD> colorMap
-      = { { Level::LOG_DEBUG,
-            FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY },
-          { Level::LOG_INFO, FOREGROUND_GREEN | FOREGROUND_INTENSITY },
-          { Level::LOG_WARNING,
-            FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY },
-          { Level::LOG_ERROR, FOREGROUND_RED | FOREGROUND_INTENSITY },
-          { Level::LOG_CRITICAL,
-            FOREGROUND_RED | FOREGROUND_INTENSITY | FOREGROUND_BLUE } };
+        = { { Level::LOG_DEBUG, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY },
+            { Level::LOG_INFO, FOREGROUND_GREEN | FOREGROUND_INTENSITY },
+            { Level::LOG_WARNING, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY },
+            { Level::LOG_ERROR, FOREGROUND_RED | FOREGROUND_INTENSITY },
+            { Level::LOG_CRITICAL, FOREGROUND_RED | FOREGROUND_INTENSITY | FOREGROUND_BLUE } };
 
     auto it = colorMap.find (level);
-    if (it != colorMap.end ())
-    {
+    if (it != colorMap.end ()) {
       SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), it->second);
-    }
-    else
-    {
+    } else {
       resetConsoleColor ();
     }
   }
 #else
   // Pomocná funkce pro Unix (ANSI escape kódy)
-  void setConsoleColorUnix (Level level)
-  {
-    static const std::map<Level, const char *> colorMap
-      = { { Level::LOG_DEBUG, "\033[34m" },
-          { Level::LOG_INFO, "\033[32m" },
-          { Level::LOG_WARNING, "\033[33m" },
-          { Level::LOG_ERROR, "\033[31m" },
-          { Level::LOG_CRITICAL, "\033[95m" } };
+  void setConsoleColorUnix (Level level) {
+    static const std::map<Level, const char *> colorMap = { { Level::LOG_DEBUG, "\033[34m" },
+                                                            { Level::LOG_INFO, "\033[32m" },
+                                                            { Level::LOG_WARNING, "\033[33m" },
+                                                            { Level::LOG_ERROR, "\033[31m" },
+                                                            { Level::LOG_CRITICAL, "\033[95m" } };
 
     auto it = colorMap.find (level);
-    if (it != colorMap.end ())
-    {
+    if (it != colorMap.end ()) {
       std::cout << it->second;
-    }
-    else
-    {
+    } else {
       resetConsoleColor ();
     }
   }
 #endif
 
   // Upravená metoda setConsoleColor (bez #ifdef uvnitř těla)
-  void setConsoleColor (Level level)
-  {
+  void setConsoleColor (Level level) {
 #ifdef _WIN32
     setConsoleColorWindows (level);
 #else
@@ -272,10 +249,8 @@ private:
 #endif
   }
 
-  void log (Level level, const std::string &message,
-            const std::string &caller = "")
-  {
-    std::lock_guard<std::mutex> lock (m_logMutex);
+  void log (Level level, const std::string &message, const std::string &caller = "") {
+    std::lock_guard<std::mutex> lock (logMutex_);
 
     auto now = std::chrono::system_clock::now ();
     auto now_time = std::chrono::system_clock::to_time_t (now);
@@ -289,11 +264,9 @@ private:
 #endif
 
     // cerr output
-    if (level == Level::LOG_ERROR || level == Level::LOG_CRITICAL)
-    {
+    if (level == Level::LOG_ERROR || level == Level::LOG_CRITICAL) {
       std::cerr << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
-      if (!caller.empty ())
-      {
+      if (!caller.empty ()) {
         std::cerr << "[" << caller << "] ";
       }
       std::cerr << "[" << levelToString (level) << "] ";
@@ -304,12 +277,9 @@ private:
     }
 
     // cout output
-    if (level == Level::LOG_DEBUG || level == Level::LOG_INFO
-        || level == Level::LOG_WARNING)
-    {
+    if (level == Level::LOG_DEBUG || level == Level::LOG_INFO || level == Level::LOG_WARNING) {
       std::cout << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
-      if (!caller.empty ())
-      {
+      if (!caller.empty ()) {
         std::cout << "[" << caller << "] ";
       }
       std::cout << "[" << levelToString (level) << "] ";
@@ -320,15 +290,12 @@ private:
     }
 
     // file output
-    if (m_logFile.is_open ())
-    {
-      m_logFile << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
-      if (!caller.empty ())
-      {
-        m_logFile << "[" << caller << "] ";
+    if (logFile_.is_open ()) {
+      logFile_ << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
+      if (!caller.empty ()) {
+        logFile_ << "[" << caller << "] ";
       }
-      m_logFile << "[" << levelToString (level) << "] " << message
-                << std::endl;
+      logFile_ << "[" << levelToString (level) << "] " << message << std::endl;
     }
   }
 
