@@ -13,31 +13,29 @@
 #include <string>
 #include <vector>
 
-constexpr char standaloneName[] = "DotNameStandalone";
-
-const std::filesystem::path executablePath = Utils::FSManager::getExecutePath ();
-constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
-constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
-const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
-const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
+namespace Config {
+  constexpr char standaloneName[] = "DotNameStandalone";
+  const std::filesystem::path executablePath = Utils::FSManager::getExecutePath ();
+  constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
+  constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
+  const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
+  const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
+}
 
 void processFile (const std::filesystem::path &filePath) {
   try {
-    if (std::ifstream file (filePath); file.is_open ()) {
-      LOG_D << "File content: " << Utils::FSManager::read (filePath) << std::endl;
-    } else {
-      LOG_E << "Failed to open file: " << filePath << std::endl;
-    }
+    LOG_D << "File content: " << Utils::FSManager::read (filePath) << std::endl;
   } catch (const std::exception &e) {
-    LOG_E << "Exception while processing file: " << e.what () << std::endl;
+    LOG_E << "Exception while processing file: " << e.what () << " [File: " << filePath << "]"
+          << std::endl;
   } catch (...) {
-    LOG_E << "Unknown error occurred while processing file." << std::endl;
+    LOG_E << "Unknown error occurred while processing file: " << filePath << std::endl;
   }
 }
 
 int processArguments (int argc, const char *argv[]) {
   try {
-    auto options = std::make_unique<cxxopts::Options> (argv[0], standaloneName);
+    auto options = std::make_unique<cxxopts::Options> (argv[0], Config::standaloneName);
     options->positional_help ("[optional args]").show_positional_help ();
     options->set_width (70);
     options->set_tab_expansion ();
@@ -54,12 +52,14 @@ int processArguments (int argc, const char *argv[]) {
     }
 
     if (result["log2file"].as<bool> ()) {
-      LOG.enableFileLogging (std::string (standaloneName) + ".log");
+      LOG.enableFileLogging (std::string (Config::standaloneName) + ".log");
       LOG_I << "Logging to file enabled [-l]" << std::endl;
     }
 
     if (!result.count ("omit")) {
-      std::unique_ptr<library::DotNameLib> lib = std::make_unique<library::DotNameLib> (assetsPath);
+      // Load the library
+      std::unique_ptr<library::DotNameLib> lib
+          = std::make_unique<library::DotNameLib> (Config::assetsPath);
     } else {
       LOG_W << "Loading library omitted [-o]" << std::endl;
     }
@@ -81,11 +81,15 @@ int processArguments (int argc, const char *argv[]) {
 
 int main (int argc, const char *argv[]) {
 
-  LOG_I << standaloneName << " / C++ = " << __cplusplus << std::endl;
-  LOG_D << "executablePath = " << executablePath << std::endl;
+  LOG_I << Config::standaloneName << " / C++ = " << __cplusplus << std::endl;
+  LOG_D << "executablePath = " << Config::executablePath << std::endl;
 
-  processArguments (argc, argv);
-  processFile (assetsPathFirstFile); // test open asset template
+  int result = processArguments (argc, argv);
+  if (result != 0) {
+    return result;
+  }
+
+  processFile (Config::assetsPathFirstFile); // test open asset template
 
   return 0;
 }
