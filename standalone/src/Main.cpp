@@ -73,7 +73,7 @@ int main (int argc, const char* argv[]) {
 
   LOG.setHeaderName (Config::standaloneName);
   // LOG.visibleHeaders (true, true, true, true);
-  LOG.noHeader(true);
+  LOG.noHeader (true);
 
   LOG_I << Config::standaloneName << " / C++ = " << __cplusplus << std::endl;
   LOG_I << "executablePath = " << Config::executablePath << std::endl;

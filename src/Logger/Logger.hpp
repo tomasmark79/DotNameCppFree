@@ -347,13 +347,16 @@ public:
 
 }; // class Logger
 
+// Logger::getInstance ().debug ("Debug message");
 #define LOG Logger::getInstance ()
+
 #define LOG_WITH_CALLER LOG.setCaller (FUNCTION_NAME)
 #define LOG_D LOG_WITH_CALLER << Logger::Level::LOG_DEBUG
 #define LOG_I LOG_WITH_CALLER << Logger::Level::LOG_INFO
 #define LOG_W LOG_WITH_CALLER << Logger::Level::LOG_WARNING
 #define LOG_E LOG_WITH_CALLER << Logger::Level::LOG_ERROR
 #define LOG_C LOG_WITH_CALLER << Logger::Level::LOG_CRITICAL
+
 #define LOG_DEBUG(msg) LOG.debug (msg, FUNCTION_NAME)
 #define LOG_INFO(msg) LOG.info (msg, FUNCTION_NAME)
 #define LOG_WARING(msg) LOG.warning (msg, FUNCTION_NAME)
