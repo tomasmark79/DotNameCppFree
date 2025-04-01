@@ -6,6 +6,7 @@
 
 #include "Logger/Logger.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -39,6 +40,7 @@
 
 namespace Utils {
   namespace FSManager {
+
     inline std::string read (const std::string &filename) {
       std::ifstream file;
       file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
@@ -53,9 +55,20 @@ namespace Utils {
       return file_stream.str ();
     }
 
+    // file processing function to open asset file and read its content
+    inline void justProcessAssetFile (const std::filesystem::path &filePath) {
+      try {
+        LOG_D << "File content: " << read (filePath) << std::endl;
+      } catch (const std::exception &e) {
+        LOG_E << "Exception while processing file: " << e.what () << " [File: " << filePath << "]"
+              << std::endl;
+      } catch (...) {
+        LOG_E << "Unknown error occurred while processing file: " << filePath << std::endl;
+      }
+    }
+
     inline std::string getExecutePath () {
       std::string path;
-
 #ifdef _WIN32
       char buffer[MAX_PATH];
       GetModuleFileNameA (NULL, buffer, MAX_PATH);

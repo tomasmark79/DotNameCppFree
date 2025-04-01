@@ -102,9 +102,8 @@ public:
     return *this;
   }
 
-  Logger &
-  setCallingFunction (const std::string &caller) // Logger a; a.setCallingFunction(FUNCTION_NAME);
-  {
+  // Logger a; a.setCallingFunction(FUNCTION_NAME);
+  Logger &setCallingFunction (const std::string &caller) {
     std::lock_guard<std::mutex> lock (logMutex_);
     if (caller.empty ()) {
       callingFunction_ = FUNCTION_NAME;
