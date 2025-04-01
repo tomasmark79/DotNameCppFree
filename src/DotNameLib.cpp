@@ -8,11 +8,11 @@
 
 namespace dotname {
 
-  DotNameLib::DotNameLib (const std::filesystem::path &assetsPath) : assetsPath_ (assetsPath) {
+  DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : assetsPath_ (assetsPath) {
     LOG_INFO ("DotNameLib v." + std::string (DOTNAMELIB_VERSION) + " constructed.");
     LOG_DEBUG ("Assets Path: " + assetsPath_.string ());
   }
-  DotNameLib::DotNameLib (const std::string &assetsPath)
+  DotNameLib::DotNameLib (const std::string& assetsPath)
       : DotNameLib (std::filesystem::path (assetsPath)) { // Delegate to Main constructor
   }
   DotNameLib::~DotNameLib () { LOG_INFO ("DotNameLib deconstructed."); }
