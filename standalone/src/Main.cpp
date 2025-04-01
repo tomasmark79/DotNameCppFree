@@ -20,17 +20,7 @@ namespace Config {
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
   const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
-}
-
-void processFile (const std::filesystem::path &filePath) {
-  try {
-    LOG_D << "File content: " << Utils::FSManager::read (filePath) << std::endl;
-  } catch (const std::exception &e) {
-    LOG_E << "Exception while processing file: " << e.what () << " [File: " << filePath << "]"
-          << std::endl;
-  } catch (...) {
-    LOG_E << "Unknown error occurred while processing file: " << filePath << std::endl;
-  }
+  
 }
 
 int processArguments (int argc, const char *argv[]) {
@@ -82,14 +72,14 @@ int processArguments (int argc, const char *argv[]) {
 int main (int argc, const char *argv[]) {
 
   LOG_I << Config::standaloneName << " / C++ = " << __cplusplus << std::endl;
-  LOG_D << "executablePath = " << Config::executablePath << std::endl;
+  LOG_I << "executablePath = " << Config::executablePath << std::endl;
 
-  int result = processArguments (argc, argv);
-  if (result != 0) {
-    return result;
+  Utils::FSManager::justProcessAssetFile (Config::assetsPathFirstFile); // test open asset template
+  
+  if(processArguments (argc, argv) != 0) {
+    return 1;
   }
-
-  processFile (Config::assetsPathFirstFile); // test open asset template
-
+  
+  LOG_I << "All done!" << std::endl;
   return 0;
 }
