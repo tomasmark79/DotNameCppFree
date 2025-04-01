@@ -122,7 +122,7 @@ public:
   }
 
   // Logger a; a.setCaller(FUNCTION_NAME);
-  Logger& setCaller (const std::string& caller = FUNCTION_NAME) {
+  Logger& setCaller (const std::string&) {
     std::lock_guard<std::mutex> lock (logMutex_);
     callingFunction_ = caller;
     return *this;
@@ -348,9 +348,11 @@ public:
 }; // class Logger
 
 // Logger::getInstance ().debug ("Debug message");
+
 #define LOG Logger::getInstance ()
 
 #define LOG_WITH_CALLER LOG.setCaller (FUNCTION_NAME)
+
 #define LOG_D LOG_WITH_CALLER << Logger::Level::LOG_DEBUG
 #define LOG_I LOG_WITH_CALLER << Logger::Level::LOG_INFO
 #define LOG_W LOG_WITH_CALLER << Logger::Level::LOG_WARNING
