@@ -29,6 +29,7 @@
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
 [Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
+[Logger](#Logger)  
 [**FAQ**](#faq)  
 [Thanks](#thanks)  
 
@@ -467,6 +468,27 @@ example snippet of toolchains from task.json
   "fedora_glibc2.36_gcc12.4",
   "fedora_glibc2.41_gcc14.2"
 }
+```
+
+[👆🏻](#index)
+
+## Logger
+
+Short Ouput
+
+```log
+todo
+```
+Long Output
+
+```log
+[01-04-2025 14:05:57] [int main(int, const char**)] [INF] DotNameStandalone / C++ = 201703
+[01-04-2025 14:05:57] [int main(int, const char**)] [INF] executablePath = "/home/tomas/dev/cpp/templates/DotNameCppFree/build/standalone/default/debug"
+[01-04-2025 14:05:57] [void Utils::FSManager::justProcessAssetFile(const std::filesystem::__cxx11::path&)] [DBG] File content: hello from assetfile1
+[01-04-2025 14:05:57] [library::DotNameLib::DotNameLib(const std::string&)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 14:05:57] [library::DotNameLib::DotNameLib(const std::string&)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCppFree/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 14:05:57] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 14:05:57] [int main(int, const char**)] [INF] All done!
 ```
 
 [👆🏻](#index)
