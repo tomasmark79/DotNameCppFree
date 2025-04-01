@@ -20,7 +20,7 @@ namespace Config {
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
   const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
-  
+
 }
 
 int processArguments (int argc, const char *argv[]) {
@@ -75,11 +75,11 @@ int main (int argc, const char *argv[]) {
   LOG_I << "executablePath = " << Config::executablePath << std::endl;
 
   Utils::FSManager::justProcessAssetFile (Config::assetsPathFirstFile); // test open asset template
-  
-  if(processArguments (argc, argv) != 0) {
+
+  if (processArguments (argc, argv) != 0) {
     return 1;
   }
-  
+
   LOG_I << "All done!" << std::endl;
   return 0;
 }

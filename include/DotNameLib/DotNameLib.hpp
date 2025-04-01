@@ -4,6 +4,7 @@
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
 
+#include <filesystem>
 #include <string>
 
 // Public API
@@ -12,14 +13,15 @@ namespace library {
 
   class DotNameLib {
   public:
+    DotNameLib (const std::filesystem::path &assetsPath);
     DotNameLib (const std::string &assetsPath);
     ~DotNameLib ();
 
   private:
-    std::string assetsPath_;
+    std::filesystem::path assetsPath_;
 
-    const std::string getAssetsPath () const { return assetsPath_; }
-    void setAssetsPath (const std::string &assetsPath) { assetsPath_ = assetsPath; }
+    const std::filesystem::path getAssetsPath () const { return assetsPath_; }
+    void setAssetsPath (const std::filesystem::path &assetsPath) { assetsPath_ = assetsPath; }
   };
 
 } // namespace library
