@@ -11,6 +11,7 @@
 [Overview](#overview)  
 [🚀 Key Features in **Free** Template ](#free--key-features)  
 [🛸 Key Features in **Pro** Template](#pro--key-features)  [**Get Pro**](#get-pro)  
+[ToDo](#todo)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
 [**Download**](#download)  
@@ -80,6 +81,12 @@ https://github.com/user-attachments/assets/344f30f9-9f19-4dee-a300-239e04584efb
 Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
 
 Thank you in advance.
+
+[👆🏻](#index)
+
+## ToDo
+
+- Possibility to debug CMake configuration even when the CMakeLists.txt file is broken.
 
 [👆🏻](#index)
 
