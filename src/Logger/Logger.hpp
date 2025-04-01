@@ -63,7 +63,7 @@ private:
   std::mutex logMutex_;
 
 private:
-  std::string callingFunction_;
+  std::string caller_;
   std::ostringstream messageStream_;
   std::ofstream logFile_;
 
@@ -103,11 +103,11 @@ public:
   // Logger a; a << std::endl;
   Logger& operator<< (std::ostream& (*outputManipulator) (std::ostream&)) {
     if (outputManipulator == static_cast<std::ostream& (*)(std::ostream&)> (std::endl)) {
-      log (currentLevel_, messageStream_.str (), callingFunction_);
+      log (currentLevel_, messageStream_.str (), caller_);
       // Reset state
       messageStream_.str ("");
       messageStream_.clear ();
-      callingFunction_ = "";
+      caller_ = "";
     } else {
       messageStream_ << outputManipulator;
     }
@@ -122,9 +122,9 @@ public:
   }
 
   // Logger a; a.setCaller(FUNCTION_NAME);
-  Logger& setCaller (const std::string&) {
+  Logger& setCaller (const std::string& caller) {
     std::lock_guard<std::mutex> lock (logMutex_);
-    callingFunction_ = caller;
+    caller_ = caller;
     return *this;
   }
 
@@ -348,17 +348,13 @@ public:
 }; // class Logger
 
 // Logger::getInstance ().debug ("Debug message");
-
 #define LOG Logger::getInstance ()
-
 #define LOG_WITH_CALLER LOG.setCaller (FUNCTION_NAME)
-
 #define LOG_D LOG_WITH_CALLER << Logger::Level::LOG_DEBUG
 #define LOG_I LOG_WITH_CALLER << Logger::Level::LOG_INFO
 #define LOG_W LOG_WITH_CALLER << Logger::Level::LOG_WARNING
 #define LOG_E LOG_WITH_CALLER << Logger::Level::LOG_ERROR
 #define LOG_C LOG_WITH_CALLER << Logger::Level::LOG_CRITICAL
-
 #define LOG_DEBUG(msg) LOG.debug (msg, FUNCTION_NAME)
 #define LOG_INFO(msg) LOG.info (msg, FUNCTION_NAME)
 #define LOG_WARING(msg) LOG.warning (msg, FUNCTION_NAME)
