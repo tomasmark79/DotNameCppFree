@@ -23,7 +23,7 @@ namespace Config {
 
 }
 
-int processArguments (int argc, const char *argv[]) {
+int processArguments (int argc, const char* argv[]) {
   try {
     auto options = std::make_unique<cxxopts::Options> (argv[0], Config::standaloneName);
     options->positional_help ("[optional args]").show_positional_help ();
@@ -55,21 +55,25 @@ int processArguments (int argc, const char *argv[]) {
     }
 
     if (!result.unmatched ().empty ()) {
-      for (const auto &arg : result.unmatched ()) {
+      for (const auto& arg : result.unmatched ()) {
         LOG_W << "Unrecognized option: " << arg << std::endl;
       }
       LOG_I << options->help () << std::endl;
       return 1;
     }
 
-  } catch (const cxxopts::exceptions::exception &e) {
+  } catch (const cxxopts::exceptions::exception& e) {
     LOG_E << "error parsing options: " << e.what () << std::endl;
     return 1;
   }
   return 0;
 }
 
-int main (int argc, const char *argv[]) {
+int main (int argc, const char* argv[]) {
+
+  LOG.setHeaderName (Config::standaloneName);
+  // LOG.visibleHeaders (true, true, true, true);
+  LOG.noHeader(true);
 
   LOG_I << Config::standaloneName << " / C++ = " << __cplusplus << std::endl;
   LOG_I << "executablePath = " << Config::executablePath << std::endl;

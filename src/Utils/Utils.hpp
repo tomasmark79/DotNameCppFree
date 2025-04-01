@@ -41,7 +41,7 @@
 namespace Utils {
   namespace FSManager {
 
-    inline std::string read (const std::string &filename) {
+    inline std::string read (const std::string& filename) {
       std::ifstream file;
       file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
       std::stringstream file_stream;
@@ -49,22 +49,22 @@ namespace Utils {
         file.open (filename.c_str ());
         file_stream << file.rdbuf ();
         file.close ();
-      } catch (const std::ifstream::failure &e) {
+      } catch (const std::ifstream::failure& e) {
         LOG_E << e.what () << std::endl;
       }
       return file_stream.str ();
     }
 
     // overload read to use std::filesystem::path (Windows requires this)
-    inline std::string read (const std::filesystem::path &filePath) {
+    inline std::string read (const std::filesystem::path& filePath) {
       return read (filePath.string ());
     }
 
     // file processing function to open asset file and read its content
-    inline void justProcessAssetFile (const std::filesystem::path &filePath) {
+    inline void justProcessAssetFile (const std::filesystem::path& filePath) {
       try {
         LOG_D << "File content: " << read (filePath) << std::endl;
-      } catch (const std::exception &e) {
+      } catch (const std::exception& e) {
         LOG_E << "Exception while processing file: " << e.what () << " [File: " << filePath << "]"
               << std::endl;
       } catch (...) {
@@ -115,13 +115,13 @@ namespace Utils {
 
   namespace StringUtils {
 
-    inline std::string trim (const std::string &str) {
+    inline std::string trim (const std::string& str) {
       size_t first = str.find_first_not_of (" \t\n\r\f\v");
       size_t last = str.find_last_not_of (" \t\n\r\f\v");
       return (first == std::string::npos) ? "" : str.substr (first, (last - first + 1));
     }
 
-    inline std::vector<std::string> split (const std::string &str, char delimiter) {
+    inline std::vector<std::string> split (const std::string& str, char delimiter) {
       std::vector<std::string> tokens;
       std::stringstream ss (str);
       std::string token;

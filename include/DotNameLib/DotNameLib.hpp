@@ -13,15 +13,15 @@ namespace dotname {
 
   class DotNameLib {
   public:
-    DotNameLib (const std::filesystem::path &assetsPath);
-    DotNameLib (const std::string &assetsPath);
+    DotNameLib (const std::filesystem::path& assetsPath);
+    DotNameLib (const std::string& assetsPath);
     ~DotNameLib ();
 
   private:
     std::filesystem::path assetsPath_;
 
     const std::filesystem::path getAssetsPath () const { return assetsPath_; }
-    void setAssetsPath (const std::filesystem::path &assetsPath) { assetsPath_ = assetsPath; }
+    void setAssetsPath (const std::filesystem::path& assetsPath) { assetsPath_ = assetsPath; }
   };
 
 } // namespace library
