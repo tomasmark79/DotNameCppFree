@@ -39,7 +39,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ==============================================================================
 set(STANDALONE_NAME DotNameStandalone)
 string(TOLOWER "${STANDALONE_NAME}" STANDALONE_NAME_LOWER)
-set(STANDALONE_NAMESPACE dsdotname)
+set(STANDALONE_NAMESPACE dotname)
 project(
     ${STANDALONE_NAME}
     LANGUAGES C CXX ASM
@@ -107,7 +107,7 @@ set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NA
 # ==============================================================================
 # Set linking
 # ==============================================================================
-target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::DotNameLib cxxopts)
+target_link_libraries(${STANDALONE_NAME} PRIVATE dotname::DotNameLib cxxopts)
 
 # ==============================================================================
 # Add missing installation exports

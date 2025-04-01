@@ -9,7 +9,7 @@
 
 // Public API
 
-namespace library {
+namespace dotname {
 
   class DotNameLib {
   public:

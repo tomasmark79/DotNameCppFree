@@ -6,7 +6,7 @@
 #include <Logger/Logger.hpp>
 #include <Utils/Utils.hpp>
 
-namespace library {
+namespace dotname {
 
   DotNameLib::DotNameLib (const std::filesystem::path &assetsPath) : assetsPath_ (assetsPath) {
     LOG_INFO ("DotNameLib v." + std::string (DOTNAMELIB_VERSION) + " constructed.");

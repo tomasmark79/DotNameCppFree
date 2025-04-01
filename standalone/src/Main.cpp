@@ -48,8 +48,8 @@ int processArguments (int argc, const char *argv[]) {
 
     if (!result.count ("omit")) {
       // Load the library
-      std::unique_ptr<library::DotNameLib> lib
-          = std::make_unique<library::DotNameLib> (Config::assetsPath);
+      std::unique_ptr<dotname::DotNameLib> lib
+          = std::make_unique<dotname::DotNameLib> (Config::assetsPath);
     } else {
       LOG_W << "Loading library omitted [-o]" << std::endl;
     }
