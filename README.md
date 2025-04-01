@@ -415,19 +415,8 @@ Workflow activities related to the project did by workflow are logged in the fil
 
 ## Formatting C like code
 
-included `.clang-format` with these prefered settings
+included `.clang-format` with prefered settings
 
-```txt
-BasedOnStyle: GNU
-BreakBeforeBraces: Allman
-ColumnLimit: 79
-SortIncludes: Never
-BreakAfterReturnType: Automatic
-ConstructorInitializerIndentWidth: 2
-ContinuationIndentWidth: 2
-IndentWidth: 2
-NamespaceIndentation: All
-```
 [👆🏻](#index)
 
 ## Formatting CMake like code
