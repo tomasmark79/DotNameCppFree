@@ -1,0 +1,43 @@
+[01-04-2025 13:05:15] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:05:15] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:05:15] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:05:15] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:05:23] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:05:23] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:05:23] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:05:23] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:49] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:49] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:49] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:49] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:49] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:08:56] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:56] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:56] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:56] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:56] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:08:57] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:57] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:57] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:57] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:57] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:08:57] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:57] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:57] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:57] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:57] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:08:58] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:58] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:58] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:58] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:58] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:08:58] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:08:58] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:08:58] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:08:58] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:08:58] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1
+[01-04-2025 13:09:24] [int processArguments(int, const char **)] [INF] Logging to file enabled [-l]
+[01-04-2025 13:09:24] [library::DotNameLib::DotNameLib(const std::string &)] [INF] DotNameLib v.0.0.1 constructed.
+[01-04-2025 13:09:24] [library::DotNameLib::DotNameLib(const std::string &)] [DBG] Assets Path: /home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/../share/DotNameStandalone/assets
+[01-04-2025 13:09:24] [library::DotNameLib::~DotNameLib()] [INF] DotNameLib deconstructed.
+[01-04-2025 13:09:24] [void processFile(const std::filesystem::path &)] [DBG] File content: hello from assetfile1

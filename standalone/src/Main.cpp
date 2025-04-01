@@ -16,10 +16,10 @@
 constexpr char standaloneName[] = "DotNameStandalone";
 
 const std::filesystem::path executablePath = Utils::FSManager::getExecutePath ();
-const std::filesystem::path assetsPath
-    = executablePath / static_cast<std::string> (UTILS_ASSET_PATH);
-const std::filesystem::path assetsPathFirstFile
-    = assetsPath / static_cast<std::string> (UTILS_FIRST_ASSET_FILE);
+constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
+constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
+const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
+const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
 
 void processFile (const std::filesystem::path &filePath) {
   try {
@@ -30,6 +30,8 @@ void processFile (const std::filesystem::path &filePath) {
     }
   } catch (const std::exception &e) {
     LOG_E << "Exception while processing file: " << e.what () << std::endl;
+  } catch (...) {
+    LOG_E << "Unknown error occurred while processing file." << std::endl;
   }
 }
 
@@ -56,7 +58,6 @@ int processArguments (int argc, const char *argv[]) {
       LOG_I << "Logging to file enabled [-l]" << std::endl;
     }
 
-    options->allow_unrecognised_options ();
     if (!result.count ("omit")) {
       std::unique_ptr<library::DotNameLib> lib = std::make_unique<library::DotNameLib> (assetsPath);
     } else {
@@ -67,10 +68,12 @@ int processArguments (int argc, const char *argv[]) {
       for (const auto &arg : result.unmatched ()) {
         LOG_W << "Unrecognized option: " << arg << std::endl;
       }
+      LOG_I << options->help () << std::endl;
+      return 1;
     }
 
   } catch (const cxxopts::exceptions::exception &e) {
-    LOG_C << "error parsing options: " << e.what ();
+    LOG_E << "error parsing options: " << e.what () << std::endl;
     return 1;
   }
   return 0;
@@ -81,8 +84,8 @@ int main (int argc, const char *argv[]) {
   LOG_I << standaloneName << " / C++ = " << __cplusplus << std::endl;
   LOG_D << "executablePath = " << executablePath << std::endl;
 
-  processFile (assetsPathFirstFile);
   processArguments (argc, argv);
+  processFile (assetsPathFirstFile); // test open asset template
 
   return 0;
 }
