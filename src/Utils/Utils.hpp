@@ -55,6 +55,11 @@ namespace Utils {
       return file_stream.str ();
     }
 
+    // overload read to use std::filesystem::path (Windows requires this)
+    inline std::string read (const std::filesystem::path &filePath) {
+      return read (filePath.string ());
+    }
+   
     // file processing function to open asset file and read its content
     inline void justProcessAssetFile (const std::filesystem::path &filePath) {
       try {
@@ -67,6 +72,7 @@ namespace Utils {
       }
     }
 
+    
     inline std::string getExecutePath () {
       std::string path;
 #ifdef _WIN32
