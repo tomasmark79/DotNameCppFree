@@ -31,7 +31,7 @@ int processArguments (int argc, const char* argv[]) {
     options->set_width (80);
     options->set_tab_expansion ();
     options->add_options () ("h,help", "Show help");
-    options->add_options () ("o,omit", "Omit library loading",
+    options->add_options () ("1,omit", "Omit library loading",
                              cxxopts::value<bool> ()->default_value ("false"));
     options->add_options () ("2,log2file", "Log to file",
                              cxxopts::value<bool> ()->default_value ("false"));
@@ -44,14 +44,14 @@ int processArguments (int argc, const char* argv[]) {
 
     if (result["log2file"].as<bool> ()) {
       LOG.enableFileLogging (std::string (Config::standaloneName) + ".log");
-      LOG_D << "Logging to file enabled [-l]" << std::endl;
+      LOG_D << "Logging to file enabled [-2]" << std::endl;
     }
 
     if (!result.count ("omit")) {
       // uniqueLib = std::make_unique<dotname::DotNameLib> ();
       uniqueLib = std::make_unique<dotname::DotNameLib> (Config::assetsPath);
     } else {
-      LOG_D << "Loading library omitted [-o]" << std::endl;
+      LOG_D << "Loading library omitted [-1]" << std::endl;
     }
 
     if (!result.unmatched ().empty ()) {
