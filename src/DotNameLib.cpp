@@ -5,13 +5,19 @@
 namespace dotname {
 
   DotNameLib::DotNameLib () {
-    LOG_D_MSG (libName + " constructed ...");
+    LOG_D << libName << " ...constructed" << std::endl;
+    if (!assetsPath_.empty ()) {
+      LOG_D << "Assets path: " << assetsPath_ << std::endl;
+    } else {
+      LOG_D << "Assets path is empty" << std::endl;
+    }
   }
-  DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : assetsPath_ (assetsPath) {
-    LOG_D_MSG (libName + " constructed with assets path ...");
+  DotNameLib::DotNameLib (const std::filesystem::path& assetsPath)
+      : DotNameLib () {
+    assetsPath_ = assetsPath;
   }
   DotNameLib::~DotNameLib () {
-    LOG_D_SAFE_MSG (DotNameLib, libName + " destructed ...");
+    LOG_D_DESTRUCTOR(DotNameLib) << libName << " ...destructed" << std::endl;
   }
 
 } // namespace dotname
