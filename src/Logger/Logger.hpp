@@ -375,7 +375,7 @@ public:
 #if !defined(NDEBUG) || defined(_DEBUG) || defined(DEBUG)
   #define LOG_D Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_DEBUG
     // safe caller
-  #define LOG_D_SAFE(className) \
+  #define LOG_D_DESTRUCTOR(className) \
     Logger::getInstance ().setCaller ("~" #className "::" #className) << Logger::Level::LOG_DEBUG
 #else
   #define LOG_D \
@@ -393,7 +393,7 @@ public:
 #if !defined(NDEBUG) || defined(_DEBUG) || defined(DEBUG)
   #define LOG_D_MSG(msg) Logger::getInstance ().debug (msg, FUNCTION_NAME)
   // safe caller
-  #define LOG_D_SAFE_MSG(className, msg) \
+  #define LOG_D_DESTRUCTOR_MSG(className, msg) \
     Logger::getInstance ().debug (std::string(msg), "~" #className "::" #className)
 #else
   #define LOG_D_MSG(msg) ((void)0)
@@ -412,7 +412,7 @@ public:
         .setCaller (FUNCTION_NAME) \
         .logFmtMessage (Logger::Level::LOG_DEBUG, format, __VA_ARGS__)
     // safe caller
-  #define LOG_D_SAFE_FMT(className, format, ...)    \
+  #define LOG_D_DESTRUCTOR_FMT(className, format, ...)    \
     Logger::getInstance ()                          \
         .setCaller ("~" #className "::" #className) \
         .logFmtMessage (Logger::Level::LOG_DEBUG, format, __VA_ARGS__)
