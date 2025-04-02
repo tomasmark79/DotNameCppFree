@@ -1,3 +1,6 @@
+// MIT License
+// Copyright (c) 2024-2025 Tomáš Mark
+
 #include <DotNameLib/DotNameLib.hpp>
 #include <Logger/Logger.hpp>
 #include <Utils/Utils.hpp>

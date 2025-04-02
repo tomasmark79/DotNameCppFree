@@ -1,5 +1,8 @@
-#ifndef __DOTNAMELIB_H__
-#define __DOTNAMELIB_H__
+// MIT License
+// Copyright (c) 2024-2025 Tomáš Mark
+
+#ifndef __DOTNAMELIB_HPP
+#define __DOTNAMELIB_HPP
 
 #include <DotNameLib/version.h>
 #include <filesystem>
@@ -29,4 +32,4 @@ namespace dotname {
 
 } // namespace dotname
 
-#endif // __DOTNAMELIB_H__
+#endif // __DOTNAMELIB_HPP
