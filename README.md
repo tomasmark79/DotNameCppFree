@@ -256,11 +256,15 @@ All content included in assets folder is accessible via file path by the macro A
 
 #### [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) enables argument management
 
-  - `-o` omit library
-    - loading using just standalone project
-  - `-l` log to file
-    - implemented logger support log to file as well
-  - `-h` show usage
+```bash
+DotNameStandalone
+Usage:
+  ./build/standalone/default/debug/./DotNameStandalone [OPTION...]
+
+  -h, --help      Show help
+  -1, --omit      Omit library loading
+  -2, --log2file  Log to file
+  ```
 
 ## Library Source
 
