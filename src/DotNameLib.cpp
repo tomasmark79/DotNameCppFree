@@ -1,20 +1,17 @@
-// MIT License
-// Copyright (c) 2024-2025 Tomáš Mark
-
 #include <DotNameLib/DotNameLib.hpp>
-#include <DotNameLib/version.h>
 #include <Logger/Logger.hpp>
 #include <Utils/Utils.hpp>
 
 namespace dotname {
 
+  DotNameLib::DotNameLib () {
+    LOG_D_MSG (libName + " constructed ...");
+  }
   DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : assetsPath_ (assetsPath) {
-    LOG_INFO ("DotNameLib v." + std::string (DOTNAMELIB_VERSION) + " constructed.");
-    LOG_DEBUG ("Assets Path: " + assetsPath_.string ());
+    LOG_D_MSG (libName + " constructed with assets path ...");
   }
-  DotNameLib::DotNameLib (const std::string& assetsPath)
-      : DotNameLib (std::filesystem::path (assetsPath)) { // Delegate to Main constructor
+  DotNameLib::~DotNameLib () {
+    LOG_D_SAFE_MSG (DotNameLib, libName + " destructed ...");
   }
-  DotNameLib::~DotNameLib () { LOG_INFO ("DotNameLib deconstructed."); }
 
-} // namespace library
+} // namespace dotname

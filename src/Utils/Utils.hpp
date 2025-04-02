@@ -60,18 +60,6 @@ namespace Utils {
       return read (filePath.string ());
     }
 
-    // file processing function to open asset file and read its content
-    inline void justProcessAssetFile (const std::filesystem::path& filePath) {
-      try {
-        LOG_D << "File content: " << read (filePath) << std::endl;
-      } catch (const std::exception& e) {
-        LOG_E << "Exception while processing file: " << e.what () << " [File: " << filePath << "]"
-              << std::endl;
-      } catch (...) {
-        LOG_E << "Unknown error occurred while processing file: " << filePath << std::endl;
-      }
-    }
-
     inline std::string getExecutePath () {
       std::string path;
 #ifdef _WIN32

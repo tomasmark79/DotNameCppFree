@@ -15,6 +15,8 @@
 #include <string>
 #include <thread>
 
+#include "fmt/core.h"
+
 #ifdef _WIN32
   #ifndef NOMINMAX
     #define NOMINMAX
@@ -124,10 +126,21 @@ public:
   // Logger a; a.setCaller(FUNCTION_NAME);
   Logger& setCaller (const std::string& caller) {
     std::lock_guard<std::mutex> lock (logMutex_);
-    caller_ = caller;
+    try {
+      // Vytvoření explicitní kopie vstupního parametru
+      std::string callerCopy = caller.empty () ? "Unknown" : caller;
+      caller_ = callerCopy;
+    } catch (const std::exception& e) {
+      std::cerr << "Error setting caller: " << e.what () << std::endl;
+      caller_ = "Error in caller"; // Nastavit bezpečnou hodnotu
+    } catch (...) {
+      std::cerr << "Unknown error setting caller" << std::endl;
+      caller_ = "Unknown error in caller"; // Nastavit bezpečnou hodnotu
+    }
     return *this;
   }
 
+public:
   void debug (const std::string& message, const std::string& caller = "") {
     log (Level::LOG_DEBUG, message, caller);
   }
@@ -148,6 +161,48 @@ public:
     log (Level::LOG_CRITICAL, message, caller);
   }
 
+  void log (Level level, const std::string& message, const std::string& caller = "") {
+    std::lock_guard<std::mutex> lock (logMutex_);
+
+    auto now = std::chrono::system_clock::now ();
+    auto now_time = std::chrono::system_clock::to_time_t (now);
+
+    // Use thread-safe localtime
+    std::tm now_tm;
+#ifdef _WIN32
+    localtime_s (&now_tm, &now_time);
+#else
+    localtime_r (&now_time, &now_tm);
+#endif
+
+    // Output to appropriate stream
+    if (level == Level::LOG_ERROR || level == Level::LOG_CRITICAL) {
+      logToStream (std::cerr, level, message, caller, now_tm);
+    } else if (level == Level::LOG_DEBUG || level == Level::LOG_INFO
+               || level == Level::LOG_WARNING) {
+      logToStream (std::cout, level, message, caller, now_tm);
+    }
+
+    // file output
+    if (logFile_.is_open ()) {
+      logFile_ << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
+      if (!caller.empty ()) {
+        logFile_ << "[" << caller << "] ";
+      } else {
+        logFile_ << "[" << "empty caller" << "] ";
+      }
+      logFile_ << "[" << levelToString (level) << "] " << message << std::endl;
+    }
+  }
+
+public:
+  template <typename... Args>
+  void logFmtMessage (Level level, const std::string& format, Args&&... args) {
+    std::string message = fmt::format (format, std::forward<Args> (args)...);
+    log (level, message, caller_);
+  }
+
+public:
   bool enableFileLogging (const std::string& filename) {
     std::lock_guard<std::mutex> lock (logMutex_);
     try {
@@ -290,15 +345,12 @@ public:
                     const std::string& caller, const std::tm& now_tm) {
 
     setConsoleColor (level);
-
     if (includeName_) {
       stream << "[" << headerName_ << "] ";
     }
-
     if (includeTime_) {
       stream << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
     }
-
     if (includeCaller_) {
       if (!caller.empty ()) {
         stream << "[" << caller << "] ";
@@ -307,58 +359,83 @@ public:
     if (includeLevel_) {
       stream << "[" << levelToString (level) << "] ";
     }
-
     stream << message;
     resetConsoleColor ();
     stream << std::endl;
   }
 
-  void log (Level level, const std::string& message, const std::string& caller = "") {
-    std::lock_guard<std::mutex> lock (logMutex_);
-
-    auto now = std::chrono::system_clock::now ();
-    auto now_time = std::chrono::system_clock::to_time_t (now);
-
-    // Use thread-safe localtime
-    std::tm now_tm;
-#ifdef _WIN32
-    localtime_s (&now_tm, &now_time);
-#else
-    localtime_r (&now_time, &now_tm);
-#endif
-
-    // Output to appropriate stream
-    if (level == Level::LOG_ERROR || level == Level::LOG_CRITICAL) {
-      logToStream (std::cerr, level, message, caller, now_tm);
-    } else if (level == Level::LOG_DEBUG || level == Level::LOG_INFO
-               || level == Level::LOG_WARNING) {
-      logToStream (std::cout, level, message, caller, now_tm);
-    }
-
-    // file output
-    if (logFile_.is_open ()) {
-      logFile_ << "[" << std::put_time (&now_tm, "%d-%m-%Y %H:%M:%S") << "] ";
-      if (!caller.empty ()) {
-        logFile_ << "[" << caller << "] ";
-      }
-      logFile_ << "[" << levelToString (level) << "] " << message << std::endl;
-    }
-  }
-
 }; // class Logger
 
-// Logger::getInstance ().debug ("Debug message");
+// Macro definitions
+
 #define LOG Logger::getInstance ()
 #define LOG_WITH_CALLER LOG.setCaller (FUNCTION_NAME)
-#define LOG_D LOG_WITH_CALLER << Logger::Level::LOG_DEBUG
-#define LOG_I LOG_WITH_CALLER << Logger::Level::LOG_INFO
-#define LOG_W LOG_WITH_CALLER << Logger::Level::LOG_WARNING
-#define LOG_E LOG_WITH_CALLER << Logger::Level::LOG_ERROR
-#define LOG_C LOG_WITH_CALLER << Logger::Level::LOG_CRITICAL
-#define LOG_DEBUG(msg) LOG.debug (msg, FUNCTION_NAME)
-#define LOG_INFO(msg) LOG.info (msg, FUNCTION_NAME)
-#define LOG_WARING(msg) LOG.warning (msg, FUNCTION_NAME)
-#define LOG_ERROR(msg) LOG.error (msg, FUNCTION_NAME)
-#define LOG_CRITICAL(msg) LOG.critical (msg, FUNCTION_NAME)
+
+// stream debug
+#if !defined(NDEBUG) || defined(_DEBUG) || defined(DEBUG)
+  #define LOG_D Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_DEBUG
+    // safe caller
+  #define LOG_D_SAFE(className) \
+    Logger::getInstance ().setCaller ("~" #className "::" #className) << Logger::Level::LOG_DEBUG
+#else
+  #define LOG_D \
+    if (false)  \
+    Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_DEBUG
+#endif
+
+//stream
+#define LOG_I Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_INFO
+#define LOG_W Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_WARNING
+#define LOG_E Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_ERROR
+#define LOG_C Logger::getInstance ().setCaller (FUNCTION_NAME) << Logger::Level::LOG_CRITICAL
+
+// functional debug
+#if !defined(NDEBUG) || defined(_DEBUG) || defined(DEBUG)
+  #define LOG_D_MSG(msg) Logger::getInstance ().debug (msg, FUNCTION_NAME)
+  // safe caller
+  #define LOG_D_SAFE_MSG(className, msg) \
+    Logger::getInstance ().debug (msg, "~" #className "::" #className)
+#else
+  #define LOG_D_MSG(msg) ((void)0)
+#endif
+
+// functional
+#define LOG_I_MSG(msg) Logger::getInstance ().info (msg, FUNCTION_NAME)
+#define LOG_W_MSG(msg) Logger::getInstance ().warning (msg, FUNCTION_NAME)
+#define LOG_E_MSG(msg) Logger::getInstance ().error (msg, FUNCTION_NAME)
+#define LOG_C_MSG(msg) Logger::getInstance ().critical (msg, FUNCTION_NAME)
+
+// fmt debug
+#if !defined(NDEBUG) || defined(_DEBUG) || defined(DEBUG)
+  #define LOG_D_FMT(format, ...)   \
+    Logger::getInstance ()         \
+        .setCaller (FUNCTION_NAME) \
+        .logFmtMessage (Logger::Level::LOG_DEBUG, format, __VA_ARGS__)
+    // safe caller
+  #define LOG_D_SAFE_FMT(className, format, ...)    \
+    Logger::getInstance ()                          \
+        .setCaller ("~" #className "::" #className) \
+        .logFmtMessage (Logger::Level::LOG_DEBUG, format, __VA_ARGS__)
+#else
+  #define LOG_D_FMT(format, ...) ((void)0)
+#endif
+
+// fmt
+#define LOG_I_FMT(format, ...)   \
+  Logger::getInstance ()         \
+      .setCaller (FUNCTION_NAME) \
+      .logFmtMessage (Logger::Level::LOG_INFO, format, __VA_ARGS__)
+#define LOG_W_FMT(format, ...)   \
+  Logger::getInstance ()         \
+      .setCaller (FUNCTION_NAME) \
+      .logFmtMessage (Logger::Level::LOG_WARNING, format, __VA_ARGS__)
+#define LOG_E_FMT(format, ...)   \
+  Logger::getInstance ()         \
+      .setCaller (FUNCTION_NAME) \
+      .logFmtMessage (Logger::Level::LOG_ERROR, format, __VA_ARGS__)
+#define LOG_C_FMT(format, ...)   \
+  Logger::getInstance ()         \
+      .setCaller (FUNCTION_NAME) \
+      .logFmtMessage (Logger::Level::LOG_CRITICAL, format, __VA_ARGS__)
 
 #endif // LOGGER_HPP
