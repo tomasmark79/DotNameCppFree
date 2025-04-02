@@ -394,7 +394,7 @@ public:
   #define LOG_D_MSG(msg) Logger::getInstance ().debug (msg, FUNCTION_NAME)
   // safe caller
   #define LOG_D_SAFE_MSG(className, msg) \
-    Logger::getInstance ().debug (msg, "~" #className "::" #className)
+    Logger::getInstance ().debug (std::string(msg), "~" #className "::" #className)
 #else
   #define LOG_D_MSG(msg) ((void)0)
 #endif
