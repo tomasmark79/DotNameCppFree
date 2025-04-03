@@ -21,6 +21,8 @@ namespace dotname {
   }
   DotNameLib::~DotNameLib () {
     LOG_D_STREAM << libName << " ...destructed" << std::endl;
+    LOG_D_FMT ("{} ...destructed", libName);
+    LOG_D_MSG (libName + " ...destructed");
   }
 
 } // namespace dotname
