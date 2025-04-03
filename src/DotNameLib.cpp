@@ -8,11 +8,11 @@
 namespace dotname {
 
   DotNameLib::DotNameLib () {
-    LOG_D << libName << " ...constructed" << std::endl;
+    LOG_D_STREAM << libName << " ...constructed" << std::endl;
     if (!assetsPath_.empty ()) {
-      LOG_D << "Assets path: " << assetsPath_ << std::endl;
+      LOG_D_STREAM << "Assets path: " << assetsPath_ << std::endl;
     } else {
-      LOG_D << "Assets path is empty" << std::endl;
+      LOG_D_STREAM << "Assets path is empty" << std::endl;
     }
   }
   DotNameLib::DotNameLib (const std::filesystem::path& assetsPath)
@@ -20,7 +20,7 @@ namespace dotname {
     assetsPath_ = assetsPath;
   }
   DotNameLib::~DotNameLib () {
-    LOG_D_DESTRUCTOR(DotNameLib) << libName << " ...destructed" << std::endl;
+    LOG_D_STREAM << libName << " ...destructed" << std::endl;
   }
 
 } // namespace dotname
