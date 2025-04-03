@@ -1,5 +1,6 @@
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
+// Thread safe logger class
 
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
@@ -245,7 +246,7 @@ private:
     setConsoleColor (level);
     stream << buildHeader (now_tm, caller, level) << message;
     resetConsoleColor ();
-    stream << std::endl;
+    stream << std::endl; // přidání nového řádku
   }
 
   std::string buildHeader (const std::tm& now_tm, const std::string& caller, Level level) const {
