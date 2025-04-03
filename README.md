@@ -21,10 +21,10 @@
 [Template Structure](#template-structure)  
 [Standalone Source](#standalone-source)  
 [Library Source](#library-source)  
+[Reusability in another projects](#reusability-in-another-projects)  
 [VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
 [VSCode Recomended Extensions](#vscode-recomended-extensions)  
 [CMake Options](#cmake-options)  
-[Project as a Library](#project-as-a-library)  
 [Environment Installers](#environment-installers)  
 [Template Maintenance - Renamer](#solution-renamer)  
 [Template Maintenance - Upgrader](#solution-upgrader)  
@@ -266,12 +266,73 @@ Usage:
   -2, --log2file  Log to file
   ```
 
+[👆🏻](#index)
+
 ## Library Source
 
 The library is connected to the main Standalone project using the CMake CPM.cmake wrapper in Standalone/CMakeLists.txt
 
 ```cmake
 CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+```
+
+[👆🏻](#index)
+
+## Reusability in another projects
+
+One of the **advantages** of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
+
+> 💡 Keep in mind that one of the overloaded class constructors of linked libraries may receive the path to the assets folder to enable all classes interested in using the folder's content to access it.
+
+### CMaker Configuration
+
+#### With CPM.cmake
+
+```cmake
+CPMAddPackage(
+    NAME DotNameCppFree
+    GITHUB_REPOSITORY tomasmark79/DotNameCppFreeFree
+    GIT_TAG main)
+
+# Remote library source code may require files
+# within ./assets folder, then you have to copy
+# all of them to your work dir ./assets folder.
+file(COPY ${DotNameCppFree_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(
+    ${LIBRARY_NAME}
+    PUBLIC dotname::DotNameCppFree
+    )
+```
+
+#### With CMake FetchContent
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+    DotNameCppFree
+    GIT_REPOSITORY https://github.com/tomasmark79/DotNameCppFreeFree.git
+    GIT_TAG main
+)
+FetchContent_MakeAvailable(DotNameCppFree)
+file(COPY...
+target_link_libraries(...
+```
+
+#### With CMake add_subdirectory
+
+```cmake
+add_subdirectory(path/to/DotNameCppFreeFree)
+file(COPY...
+target_link_libraries(...
+```
+
+### C++ Implementation
+
+##### In Main.cpp just modify name of the linked library
+
+```cpp
+uniqueLib = std::make_unique<dotname::DotNameCppFree> (Config::assetsPath);
 ```
 
 [👆🏻](#index)
@@ -349,39 +410,6 @@ You need advanced knowledge to use these options.
 - `ENABLE_HARDENING`: Enable hardening options for increased security.
 - `ENABLE_IPO`: Enable interprocedural optimization.
 - `ENABLE_CCACHE`: Enable ccache for faster recompilation.
-
-[👆🏻](#index)
-
-## Project as a Library
-
-One of the **advantages** of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
-
-> 💡 Keep in mind that the class constructor of connected projects (libs connected via CPM or CMake) must accept the current standalone path to the assets folder. The standalone assets folder will always include all required assets from the connected libraries.
-
-### Simply use the commands provided below.
-
-  #### CMakeLists.txt
-
-  ```cmake
-  CPMAddPackage(
-    NAME EmojiTools
-    GITHUB_REPOSITORY tomasmark79/EmojiToolsFree
-    GIT_TAG main
-  )
-  file(COPY ${EmojiTools_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
-
-  target_link_libraries(
-    ${LIBRARY_NAME}
-    PUBLIC dsdotname::EmojiTools
-  )
-  ```
-
-  #### C++
-
-  ```cpp
-    std::shared_ptr<EmojiSpace::EmojiTools> /*💋*/ emojiTools
-      = std::make_shared<EmojiSpace::EmojiTools> (m_assetsPath);
-  ```
 
 [👆🏻](#index)
 
