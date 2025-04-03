@@ -36,7 +36,7 @@
 
 ## Overview
 
-DotName C++ Template is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
+DotName C++ Template is a comprehensive and modern foundation for cross-platform development in C++. This template provides a robust infrastructure suitable for both standalone applications and libraries, integrating best practices and tools used in professional software development. The extended Pro version further offers complete capabilities for efficient work in Visual Studio Code, ensuring high flexibility and comfort when creating high-quality software solutions.
 
 In the Free 🚀 Edition Template, the framework provides comprehensive, essential C++ source code and configuration settings to ensure a successful project build.
 
