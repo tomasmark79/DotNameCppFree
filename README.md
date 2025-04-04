@@ -6,12 +6,12 @@
 
 # DotName C++ Template
 
+DotName C++ Template is a comprehensive and modern foundation for cross-platform development in C++. This template provides a robust infrastructure suitable for both standalone applications and libraries, integrating best practices and tools used in professional software development. In the Free 🚀 Edition Template, the framework provides comprehensive, essential C++ source code and configuration settings to ensure a successful project build. The extended Pro 🛸 version further offers complete capabilities for efficient work in Visual Studio Code, ensuring high flexibility and comfort when creating high-quality software solutions. This template is offered as is, without any warranties regarding its functionality.
+
 ## Index
 
-[Overview](#overview)  
 [🚀 Key Features in **Free** Template ](#free--key-features)  
 [🛸 Key Features in **Pro** Template](#pro--key-features)  [**Get Pro**](#get-pro)  
-[ToDo](#todo)  
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
 [**Download**](#download)  
@@ -32,17 +32,8 @@
 [Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
 [Logger](#Logger)  
 [**FAQ**](#faq)  
+[ToDo](#todo)  
 [Thanks](#thanks)  
-
-## Overview
-
-DotName C++ Template is a comprehensive and modern foundation for cross-platform development in C++. This template provides a robust infrastructure suitable for both standalone applications and libraries, integrating best practices and tools used in professional software development. The extended Pro version further offers complete capabilities for efficient work in Visual Studio Code, ensuring high flexibility and comfort when creating high-quality software solutions.
-
-In the Free 🚀 Edition Template, the framework provides comprehensive, essential C++ source code and configuration settings to ensure a successful project build.
-
-In the Pro 🛸 Edition Template, you gain significantly expanded development features, advanced automation capabilities, and enhanced overall usability for a more comfortable and efficient development experience.
-
-[👆🏻](#index)
 
 ## Free 🚀 Key Features
 - From GitHub source code to local binary tarballs in under 🦅 one minute 
@@ -81,12 +72,6 @@ https://github.com/user-attachments/assets/344f30f9-9f19-4dee-a300-239e04584efb
 Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
 
 Thank you in advance.
-
-[👆🏻](#index)
-
-## ToDo
-
-- Possibility to debug CMake configuration even when the CMakeLists.txt file is broken.
 
 [👆🏻](#index)
 
@@ -533,6 +518,12 @@ Output with header.
 
 **Question**: Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?  
 **Answer**: Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency. CPM enables caching of downloaded libraries, significantly speeding up repeated builds across different machines by storing dependencies locally. It also elegantly handles versioning, preventing duplicates and minimizing conflicts between different versions. Its declarative approach allows all dependencies to be specified in one place with easy configuration options. CPM integrates well with PackageProject.cmake, simplifying the process of exporting projects as CMake packages. Additionally, with CPMLicenses.cmake, projects can automatically generate an overview of dependency licenses. The simple syntax based on CPMAddPackage() enhances readability compared to FetchContent. Another advantage is the unified management of various types of dependencies, whether they come from GitHub repositories, tarballs, or local files, ensuring consistent and organized package management. I also have experience suggesting that Conan sometimes reacts slower to the development of certain projects, whereas this CPM solution allows you to comfortably use the very latest iterations directly from GitHub.
+
+[👆🏻](#index)
+
+## ToDo
+
+>Possibility to debug CMake configuration even when the CMakeLists.txt file is broken.  
 
 [👆🏻](#index)
 
