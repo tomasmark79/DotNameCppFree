@@ -14,7 +14,7 @@ namespace dotname {
 
   class DotNameLib {
 
-    const std::string libName = std::string ("DotNameLib v.") + DOTNAMELIB_VERSION;
+    const std::string libName_ = std::string ("DotNameLib v.") + DOTNAMELIB_VERSION;
     std::filesystem::path assetsPath_;
 
   public:

@@ -8,7 +8,7 @@
 namespace dotname {
 
   DotNameLib::DotNameLib () {
-    LOG_D_STREAM << libName << " ...constructed" << std::endl;
+    LOG_D_STREAM << libName_ << " ...constructed" << std::endl;
   }
   DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : DotNameLib () {
     assetsPath_ = assetsPath;
@@ -19,7 +19,7 @@ namespace dotname {
     }
   }
   DotNameLib::~DotNameLib () {
-    LOG_D_STREAM << libName << " ...destructed" << std::endl;
+    LOG_D_STREAM << libName_ << " ...destructed" << std::endl;
   }
 
 } // namespace dotname
