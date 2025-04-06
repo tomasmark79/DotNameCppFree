@@ -39,49 +39,52 @@
 #endif
 
 namespace Utils {
-  namespace FSManager {
 
-    inline std::string read (const std::string& filename) {
-      std::ifstream file;
-      file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-      std::stringstream file_stream;
-      try {
-        file.open (filename.c_str ());
-        file_stream << file.rdbuf ();
-        file.close ();
-      } catch (const std::ifstream::failure& e) {
-        LOG_E_STREAM << e.what () << std::endl;
+  namespace FileIO {
+    inline std::string readFile (const std::filesystem::path& filePath) {
+      std::ifstream file (filePath, std::ios::in);
+      if (!file.is_open ()) {
+        throw std::ios_base::failure ("Failed to open file: " + filePath.string ());
       }
-      return file_stream.str ();
+      std::stringstream buffer;
+      buffer << file.rdbuf ();
+      return buffer.str ();
     }
 
-    // overload read to use std::filesystem::path (Windows requires this)
-    inline std::string read (const std::filesystem::path& filePath) {
-      return read (filePath.string ());
+    inline void writeFile (const std::filesystem::path& filePath, const std::string& content) {
+      std::ofstream file (filePath, std::ios::out | std::ios::trunc);
+      if (!file.is_open ()) {
+        throw std::ios_base::failure ("Failed to open file: " + filePath.string ());
+      }
+      file << content;
+    }
+  } // namespace FileIO
+
+  namespace PathUtils {
+    inline std::filesystem::path getParentPath (const std::filesystem::path& filePath) {
+      return filePath.parent_path ();
     }
 
-    inline std::string getExecutePath () {
-      std::string path;
+    inline std::string getFileName (const std::filesystem::path& filePath) {
+      return filePath.filename ().string ();
+    }
+
+    inline bool fileExists (const std::filesystem::path& filePath) {
+      return std::filesystem::exists (filePath);
+    }
+
+    inline std::filesystem::path getStandalonePath () {
+      std::filesystem::path path;
+
 #ifdef _WIN32
       char buffer[MAX_PATH];
       GetModuleFileNameA (NULL, buffer, MAX_PATH);
       path = buffer;
-      size_t pos = path.find_last_of ("\\/");
-      if (pos != std::string::npos) {
-        path = path.substr (0, pos);
-      }
 #elif defined(__APPLE__)
       char buffer[PATH_MAX];
       uint32_t bufferSize = PATH_MAX;
       if (_NSGetExecutablePath (buffer, &bufferSize) == 0) {
-        char realPath[PATH_MAX];
-        if (realpath (buffer, realPath) != nullptr) {
-          path = realPath;
-          size_t pos = path.find_last_of ("/");
-          if (pos != std::string::npos) {
-            path = path.substr (0, pos);
-          }
-        }
+        path = buffer;
       }
 #else
       char buffer[PATH_MAX];
@@ -89,38 +92,34 @@ namespace Utils {
       if (count != -1) {
         buffer[count] = '\0';
         path = buffer;
-        size_t pos = path.find_last_of ("/");
-        if (pos != std::string::npos) {
-          path = path.substr (0, pos);
-        }
       }
 #endif
-
       return path;
     }
 
-  }; // namespace FSManager
+  } // namespace PathUtils
 
-  namespace StringUtils {
-
-    inline std::string trim (const std::string& str) {
-      size_t first = str.find_first_not_of (" \t\n\r\f\v");
-      size_t last = str.find_last_not_of (" \t\n\r\f\v");
-      return (first == std::string::npos) ? "" : str.substr (first, (last - first + 1));
-    }
-
-    inline std::vector<std::string> split (const std::string& str, char delimiter) {
-      std::vector<std::string> tokens;
-      std::stringstream ss (str);
-      std::string token;
-      while (std::getline (ss, token, delimiter)) {
-        tokens.push_back (trim (token));
+  namespace FileManager {
+    inline void createDirectory (const std::filesystem::path& dirPath) {
+      if (!std::filesystem::exists (dirPath)) {
+        std::filesystem::create_directories (dirPath);
       }
-      return tokens;
     }
 
-  } // namespace StringUtils
+    inline void remove (const std::filesystem::path& path) {
+      if (std::filesystem::exists (path)) {
+        std::filesystem::remove_all (path);
+      }
+    }
 
+    inline std::vector<std::filesystem::path> listFiles (const std::filesystem::path& dirPath) {
+      std::vector<std::filesystem::path> files;
+      for (const auto& entry : std::filesystem::directory_iterator (dirPath)) {
+        files.push_back (entry.path ());
+      }
+      return files;
+    }
+  } // namespace FileManager
 } // namespace Utils
 
 #endif // UTILS_HPP
