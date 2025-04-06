@@ -13,12 +13,16 @@
 #include <string>
 #include <vector>
 
+using namespace Utils;
+
 namespace Config {
+
   constexpr char standaloneName[] = "DotNameStandalone";
-  const std::filesystem::path executablePath = Utils::FSManager::getExecutePath ();
+  const std::filesystem::path standalonePath
+      = PathUtils::getParentPath (PathUtils::getStandalonePath ());
   constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
-  const std::filesystem::path assetsPath = executablePath / utilsAssetPath;
+  const std::filesystem::path assetsPath = standalonePath / utilsAssetPath;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
 }
 
@@ -69,10 +73,31 @@ int processArguments (int argc, const char* argv[]) {
   return 0;
 }
 
+int printAssets (const std::filesystem::path& assetsPath) {
+  try {
+    auto files = FileManager::listFiles (assetsPath);
+    for (const auto& file : files) {
+      std::cout << "asset: " << file << std::endl;
+    }
+    if (files.empty ()) {
+      LOG_I_STREAM << "No assets found in " << assetsPath << std::endl;
+    }
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what () << std::endl;
+    return 1;
+  }
+  return 0;
+}
+
 int main (int argc, const char* argv[]) {
   // LOG.noHeader (true);
+
   LOG_I_STREAM << "Starting " << Config::standaloneName << " ..." << std::endl;
+
   if (processArguments (argc, argv) != 0) {
+    return 1;
+  }
+  if (printAssets (Config::assetsPath) != 0) {
     return 1;
   }
   return 0;
