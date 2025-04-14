@@ -7,17 +7,20 @@
 
 The DotName C++ Template is a modern and versatile foundation for cross-platform C++ development. It is designed to support both standalone applications and libraries, offering a robust infrastructure that incorporates best practices and tools commonly used in professional software development. 
 
-The **Free 🚀 Edition** provides essential C++ source code and configuration settings to ensure a successful project build. For those seeking enhanced functionality, the **Pro 🛸 Edition** includes advanced features tailored for Visual Studio Code, enabling a highly efficient and comfortable development experience. 
+The **Free 🚀 Edition** provides essential C++ source code and configuration settings to ensure a successful project build. For those seeking enhanced functionality, the **Private 🛸 Edition** includes advanced features tailored for Visual Studio Code, enabling a highly efficient and comfortable development experience. 
 
 This template is provided "as is," without any guarantees regarding its functionality.
 
 ## This solution is a hidden gem waiting to be polished 💎✨
 
+**Why does this exist when there are official CMake extensions for VSCode?**  
+Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.
+
 **What scenarios is this template suitable for?**  
 This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.
 
 **What makes this solution unique?**  
-This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Pro version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
+This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
 
 **Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
 Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
@@ -35,10 +38,14 @@ The implementation of tests is currently missing. I plan to add them once I deci
 
 ## Index
 
-[🚀 Key Features in **Free** Template ](#free--key-features)  
-[🛸 Key Features in **Pro** Template](#pro--key-features)  [**Get Pro**](#get-pro)  
+[🚀 Key Features free for all](#-key-features-free-for-all)  
+[🛸 Key Features in private edition](#-key-features-in-private-edition)  
+[**Get Private**](#get-private-edition)  
+
+
 [Using Github Codespace](#using-github-codespace)  
 [References Used](#references-used)  
+
 [**Download**](#download)  
 [CMake and Conan 2](#cmake-and-conan-2)  
 [Building using raw CMake commands](#building-using-raw-cmake-commands)  
@@ -59,7 +66,8 @@ The implementation of tests is currently missing. I plan to add them once I deci
 [ToDo](#todo)  
 [Thanks](#thanks)  
 
-## Free 🚀 Key Features
+## 🚀 Key Features free for all
+
 - From GitHub source code to local binary tarballs in under 🦅 one minute 
 - Works in **Linux**, **MacOS**, **Windows**
 - Modern projects design **Standalone** & **Library**
@@ -73,7 +81,7 @@ https://github.com/user-attachments/assets/f7564f75-f57d-431a-9313-4db26a2197a2
 
 [👆🏻](#index)
 
-## Pro 🛸 Key Features
+## 🛸 Key Features in private edition
 
 - Initializer (Installers) scripts (Debians, Fedoras, Windows)
 - Keybindings definitions for implemented [VSCode Tasks](https://code.visualstudio.com/docs/editor/tasks)
@@ -91,7 +99,7 @@ https://github.com/user-attachments/assets/344f30f9-9f19-4dee-a300-239e04584efb
 
 [👆🏻](#index)
 
-## Get Pro
+## Get Private Edition
 
 Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
 
@@ -101,9 +109,7 @@ Thank you in advance.
 
 ## Using Github Codespace
 
-  Github Codespace is suitable for simple use cases that require command-line control of the entire solution workflow. (In Pro 🛸 is existing way to use advanced features)
-
-  Open the template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build_default_debug.sh" script for basic command-line compilation.
+  Open the free edition template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build_default_debug.sh" script for basic command-line compilation or your own commands to specify build needs. 🤓
 
 [👆🏻](#index)
 
@@ -229,7 +235,7 @@ cmake --build --preset <preset_name>
 ./build_all_presets.sh  
 ```
 
-> 💡 The Pro edition includes task item 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
+> 💡 The Private edition includes task item 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
 
 > 💡 **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.  
 
