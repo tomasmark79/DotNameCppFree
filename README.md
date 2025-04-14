@@ -3,10 +3,35 @@
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
+# What is the DotName C++ Template?
 
-# DotName C++ Template
+The DotName C++ Template is a modern and versatile foundation for cross-platform C++ development. It is designed to support both standalone applications and libraries, offering a robust infrastructure that incorporates best practices and tools commonly used in professional software development. 
 
-DotName C++ Template is a comprehensive and modern foundation for cross-platform development in C++. This template provides a robust infrastructure suitable for both standalone applications and libraries, integrating best practices and tools used in professional software development. In the Free 🚀 Edition Template, the framework provides comprehensive, essential C++ source code and configuration settings to ensure a successful project build. The extended Pro 🛸 version further offers complete capabilities for efficient work in Visual Studio Code, ensuring high flexibility and comfort when creating high-quality software solutions. This template is offered as is, without any warranties regarding its functionality.
+The **Free 🚀 Edition** provides essential C++ source code and configuration settings to ensure a successful project build. For those seeking enhanced functionality, the **Pro 🛸 Edition** includes advanced features tailored for Visual Studio Code, enabling a highly efficient and comfortable development experience. 
+
+This template is provided "as is," without any guarantees regarding its functionality.
+
+## This solution is a hidden gem waiting to be polished 💎✨
+
+**What scenarios is this template suitable for?**  
+This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.
+
+**What makes this solution unique?**  
+This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Pro version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
+
+**Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
+Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
+
+**How do you work with this solution?**  
+Once I select the operating system, it is essential to have a minimal development environment in place, including binary tools, compilers, linkers, and so on. If we are planning for cross-platform development, we will also need toolchains for cross-compilation. Once everything is set up, I proceed to define Conan system profiles and integrate these profiles into the VSCode task system, ensuring they are ready for everyday use.
+
+I usually start by cloning a fresh copy into my local repository. Then, I launch VSCode and rename in the integrated terminal the standalone and library components to best reflect the project's needs. Next, I focus on defining Conan dependencies or look for dependencies that can be resolved directly using CMake, CPM.cmake, or FetchContent. Once I ensure that the necessary dependencies are either installed on the system or managed by the aforementioned tools, I proceed with a clean build to verify that everything works as expected. After that, it’s just about the development process itself. Thanks to the careful attention paid to the CMake configuration during the creation of this solution, the configuration process is now highly intuitive.
+
+**What is the future direction of this solution?**  
+While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.
+
+**What is still missing from this solution?**  
+The implementation of tests is currently missing. I plan to add them once I decide on a preferred testing framework, which will then be integrated into the solution by default.
 
 ## Index
 
@@ -30,8 +55,7 @@ DotName C++ Template is a comprehensive and modern foundation for cross-platform
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
 [Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
-[Logger](#Logger)  
-[**FAQ**](#faq)  
+[Logger](#Logger)   
 [ToDo](#todo)  
 [Thanks](#thanks)  
 
@@ -505,19 +529,6 @@ Output with header.
 ```
 
 >💡 The Name, Time, Caller, and Level fields can each be disabled individually by calling *LOG.showHeaderTime(false)*, etc.
-
-[👆🏻](#index)
-
-## FAQ
-
-**Question**: What scenarios is this template suited for?  
-**Answer**: This solution is suitable for a wide range of projects of all sizes. This template was not originally created as a public project but as something I used for my own iterative development of small applications. Over time, I discovered that the benefit of such a template is enormous, provided that it maintains the ability to be flexible and configurable even in more complex projects. For this reason, the template is designed so that it can be adapted to various needs throughout the development cycle. Ultimately, this means that I spent a considerable amount of time seeking a balance between optimization, clarity, and the potential for future code flexibility.
-
-**Question**: What is the recommended procedure for working with the project template?  
-**Answer**: I usually start by cloning a fresh copy into my local repository. Then I rename the library and the standalone components as needed and perform the first successful build of the project. Next, I pause at the dependency definitions in the conanfile.py to configure the required packages to be integrated into my project. After that, I move on to both CMakeLists.txt files, where I set additional parameters—such as linking the dependencies provided by Conan and specifying whether they should be private or public. I might also enable static linking in the CMake options before diving into development. I really like using keyboard shortcuts, so I hardly ever need to work with terminal commands. Finally, I build tarballs and upload them to GitHub as binary releases. If needed, I can, for example, build with aarch64 to port my program to devices like the Raspberry Pi with an ARM processor.
-
-**Question**: Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?  
-**Answer**: Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency. CPM enables caching of downloaded libraries, significantly speeding up repeated builds across different machines by storing dependencies locally. It also elegantly handles versioning, preventing duplicates and minimizing conflicts between different versions. Its declarative approach allows all dependencies to be specified in one place with easy configuration options. CPM integrates well with PackageProject.cmake, simplifying the process of exporting projects as CMake packages. Additionally, with CPMLicenses.cmake, projects can automatically generate an overview of dependency licenses. The simple syntax based on CPMAddPackage() enhances readability compared to FetchContent. Another advantage is the unified management of various types of dependencies, whether they come from GitHub repositories, tarballs, or local files, ensuring consistent and organized package management. I also have experience suggesting that Conan sometimes reacts slower to the development of certain projects, whereas this CPM solution allows you to comfortably use the very latest iterations directly from GitHub.
 
 [👆🏻](#index)
 
