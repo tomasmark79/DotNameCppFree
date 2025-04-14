@@ -66,9 +66,8 @@ The implementation of tests is currently missing. I plan to add them once I deci
 [ToDo](#todo)  
 [Thanks](#thanks)  
 
-## 🚀 Key Features free for all
+## 🚀 Key Features free for all edition
 
-- From GitHub source code to local binary tarballs in under 🦅 one minute 
 - Works in **Linux**, **MacOS**, **Windows**
 - Modern projects design **Standalone** & **Library**
   - With integrated wrappers [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
@@ -83,6 +82,7 @@ https://github.com/user-attachments/assets/f7564f75-f57d-431a-9313-4db26a2197a2
 
 ## 🛸 Key Features in private edition
 
+- From GitHub source code to local binary tarballs in under 🦅 one minute 
 - Initializer (Installers) scripts (Debians, Fedoras, Windows)
 - Keybindings definitions for implemented [VSCode Tasks](https://code.visualstudio.com/docs/editor/tasks)
 - Integrated VSCode WorkFlow via **SolutionController.py**
