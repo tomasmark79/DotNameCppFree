@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# MIT License
-# Copyright (c) 2024-2025 Tomáš Mark
+# MIT License Copyright (c) 2024-2025 Tomáš Mark
 
-#+-+-+-+-+-+-+-+-+-+-+
-#|s|t|a|n|d|a|l|o|n|e|
-#+-+-+-+-+-+-+-+-+-+-+
+# +-+-+-+-+-+-+-+-+-+-+
+# |s|t|a|n|d|a|l|o|n|e|
+# +-+-+-+-+-+-+-+-+-+-+
 
 cmake_policy(SET CMP0048 NEW) # project() command manages VERSION variables
 cmake_policy(SET CMP0076 NEW) # target_sources() command creates usage requirements
@@ -33,6 +32,8 @@ include(../cmake/ccache.cmake)
 option(ENABLE_CCACHE "Enable ccache" ON)
 # === linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# === gtest
+option(ENABLE_GTESTS "Enable gtests" ON)
 
 # ==============================================================================
 # Project attributes
@@ -120,3 +121,14 @@ install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
 # ==============================================================================
 include(../cmake/tmplt-assets.cmake)
 apply_assets_processing_standalone()
+
+# ==============================================================================
+# GTests processing via interface
+# ==============================================================================
+if(ENABLE_GTESTS)
+    message(STATUS "GTESTS enabled")
+    add_library(standalone_common INTERFACE)
+    target_link_libraries(standalone_common INTERFACE dotname::DotNameLib cxxopts)
+    add_library(dotname::standalone_common ALIAS standalone_common)
+    add_subdirectory(tests)
+endif()
