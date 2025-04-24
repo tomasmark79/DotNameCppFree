@@ -311,7 +311,7 @@ One of the **advantages** of the chosen design is that the project you are curre
 
 > 💡 Keep in mind that one of the overloaded class constructors of linked libraries may receive the path to the assets folder to enable all classes interested in using the folder's content to access it.
 
-### CMaker Configuration
+### CMake Configuration
 
 #### With CPM.cmake
 
@@ -352,14 +352,6 @@ target_link_libraries(...
 add_subdirectory(path/to/DotNameCppFreeFree)
 file(COPY...
 target_link_libraries(...
-```
-
-### C++ Implementation
-
-##### In Main.cpp just modify name of the linked library
-
-```cpp
-uniqueLib = std::make_unique<dotname::DotNameCppFree> (Config::assetsPath);
 ```
 
 [👆🏻](#index)
@@ -551,6 +543,8 @@ Output with header.
 [👆🏻](#index)
 
 ## ToDo
+
+> Understanding the entire solution might be beyond the capabilities of some individuals. Therefore, I would like to eventually create a detailed guide on the behavior of the entire solution to help newcomers more easily get involved in C++ development.
 
 >Possibility to debug CMake configuration even when the CMakeLists.txt file is broken.  
 
