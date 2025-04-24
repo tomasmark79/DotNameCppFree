@@ -286,10 +286,9 @@ Usage:
 
 ## Google Tests integration
 
-Inside the standalone folder, there is a **/tests** directory where tests can be created. Default LibTester.cpp already present.
+Inside the standalone folder, there is a **/tests** directory where tests can be created. Default **LibTester.cpp** already exists.
 
-CMake configuration for test may be enabled by Standalone CMakeLists.txt, where you will find the option  
-**ENABLE_GTESTS [ON | OFF]**. Default option is ON.
+CMake configuration for test may be enable/disable by Standalone CMakeLists.txt, where you will find the option **ENABLE_GTESTS [ON | OFF]**. Default ON.
 
 Tests output is generated in:
 `./build/standalone/default/debug/tests`

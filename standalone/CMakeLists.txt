@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# MIT License Copyright (c) 2024-2025 Tomáš Mark
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
 
 # +-+-+-+-+-+-+-+-+-+-+
 # |s|t|a|n|d|a|l|o|n|e|
