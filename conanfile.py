@@ -16,7 +16,7 @@ from conan.tools.files import copy
 # ----------------------------------------- --
 
 class DotNameCppRecipe(ConanFile):
-    name = "DotNameLib"
+    name = "dotnamelib"
     version = "1.0"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
@@ -56,7 +56,7 @@ class DotNameCppRecipe(ConanFile):
         self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
 
     def requirements(self):
-        self.requires("gtest/1.16.0")
+        # self.requires("gtest/1.16.0") # if cpm not used
         self.requires("fmt/[~11.1]") # required by cpm package
         # self.requires("zlib/[~1.3]")
         # self.requires("nlohmann_json/[~3.11]")
@@ -107,4 +107,4 @@ class DotNameCppRecipe(ConanFile):
     #     cmake.install()
 
     # def package_info(self):
-    #     self.cpp_info.libs = ["DotNameLib"]
+    #     self.cpp_info.libs = ["dotnamelib"]
