@@ -52,6 +52,7 @@ The implementation of tests is currently missing. I plan to add them once I deci
 [Building by CMake Presets](#building-by-cmake-presets)  
 [Template Structure](#template-structure)  
 [Standalone Source](#standalone-source)  
+[Google Tests integration](#google-tests-integration)  
 [Library Source](#library-source)  
 [Reusability in another projects](#reusability-in-another-projects)  
 [VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
@@ -280,6 +281,23 @@ Usage:
   -1, --omit      Omit library loading
   -2, --log2file  Log to file
   ```
+
+[👆🏻](#index)
+
+## Google Tests integration
+
+Inside the standalone folder, there is a **/tests** directory where tests can be created. Default LibTester.cpp already present.
+
+CMake configuration for test may be enabled by Standalone CMakeLists.txt, where you will find the option  
+**ENABLE_GTESTS [ON | OFF]**. Default option is ON.
+
+Tests output is generated in:
+`./build/standalone/default/debug/tests`
+
+To start test launch executable or use folowwing command:
+```bash
+ctest
+```
 
 [👆🏻](#index)
 
