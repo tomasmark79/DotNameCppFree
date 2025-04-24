@@ -25,16 +25,11 @@ This project combines several modern and unique features. First, the design of t
 **Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
 Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
 
-**How do you work with this solution?**  
-Once I select the operating system, it is essential to have a minimal development environment in place, including binary tools, compilers, linkers, and so on. If we are planning for cross-platform development, we will also need toolchains for cross-compilation. Once everything is set up, I proceed to define Conan system profiles and integrate these profiles into the VSCode task system, ensuring they are ready for everyday use.
-
-I usually start by cloning a fresh copy into my local repository. Then, I launch VSCode and rename in the integrated terminal the standalone and library components to best reflect the project's needs. Next, I focus on defining Conan dependencies or look for dependencies that can be resolved directly using CMake, CPM.cmake, or FetchContent. Once I ensure that the necessary dependencies are either installed on the system or managed by the aforementioned tools, I proceed with a clean build to verify that everything works as expected. After that, it’s just about the development process itself. Thanks to the careful attention paid to the CMake configuration during the creation of this solution, the configuration process is now highly intuitive.
-
 **What is the future direction of this solution?**  
 While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.
 
 **What is still missing from this solution?**  
-The implementation of tests is currently missing. I plan to add them once I decide on a preferred testing framework, which will then be integrated into the solution by default.
+At this moment, I am not certain that anything specific is missing.
 
 ## Index
 
