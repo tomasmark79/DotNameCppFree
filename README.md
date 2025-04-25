@@ -43,15 +43,15 @@ The D🌀tName C++ Template is a modern and versatile foundation for cross-platf
 ╰➤[VSCode Recomended Extensions](#vscode-recomended-extensions)  
 
 **Maintenance**  
-╰➤[Environment Installers](#environment-installers)  
-╰➤[Renamer](#solution-renamer)  
-╰➤[Upgrader](#solution-upgrader)  
+╰➤[Installers](#installers)  
+╰➤[Renamer](#renamer)  
+╰➤[Upgrader](#upgrader)  
+╰➤[Activities log](#activities-log)  
 
-**Sharing template or your project**  
-╰➤[Create Lightweight Clone](#create-lightweight-clone)  
-
-**Missing features**  
-╰➤[ToDo](#todo)  
+**Sharing the Template or Your Own Project**  
+╰➤[How To](#how-to)  
+╰➤[Start Automatic Sync Free Clone of Clone](#start-automatic-sync-free-clone-of-clone)  
+╰➤[Stop Automatic Sync Free Clone of Clone](#stop-automatic-sync-free-clone-of-clone)  
 
 **Greetings**  
 ╰➤[Thanks](#thanks)  
@@ -341,8 +341,8 @@ target_link_libraries(...
 
 - 🔨 Build All CMakeUserPresets.json : **Ctrl+Alt+P**  
 - 🚀 Launch Standalone binary : **Ctrl+Alt+R**  
-- 📐 clang-format : **Ctrl+Alt+F**  
-- 📏 cmake-format : **Ctrl+Alt+M**  
+- 📐 clang-format : **Ctrl+Alt+F** *(.clang-format)*
+- 📏 cmake-format : **Ctrl+Alt+M** *(.cmake-format)*  
 - ⚔️ Conan create library recipe  
 - 📊 Conan dependencies in graph.html  
 
@@ -353,153 +353,132 @@ target_link_libraries(...
 ## VSCode Recomended Extensions
 
 ```url
-ms-vscode.cpptools
-ms-vscode.cpptools-extension-pack
-ms-vscode.cpptools-themes
-FleeXo.cpp-class-creator
-amiralizadeh9480.cpp-helper
-twxs.cmake
-ms-vscode.cmake-tools
-cheshirekow.cmake-format
-Guyutongxue.cpp-reference
-tamasfe.even-better-toml
-github.vscode-github-actions
-GitHub.copilot
-GitHub.copilot-chat
-ms-python.python
-natqe.reload
-foxundermoon.shell-format
-jeff-hykin.better-cpp-syntax
+https://marketplace.visualstudio.com/items?itemName=chekweitan.compare-view
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes
+https://marketplace.visualstudio.com/items?itemName=FleeXo.cpp-class-creator
+https://marketplace.visualstudio.com/items?itemName=amiralizadeh9480.cpp-helper
+https://marketplace.visualstudio.com/items?itemName=twxs.cmake
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools
+https://marketplace.visualstudio.com/items?itemName=cheshirekow.cmake-format
+https://marketplace.visualstudio.com/items?itemName=Guyutongxue.cpp-reference
+https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
+https://marketplace.visualstudio.com/items?itemName=github.vscode-github-actions
+https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
+https://marketplace.visualstudio.com/items?itemName=ms-python.python
+https://marketplace.visualstudio.com/items?itemName=natqe.reload
+https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
+https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 ```
 
 [👆🏻](#index)
 ---
 
+## Maintenance
 
-[👆🏻](#index)
+### Installers  
 
-## Environment Installers  
-
-Linux installer scripts are using [setup-cpp](https://github.com/aminya/setup-cpp).
-
-#### Bash script for Debian  
+Linux installer scripts are using for some tools [setup-cpp](https://github.com/aminya/setup-cpp):
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/DebianBasedInstaller.sh | bash
-```
-
-#### Bash script for Fedora  
-
-```bash
 curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/FedoraInstaller.sh | bash
 ```
 
-#### Powershell script for Windows (without pyenv)
+Windows OS installers are using Powershell (no pyenv, no setup-cpp):
 
 ```powershell
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 ```
 
-[👆🏻](#index)
-
 ## Template Maintenance
 
-### Solution Renamer
+### Renamer
 
-Renaming the executable and library, including all necessary strings and classes, is handled by the Python script **SolutionRenamer.py**.
+Renaming the Standalone and Library targets, including all necessary strings and classes, is handled by the Python script **SolutionRenamer.py**.
 
-### Solution Upgrader
+### Upgrader
 
 Updating individual files from the remote repository with the option to back up updated components is handled by the Python script **SolutionUpgrader.py**.
 
-### Log using history
+### Activities log
 
 Workflow activities related to the project did by workflow are logged in the file **Solution.log**.
 
 [👆🏻](#index)
+---
 
-## Formatting C like code
+## Sharing the Template or Your Own Project
 
-included `.clang-format` with prefered settings
+### How To
+For contributors, we offer the option to share your own source code project in a lightweight form. This means without the additional features included in the private edition of the template. I created this option to share source code with the world while keeping the contributors' edition private. The private edition of the template should be earned by those interested. Therefore, if you wish to share the private edition, please do so only within a limited circle. Thank you.
 
-[👆🏻](#index)
+So how does it work? It's simple.
 
-## Formatting CMake like code
+When you clone the template, it includes git script hooks that allow you to call special commands to create a clone of the clone with the suffix **"Free"**. For example, a repository named **"MyProject"** will become **"MyProjectFree"** and will be automatically kept up to date. This is managed using the commands listed below.
 
-included `.cmake-format`
-
-[👆🏻](#index)
-
-## Create Lightweight Clone
- 
-If you are reading this text on a public GitHub repository, it is most likely that this repository was created by the **MakeFreeClone.sh** script located in the **.init/initializers** folder. The script generates a lightweight clone of your main project with the suffix **Free**. For example, **"MyProject"** will become **"MyProjectFree"** and will be automatically kept up to date.
-
-**To Start**
+#### Start Automatic Sync Free Clone of Clone
 
 1. Run `MakeFreeClone.sh init` to set up git hooks.
 
-    ```bash
-    .init/initializers/MakeFreeClone.sh init
-    ```
-2. Hooks will sync local and remote free repositories during commit and push.
+```bash
+.init/initializers/MakeFreeClone.sh init
+```
 
-3. Commits will update `README.md` to add "Free" to relevant strings.
+2. Hooks will automatically sync local and remote free repositories during commit and push.
 
-4. Customize exclusions with `--exclude='fileOrFolderEtc'` in the script.
+3. Commits will update **README.md** to add "Free" to relevant strings.
 
-**To stop** maintaining the lightweight clone, we delete the hooks in particular template.
+4. Customize exclusions with **--exclude='fileOrFolderEtc** in the **.init/initializers/MakeFreeClone.sh**.
+
+#### Stop Automatic Sync Free Clone of Clone
+
+We delete the hooks in particular template.
 
 ```bash
 rm .git/hooks/pre-push
 rm .git/hooks/post-commit
 ```
-[👆🏻](#index)
-
-
-```
 
 [👆🏻](#index)
+---
 
-## ToDo
-
-> Understanding the entire solution might be beyond the capabilities of some individuals. Therefore, I would like to eventually create a detailed guide on the behavior of the entire solution to help newcomers more easily get involved in C++ development.
-
->Possibility to debug CMake configuration even when the CMakeLists.txt file is broken.  
-
-[👆🏻](#index)
-
-## Few words 💎✨
+## A Deeper Dive into the Theory of This Project 💎✨
 
 **Why does this exist when there are official CMake extensions for VSCode?**  
-Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.
+Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.  
 
 **What scenarios is this template suitable for?**  
-This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.
+This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.  
 
 **What makes this solution unique?**  
-This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
+This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.  
 
 **Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
-Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
+Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.  
 
 **What is the future direction of this solution?**  
-While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.
+While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.  
 
 **What is still missing from this solution?**  
-At this moment, I am not certain that anything specific is missing.
+At this moment, I am not certain that anything specific is missing.  
 
 ## Thanks
 
 **To everyone** who supported me in creating this template.  
-Thank you very much!  
 
-[👆🏻](#index)
+🩵🩵🩵 Thank you very much! 🩵🩵🩵
 
 ## License
 
 MIT License  
 Copyright (c) 2024-2025 Tomáš Mark
 
+## Disclaimer
+
 This template is provided "as is," without any guarantees regarding its functionality.
 
 [👆🏻](#index)
+---
