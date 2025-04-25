@@ -257,9 +257,7 @@ private:
     stream << buildHeader (now_tm, caller, level) << message;
     resetConsoleColor ();
     if (isSkipLine_) {
-      stream << std::endl; 
-    } else {
-      stream << " ";
+      stream << std::endl;
     }
   }
 

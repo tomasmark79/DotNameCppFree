@@ -27,7 +27,7 @@ namespace AppContext {
 
 std::unique_ptr<dotname::DotNameLib> uniqueLib;
 
-int processArguments (int argc, const char* argv[]) {
+int handlesArguments (int argc, const char* argv[]) {
   try {
     auto options = std::make_unique<cxxopts::Options> (argv[0], AppContext::standaloneName);
     options->positional_help ("[optional args]").show_positional_help ();
@@ -72,6 +72,7 @@ int processArguments (int argc, const char* argv[]) {
   return 0;
 }
 
+// unused right now
 int printAssets (const std::filesystem::path& assetsPath) {
   try {
     auto files = FileManager::listFiles (assetsPath);
@@ -91,18 +92,19 @@ int printAssets (const std::filesystem::path& assetsPath) {
 }
 
 int runApp (int argc, const char* argv[]) {
-  LOG.noHeader (true);
-  LOG.setSkipLine(false);
   
+  LOG.noHeader (true);
+  LOG.setSkipLine (false);
   LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
-  if (processArguments (argc, argv) != 0) {
+  if (handlesArguments(argc, argv) != 0) {
     return 1;
   }
 
-  if (printAssets (AppContext::assetsPath) != 0) {
-    return 1;
-  }
-
+  // i know it is smartpointer
+  uniqueLib = nullptr;
+  
+  // bye  
+  LOG_I_STREAM << "Sucessfully exited " << AppContext::standaloneName << std::endl;
   return 0;
 }
