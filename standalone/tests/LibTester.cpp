@@ -4,8 +4,7 @@
 #include "../src/AppCore.hpp"
 #include <gtest/gtest.h>
 
-TEST(AppLogic, HandlesArguments) {
-    const char* argv[] = {"app", "--help"};
-    EXPECT_EQ(runApp(2, argv), 0);
+TEST (AppLogic, HandlesArguments) {
+  const char* argv[] = { "app", "--help" };
+  EXPECT_EQ (runApp (2, argv), 0);
 }
-
