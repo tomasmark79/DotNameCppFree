@@ -16,7 +16,6 @@
 using namespace Utils;
 
 namespace AppContext {
-
   constexpr char standaloneName[] = "DotNameStandalone";
   const std::filesystem::path standalonePath
       = PathUtils::getParentPath (PathUtils::getStandalonePath ());
@@ -76,11 +75,13 @@ int processArguments (int argc, const char* argv[]) {
 int printAssets (const std::filesystem::path& assetsPath) {
   try {
     auto files = FileManager::listFiles (assetsPath);
-    for (const auto& file : files) {
-      std::cout << "asset: " << file << std::endl;
-    }
     if (files.empty ()) {
-      LOG_I_STREAM << "No assets found in " << assetsPath << std::endl;
+      LOG_D_STREAM << "No assets found in " << assetsPath << std::endl;
+      return 0;
+    }
+
+    for (const auto& file : files) {
+      LOG_D_STREAM << "╰➤ " << file << std::endl;
     }
   } catch (const std::exception& e) {
     std::cerr << "Error: " << e.what () << std::endl;
@@ -91,13 +92,17 @@ int printAssets (const std::filesystem::path& assetsPath) {
 
 int runApp (int argc, const char* argv[]) {
   LOG.noHeader (true);
+  LOG.setSkipLine(false);
+  
   LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
   if (processArguments (argc, argv) != 0) {
     return 1;
   }
+
   if (printAssets (AppContext::assetsPath) != 0) {
     return 1;
   }
+
   return 0;
 }

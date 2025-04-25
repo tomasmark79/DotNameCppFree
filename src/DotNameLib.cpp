@@ -9,22 +9,21 @@
 namespace dotname {
 
   DotNameLib::DotNameLib () {
-    LOG_D_STREAM << libName_ << " ...constructed" << std::endl;
+    LOG_D_STREAM << libName_ << " constructed ..." << std::endl;
+    AssetContext::clearAssetsPath ();
   }
 
   DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : DotNameLib () {
-    AssetContext::setAssetsPath (assetsPath);
-
-    if (!AssetContext::getAssetsPath ().empty ()) {
-      LOG_D_STREAM << "Assets path: " << AssetContext::getAssetsPath () << std::endl;
-      auto logo = std::ifstream(AssetContext::getAssetsPath() / "logo.png");
-    } else {
-      LOG_D_STREAM << "Assets path is empty" << std::endl;
+    if (!assetsPath.empty ()) {
+      AssetContext::setAssetsPath (assetsPath);
+      LOG_D_STREAM << "Assets path given to the library\n"
+                   << "╰➤ " << AssetContext::getAssetsPath () << std::endl;
+      auto logo = std::ifstream (AssetContext::getAssetsPath () / "logo.png");
     }
   }
 
   DotNameLib::~DotNameLib () {
-    LOG_D_STREAM << libName_ << " ...destructed" << std::endl;
+    LOG_D_STREAM << libName_ << " ... destructed" << std::endl;
   }
 
 } // namespace dotname
