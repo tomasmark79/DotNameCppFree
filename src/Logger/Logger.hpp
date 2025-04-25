@@ -66,6 +66,7 @@ private:
   std::mutex logMutex_;
   std::ostringstream messageStream_;
   std::ofstream logFile_;
+  bool isSkipLine_ = false;
 
 protected:
   Logger () = default;
@@ -84,6 +85,15 @@ public:
   static Logger& getInstance () {
     static Logger instance;
     return instance;
+  }
+
+public:
+  static void setSkipLine (bool isSkipLine) {
+    getInstance ().isSkipLine_ = isSkipLine;
+  }
+
+  static bool isSkipLine () {
+    return getInstance ().isSkipLine_;
   }
 
 public:
@@ -246,7 +256,11 @@ private:
     setConsoleColor (level);
     stream << buildHeader (now_tm, caller, level) << message;
     resetConsoleColor ();
-    stream << std::endl; // přidání nového řádku
+    if (isSkipLine_) {
+      stream << std::endl; 
+    } else {
+      stream << " ";
+    }
   }
 
   std::string buildHeader (const std::tm& now_tm, const std::string& caller, Level level) const {
