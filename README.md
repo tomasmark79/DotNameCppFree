@@ -49,6 +49,7 @@ At this moment, I am not certain that anything specific is missing.
 [Standalone Source](#standalone-source)  
 [Google Tests integration](#google-tests-integration)  
 [Library Source](#library-source)  
+[Logger Class](#logger-class)  
 [Reusability in another projects](#reusability-in-another-projects)  
 [VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
 [VSCode Recomended Extensions](#vscode-recomended-extensions)  
@@ -58,7 +59,6 @@ At this moment, I am not certain that anything specific is missing.
 [Template Maintenance - Upgrader](#solution-upgrader)  
 [Create Lightweight Clone](#create-lightweight-clone)  
 [Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
-[Logger](#Logger)   
 [ToDo](#todo)  
 [Thanks](#thanks)  
 
@@ -305,6 +305,15 @@ CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 [👆🏻](#index)
 
+## Logger Class
+
+The Logger ensures output to the console. It supports **iostream** streams, **fmt**, and constructor-based calls. The output is sent to **cout** or **cerr**, depending on the set level. To finalize the log entry, the string must be terminated with **std::endl**.
+
+>💡 The Name, Time, Caller, and Level fields in the header can each be disabled individually by calling *LOG.showHeaderTime(false, ...)*, etc. Refer to the Logger class declaration for a detailed understanding of the intended behavior.
+
+[👆🏻](#index)
+
+
 ## Reusability in another projects
 
 One of the **advantages** of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
@@ -527,18 +536,6 @@ example snippet of toolchains from task.json
   "fedora_glibc2.41_gcc14.2"
 }
 ```
-
-[👆🏻](#index)
-
-## Logger
-
-Output with header.
-
-```log
-[01-04-2025 14:05:57] [int main(int, const char**)] [INF] DotNameStandalone / C++ = 201703
-```
-
->💡 The Name, Time, Caller, and Level fields can each be disabled individually by calling *LOG.showHeaderTime(false)*, etc.
 
 [👆🏻](#index)
 
