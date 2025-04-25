@@ -15,7 +15,7 @@
 
 using namespace Utils;
 
-namespace Config {
+namespace AppContext {
 
   constexpr char standaloneName[] = "DotNameStandalone";
   const std::filesystem::path standalonePath
@@ -30,7 +30,7 @@ std::unique_ptr<dotname::DotNameLib> uniqueLib;
 
 int processArguments (int argc, const char* argv[]) {
   try {
-    auto options = std::make_unique<cxxopts::Options> (argv[0], Config::standaloneName);
+    auto options = std::make_unique<cxxopts::Options> (argv[0], AppContext::standaloneName);
     options->positional_help ("[optional args]").show_positional_help ();
     options->set_width (80);
     options->set_tab_expansion ();
@@ -47,13 +47,13 @@ int processArguments (int argc, const char* argv[]) {
     }
 
     if (result["log2file"].as<bool> ()) {
-      LOG.enableFileLogging (std::string (Config::standaloneName) + ".log");
+      LOG.enableFileLogging (std::string (AppContext::standaloneName) + ".log");
       LOG_D_STREAM << "Logging to file enabled [-2]" << std::endl;
     }
 
     if (!result.count ("omit")) {
       // uniqueLib = std::make_unique<dotname::DotNameLib> ();
-      uniqueLib = std::make_unique<dotname::DotNameLib> (Config::assetsPath);
+      uniqueLib = std::make_unique<dotname::DotNameLib> (AppContext::assetsPath);
     } else {
       LOG_D_STREAM << "Loading library omitted [-1]" << std::endl;
     }
@@ -90,14 +90,13 @@ int printAssets (const std::filesystem::path& assetsPath) {
 }
 
 int runApp (int argc, const char* argv[]) {
-  // LOG.noHeader (true);
-
-  LOG_I_STREAM << "Starting " << Config::standaloneName << " ..." << std::endl;
+  LOG.noHeader (true);
+  LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
   if (processArguments (argc, argv) != 0) {
     return 1;
   }
-  if (printAssets (Config::assetsPath) != 0) {
+  if (printAssets (AppContext::assetsPath) != 0) {
     return 1;
   }
   return 0;
