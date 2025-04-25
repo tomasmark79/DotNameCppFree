@@ -327,6 +327,8 @@ target_link_libraries(...
 - 🔧 CMake configure  
 - 🪲 CMake configure with CMake 🦉 debugger  
 - 🔨 Build  
+- 🧪 Launch CTest
+- 🧪 Launch LibTester
 - 📜 Collect Licenses cpm  
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  

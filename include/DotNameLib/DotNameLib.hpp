@@ -20,7 +20,6 @@ namespace dotname {
     DotNameLib ();
     DotNameLib (const std::filesystem::path& assetsPath);
     ~DotNameLib ();
-
   };
 
 } // namespace dotname

@@ -1,5 +1,13 @@
-cmake_minimum_required(VERSION 3.14)
-set(TEST_NAME DNTests)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
+
+# +-+-+-+-+-+-+-+-+-+
+#   |g|t|e|s|t|s|   |
+# +-+-+-+-+-+-+-+-+-+
+
+set(TEST_NAME LibTester)
 project(TEST_NAME LANGUAGES CXX)
 include(CTest)
 include(../../cmake/CPM.cmake)
