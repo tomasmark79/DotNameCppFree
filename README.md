@@ -447,23 +447,14 @@ rm .git/hooks/post-commit
 
 ## A Deeper Dive into the Theory of This Project 💎✨
 
-**Why does this exist when there are official CMake extensions for VSCode?**  
-Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.  
+**Why use this instead of the official CMake extensions for VSCode?**  
+That's a great question! While the official extensions are useful, they often fall short when it comes to more complex tasks like cross-compiling. For example, building an application for an **x86** architecture while targeting **ARM64** requires more than just basic configuration. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a cohesive workflow. This solution simplifies that process by handling the integration for you. 😎 - All you need to do is supply the toolchain and sysroot, and this template is ready to build applications for other platforms with minimal effort.  
 
-**What scenarios is this template suitable for?**  
-This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.  
+**What additional value does this project bring?**  
+There’s quite a lot. Perhaps the biggest advantage is freedom. By leveraging the VSCode editor and its integration capabilities, such as extensions and tasks, this solution transforms into a fully-fledged development IDE with its own graphical user interface. Thanks to the sophisticated connection between VSCode tasks and Python scripts, I was able to build my own comprehensive development center. It’s true—everything is ready and functional. Of course, there’s always room for improvement, but essentially, this is a complete solution for modern software development at minimal cost.  
 
-**What makes this solution unique?**  
-This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.  
-
-**Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
-Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.  
-
-**What is the future direction of this solution?**  
-While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.  
-
-**What is still missing from this solution?**  
-At this moment, I am not certain that anything specific is missing.  
+**What Does the Future Hold?**  
+The future is always uncertain; however, the plan is to gradually expand this solution. If anyone wishes to get involved, their help will be more than welcome.  
 
 ## Thanks
 
