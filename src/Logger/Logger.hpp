@@ -200,6 +200,8 @@ public:
 #ifdef _WIN32
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE),
                              FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+#elif defined(__EMSCRIPTEN__)
+// no colors, no reset
 #else
     std::cout << "\033[0m";
 #endif
@@ -239,6 +241,8 @@ public:
   void setConsoleColor (Level level) {
 #ifdef _WIN32
     setConsoleColorWindows (level);
+#elif EMSCRIPTEN
+      // no colors
 #else
     setConsoleColorUnix (level);
 #endif
@@ -253,7 +257,6 @@ private:
 
   void logToStream (std::ostream& stream, Level level, const std::string& message,
                     const std::string& caller, const std::tm& now_tm) {
-    setConsoleColor (level);
     stream << buildHeader (now_tm, caller, level) << message;
     resetConsoleColor ();
     if (isSkipLine_) {

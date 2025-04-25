@@ -104,7 +104,7 @@ apply_sanitizers(${STANDALONE_NAME})
 # ==============================================================================
 # Set compile properties
 # ==============================================================================
-set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NAME}")
+set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NAME}" SUFFIX ".html")
 
 # ==============================================================================
 # Set linking
