@@ -144,16 +144,16 @@ git clone git@github.com:tomasmark79/DotNameCppFree.git ./
 
 ## Helper Classes
 
-### AssetContext Class
->💡 To ensure proper access to the **assets** folder, the solution relies on the CMake configurator. During project configuration, it generates and sets the preprocessor definition **#define UTILS_ASSET_PATH ""** to point to the current **assets** folder. Behind the scenes, certain adjustments are made to guarantee that the folder remains accessible, regardless of whether the project is being debugged or deployed to a production Linux environment. Minor modifications might be required for other platforms, but perhaps not. In the Standalone section, **constexpr std::string_view utilsAssetPath** is finalized and passed to the library via a constructor, where the **AssetContext** class awaits this string. The **AssetContext** class later enables access to the **assets** folder path from anywhere within the library part project.
+### AssetContext 🖇️ Class
+To ensure proper access to the **assets** folder, the solution relies on the CMake configurator. During project configuration, it generates and sets the preprocessor definition **#define UTILS_ASSET_PATH ""** to point to the current **assets** folder. Behind the scenes, certain adjustments are made to guarantee that the folder remains accessible, regardless of whether the project is being debugged or deployed to a production Linux environment. Minor modifications might be required for other platforms, but perhaps not. In the Standalone section, **constexpr std::string_view utilsAssetPath** is finalized and passed to the library via a constructor, where the **AssetContext** class awaits this string. The **AssetContext** class later enables access to the **assets** folder path from anywhere within the library part project.
 
-### Logger Class
+### Logger 📝 Class
 
->💡 The Logger ensures output to the console. It supports **iostream** streams, **fmt**, and constructor-based calls. The output is sent to **cout** or **cerr**, depending on the set level. To finalize the log entry, the string must be terminated with **std::endl**. The Name, Time, Caller, and Level fields in the header can each be disabled individually by calling *LOG.showHeaderTime(false, ...)*, etc. Refer to the Logger class declaration for a detailed understanding of the intended behavior.
+The Logger ensures output to the console. It supports **iostream** streams, **fmt**, and constructor-based calls. The output is sent to **cout** or **cerr**, depending on the set level. To finalize the log entry, the string must be terminated with **std::endl**. The Name, Time, Caller, and Level fields in the header can each be disabled individually by calling *LOG.showHeaderTime(false, ...)*, etc. Refer to the Logger class declaration for a detailed understanding of the intended behavior.
 
-### Google Tests integration
+### Google 🧪 Tests integration
 
->💡 Inside the standalone folder, there is a **/tests** directory where C++ gtests can be created. Default **LibTester.cpp** already exists. Test can be enabled, or disabled by CMake option **ENABLE_GTESTS**. Default is ON. Output path for tests was set to relative path to **./build/standalone/default/debug/tests**
+Inside the standalone folder, there is a **/tests** directory where C++ gtests can be created. A default **LibTester.cpp** file is already provided. Tests can be enabled or disabled using the CMake option **ENABLE_GTESTS**, which is set to ON by default. The output path for tests is configured as a relative path to **./build/standalone/default/debug/tests**. Contributors can use the VSCode task menu to invoke either the **ctest** command or directly execute the **./LibTester** binary.
 
 [👆🏻](#index)
 ---
@@ -350,8 +350,6 @@ target_link_libraries(...
 
 - **F8** or **Shift+F8** jumps to the next or previous error  
 
-[👆🏻](#index)
-
 ## VSCode Recomended Extensions
 
 ```url
@@ -375,7 +373,7 @@ jeff-hykin.better-cpp-syntax
 ```
 
 [👆🏻](#index)
-
+---
 
 
 [👆🏻](#index)
