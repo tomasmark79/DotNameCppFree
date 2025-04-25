@@ -1,219 +1,228 @@
 <img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
 
+
+The D🌀tName C++ Template is a modern and versatile foundation for cross-platform ***C++*** development. It creates a starting point from zero to hero for C++ developers who need to quickly build a robust application.  
+
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)  
-# What is the DotName C++ Template?
-
-The DotName C++ Template is a modern and versatile foundation for cross-platform C++ development. It is designed to support both standalone applications and libraries, offering a robust infrastructure that incorporates best practices and tools commonly used in professional software development. 
-
-The **Free 🚀 Edition** provides essential C++ source code and configuration settings to ensure a successful project build. For those seeking enhanced functionality, the **Private 🛸 Edition** includes advanced features tailored for Visual Studio Code, enabling a highly efficient and comfortable development experience. 
-
-This template is provided "as is," without any guarantees regarding its functionality.
-
-## This solution is a hidden gem waiting to be polished 💎✨
-
-**Why does this exist when there are official CMake extensions for VSCode?**  
-Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.
-
-**What scenarios is this template suitable for?**  
-This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.
-
-**What makes this solution unique?**  
-This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
-
-**Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
-Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
-
-**What is the future direction of this solution?**  
-While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.
-
-**What is still missing from this solution?**  
-At this moment, I am not certain that anything specific is missing.
 
 ## Index
 
-[🚀 Key Features free for all](#-key-features-free-for-all)  
-[🛸 Key Features in private edition](#-key-features-in-private-edition)  
-[**Get Private**](#get-private-edition)  
+**Template Editions**  
+╰➤[🚀 Free edition](#-key-features-free-for-all)  
+╰➤[🛸 Private edition for](#-key-features-in-private-edition) - [***Contributors***](#contributors---sponsors)
 
+**Ready to go**  
+╰➤[Used 3rd parties](#used-3rd-parties)  
+╰➤[**Clone to local development**](#clone-to-local-development)  
+╰➤[Github Codespace to dev on the Web](#using-github-codespace)  
 
-[Using Github Codespace](#using-github-codespace)  
-[References Used](#references-used)  
+**Helper Classes**  
+╰➤[AssetContext Class](#assetcontext-class)  
+╰➤[Logger Class](#logger-class)  
+╰➤[Google Tests integration](#google-tests-integration)  
+╰➤[Reusability library part in another projects](#reusability-in-another-projects)  
 
-[**Download**](#download)  
-[CMake and Conan 2](#cmake-and-conan-2)  
-[Building using raw CMake commands](#building-using-raw-cmake-commands)  
-[Building by CMake Presets](#building-by-cmake-presets)  
-[Template Structure](#template-structure)  
-[Standalone Source](#standalone-source)  
-[Google Tests integration](#google-tests-integration)  
-[Library Source](#library-source)  
-[Logger Class](#logger-class)  
-[Reusability in another projects](#reusability-in-another-projects)  
-[VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
-[VSCode Recomended Extensions](#vscode-recomended-extensions)  
-[CMake Options](#cmake-options)  
-[Environment Installers](#environment-installers)  
-[Template Maintenance - Renamer](#solution-renamer)  
-[Template Maintenance - Upgrader](#solution-upgrader)  
-[Create Lightweight Clone](#create-lightweight-clone)  
-[Cross-Compilation by Conan profiles](#cross-compilation-by-conan-profiles)  
-[ToDo](#todo)  
-[Thanks](#thanks)  
+**Dependencies, Configuration and Building**  
+╰➤[Conan 2](#conan-2)  
+╰➤[CMake](#cmake)  
+╰➤[CMake Options](#cmake-options)  
+╰➤[Manual Template Build](#manual-template-build)  
+╰➤[Manual Template Build by CMake Presets](#manual-template-build-by-cmake-presets)  
+╰➤[Cross-Compilation](#cross-compilation)  
 
-## 🚀 Key Features free for all edition
+**Library Reusability**  
+╰➤[Library Reusability](#reusability)  
+╰➤[linking by CPM.cmake](#linking-by-cpmcmake)  
+╰➤[linking by CMake FetchContent](#linking-by-cmake-fetchcontent)  
+╰➤[linking by CMake add_subdirectory](#linking-by-cmake-add_subdirectory)  
 
-- Works in **Linux**, **MacOS**, **Windows**
-- Modern projects design **Standalone** & **Library**
-  - With integrated wrappers [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
-  - With integrated basic [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxoptwiki](https://github.com/jarro2783/cxxopts/wiki))
-- **Conan 2** ready conanfile.py
-- Predefined GitHub [Actions](https://docs.github.com/en/actions) workflows for continuous integration
-- Provided basic commands for **installing**, **configuring**, **building**, and **installing** the project via *CLI*.
+**VSCode Integration**  
+╰➤[VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
+╰➤[VSCode Recomended Extensions](#vscode-recomended-extensions)  
 
-https://github.com/user-attachments/assets/f7564f75-f57d-431a-9313-4db26a2197a2
+**Maintenance**  
+╰➤[Environment Installers](#environment-installers)  
+╰➤[Renamer](#solution-renamer)  
+╰➤[Upgrader](#solution-upgrader)  
 
-[👆🏻](#index)
+**Sharing template or your project**  
+╰➤[Create Lightweight Clone](#create-lightweight-clone)  
 
-## 🛸 Key Features in private edition
+**Missing features**  
+╰➤[ToDo](#todo)  
 
-- From GitHub source code to local binary tarballs in under 🦅 one minute 
-- Initializer (Installers) scripts (Debians, Fedoras, Windows)
-- Keybindings definitions for implemented [VSCode Tasks](https://code.visualstudio.com/docs/editor/tasks)
-- Integrated VSCode WorkFlow via **SolutionController.py**
-- Wrapped automatic CMake **Native Build** support with Conan profiles
-- Wrapped automatic CMake **Cross Build** support with Conan profiles
-- Integrated Template Renamer by **SolutionRenamer.py**
-- Integrated Template Upgrader by **SolutionUpgrader.py**
-- Integrated Solution.log
-- Integrated **Native C++ debugging** in VSCode by Microsoft [C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-  - Advanced feature to debug [**CMake configurations**](https://devblogs.microsoft.com/cppblog/introducing-cmake-debugger-in-vs-code-debug-your-cmake-scripts-using-open-source-cmake-debugger/)
-- Compatible with [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
-
-https://github.com/user-attachments/assets/344f30f9-9f19-4dee-a300-239e04584efb
+**Greetings**  
+╰➤[Thanks](#thanks)  
 
 [👆🏻](#index)
+---
 
-## Get Private Edition
+## **Template Editions**  
+
+### 🚀 Free Edition
+
+- Develop on **Linux**, **MacOS**, and **Windows**
+- Template utilizes a **Standalone** & **Library** structure
+- Integrates **Conan 2** with a ready-to-use `conanfile.py`
+- Includes [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake) and [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
+- Integrates [**cxxopts**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxopts wiki](https://github.com/jarro2783/cxxopts/wiki))
+- Provides Helper Classes
+- Includes predefined GitHub [Actions](https://docs.github.com/en/actions)
+- Supports command-line-based builds
+
+### 🛸 Private Edition for Contributors
+
+- Provides everything else  
+
+### Contributors - Sponsors  
 
 Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
 
 Thank you in advance.
 
 [👆🏻](#index)
+---
 
-## Using Github Codespace
+## Ready to go
+
+### Used 3rd parties
+
+| Symbol | Description                     |
+|--------|---------------------------------|
+| `r`    | Required for free edition       |
+| `r+`   | Required for private edition    |
+| `o`    | Optional                        |
+| `f`    | Future plans                    |
+
+- `o` [git](https://git-scm.com)
+- `o` [conan 2](https://conan.io/center) - [ConanHub](https://conan.io/center)
+- `o` [make](https://www.gnu.org/software/make/)
+- `o` [ninja](https://ninja-build.org)
+- `r` [cmake](https://cmake.org/download/)
+- `r+` [ccache](https://ccache.dev/download.html)
+- `r+` [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
+- `r+` [pyenv](https://github.com/pyenv/pyenv)
+  - `r+` [python 3](https://www.python.org)
+    - `r+` [pip](https://pypi.org/project/pip/) - [PipHub](https://pypi.org)
+      - `r+` [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
+      - `r+` [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
+      - `r+` [clanf-format configurator](https://clang-format-configurator.site)
+      - `r+` [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
+      - `r+` [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
+- `f` [vcpkg](https://vcpkg.io/en/)
+- `f` [doxygen](https://www.doxygen.nl)
+- `f` [gcovr](https://gcovr.com/en/stable/)
+
+#### Compilers
+
+- `o` [mingw](https://www.mingw-w64.org)
+- `o` [llvm](https://llvm.org)
+- `o` [clang](https://clang.llvm.org)
+- `o` [gcc](https://gcc.gnu.org)
+- `o` [msvc](https://visualstudio.microsoft.com/vs/features/cplusplus/)
+- `o` [intel C++ compiler](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/dpc-compiler.html)
+
+#### Crosstools
+
+- `r+` [crosstool-ng](https://crosstool-ng.github.io)
+
+### Clone to local development
+
+```bash
+git clone https://github.com/tomasmark79/DotNameCppFree.git ./
+git clone git@github.com:tomasmark79/DotNameCppFree.git ./
+```
+
+### Using Github Codespace
 
   Open the free edition template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build_default_debug.sh" script for basic command-line compilation or your own commands to specify build needs. 🤓
 
 [👆🏻](#index)
+---
 
-## References Used
+## Helper Classes
 
-Tools
-- [git](https://git-scm.com)
-- [curl](https://curl.se) (optional)
-- [make](https://www.gnu.org/software/make/) [ninja](https://ninja-build.org)
-- [cmake](https://cmake.org/download/)
-- [ccache](https://ccache.dev/download.html)
-- [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
-- [pyenv](https://github.com/pyenv/pyenv) (optional) (.python-version)
-  - [python 3](https://www.python.org)
-    - [pip](https://pypi.org/project/pip/) - [PipHub](https://pypi.org)
-      - [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
-      - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
-      - [clanf-format configurator](https://clang-format-configurator.site)
-      - [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
-      - [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
-    - [conan 2](https://conan.io/center) - [ConanHub](https://conan.io/center)
-- [vcpkg](https://vcpkg.io/en/) (not implemented yet)
-- [doxygen](https://www.doxygen.nl) (not implemented yet)
-- [gcovr](https://gcovr.com/en/stable/) (not implemented yet)
+### AssetContext Class
+>💡 To ensure proper access to the **assets** folder, the solution relies on the CMake configurator. During project configuration, it generates and sets the preprocessor definition **#define UTILS_ASSET_PATH ""** to point to the current **assets** folder. Behind the scenes, certain adjustments are made to guarantee that the folder remains accessible, regardless of whether the project is being debugged or deployed to a production Linux environment. Minor modifications might be required for other platforms, but perhaps not. In the Standalone section, **constexpr std::string_view utilsAssetPath** is finalized and passed to the library via a constructor, where the **AssetContext** class awaits this string. The **AssetContext** class later enables access to the **assets** folder path from anywhere within the library part project.
 
-Compilers
-- [mingw](https://www.mingw-w64.org)
-- [llvm](https://llvm.org)
-- [clang](https://clang.llvm.org)
-- [gcc](https://gcc.gnu.org)
-- [msvc](https://visualstudio.microsoft.com/vs/features/cplusplus/)
-- [intel C++ compiler](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/dpc-compiler.html)
+### Logger Class
 
-Crosstools
-- [crosstool-ng](https://crosstool-ng.github.io)
+>💡 The Logger ensures output to the console. It supports **iostream** streams, **fmt**, and constructor-based calls. The output is sent to **cout** or **cerr**, depending on the set level. To finalize the log entry, the string must be terminated with **std::endl**. The Name, Time, Caller, and Level fields in the header can each be disabled individually by calling *LOG.showHeaderTime(false, ...)*, etc. Refer to the Logger class declaration for a detailed understanding of the intended behavior.
+
+### Google Tests integration
+
+>💡 Inside the standalone folder, there is a **/tests** directory where C++ gtests can be created. Default **LibTester.cpp** already exists. Test can be enabled, or disabled by CMake option **ENABLE_GTESTS**. Default is ON. Output path for tests was set to relative path to **./build/standalone/default/debug/tests**
 
 [👆🏻](#index)
+---
 
-## Download
+## Dependencies, Configuration and Building
 
-```bash
-git clone https://github.com/tomasmark79/DotNameCppFree.git ./
-```
+### Conan 2
 
-or
+Conan 2 ensures semi-automatic and very convenient dependency management for our build system. In traditional desktop development, we often rely on dependencies provided by the system we are developing on. However, for cross-platform development, it is necessary to have dependencies available for the target architecture, which may differ from the one we are developing on. This is called cross-compilation. Conan 2 helps us with both native and cross-compilation. Conan 2 is an application written in Python. It has its own ecosystem with a remote hub offering many dependencies that it can deliver to us. To use Conan 2, we need a **Python runtime** and a **basic configuration** that creates a new default profile **default**, which will contain the configuration for the default compiler on the system. This profile will also be used as the default in **VSCode tasks**.
 
-```bash
-git clone git@github.com:tomasmark79/DotNameCppFree.git ./
-```
-
-[👆🏻](#index)
-
-## CMake and Conan 2
-
-For smooth operation of the template, tools such as CMake and Conan 2 are required—ideally the latest versions. How you install them is entirely up to you.
-
-To create a new profile, use the following command. More details can be found in the [Conan 2 Documentation](https://docs.conan.io/2/).
+To create a new Conan 2 profile on your system, use the following command:
 
 ```bash
 conan profile detect --force
 ```
 
-[👆🏻](#index)
-
-## Building using raw CMake commands
-
-  Using such long commands is unappealing - they make development a tedious and slow 🦥 process. This template was primarily created for use with 🎢 VSCode, where a workflow using tasks triggered by keyboard 🎯 shortcuts was developed. However, in some scenarios, this manual process might come in handy.
-
-#### Preparing External Dependencies for Your Project
+install dependencies to your project:
 
 ```bash
 conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
 ```
 
-#### Configuration
+>💡 More details can be found in the [Conan 2 Documentation](https://docs.conan.io/2/).
+
+### CMake
+
+The template relies entirely on the CMake tool.
+
+#### CMake Options
+
+You need advanced knowledge to use these options. 
+
+- `BUILD_SHARED_LIBS`: Build shared libraries instead of static ones.
+- `USE_STATIC_RUNTIME`: Use the static runtime library.
+- `SANITIZE_ADDRESS`: Enable address sanitizer.
+- `SANITIZE_UNDEFINED`: Enable undefined behavior sanitizer.
+- `SANITIZE_THREAD`: Enable thread sanitizer.
+- `SANITIZE_MEMORY`: Enable memory sanitizer.
+- `ENABLE_HARDENING`: Enable hardening options for increased security.
+- `ENABLE_IPO`: Enable interprocedural optimization.
+- `ENABLE_CCACHE`: Enable ccache for faster recompilation.
+- `ENABLE_GTESTS`: Google tests.
+
+#### Manual Template Build
+
+If Conan 2 provides the dependencies, we activate access to its packages using the `source` command:
 
 ```bash
-source "./build/standalone/default/debug/conanbuild.sh" && cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="./build/installation/default/debug"
+source "./build/standalone/default/debug/conanbuild.sh"
 ```
 
-#### Build target
+And here is the actual configuration, building, and optional installation command:
 
 ```bash
-source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug"  -j 16
+cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="./build/installation/default/debug"
+cmake --build "./build/standalone/default/debug"  -j 4
+cmake --build "./build/standalone/default/debug" --target install -j 4
 ```
 
-#### Install target
+#### Manual Template Build by CMake Presets
+
+If the template is used in the contributor version with Conan 2, an automatically generated file **CMakeUserPresets.json** is created. This file contains the history of previous builds, and it is possible to invoke these builds again.
 
 ```bash
-source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug" --target install -j 16
+cmake --list-presets  
 ```
-
-[👆🏻](#index)
-
-## Building by CMake Presets
-
-Solution is using Conan, and Conan automatically creates the **CMake*User*Presets.json** and **CMakePreset.json** files. The **CMakePreset** file defines the build configuration for the current folder, while the **CMake*User*Presets** file in the main project folder references all available **CMakePreset** files. Another advantage of these files is that **you can Build all targets at once**, eliminating the need to build each target separately.
-
-you may list all existing CMake presets
+example output:
 
 ```bash
-cmake --list-presets
-```
-
-example output
-```bash
-DotNameCppFree on  main [!?] via △ v3.31.4 via 🐍 v3.13.1 (env3131) 
-❯ cmake --list-presets  
 Available configure presets:  
 
   "conan-debug-x86_64-fa690d22"          - 'conan-debug' config (x86_64-fa690d22)
@@ -223,106 +232,45 @@ Available configure presets:
   "conan-debug-armv8-8b031f0f"           - 'conan-debug' config (armv8-8b031f0f)
 ```
 
-you may build only some one or all at once
+select preset from the list above and call build:
 
 ```bash
 cmake --build --preset <preset_name>
-# or
-./build_all_presets.sh  
 ```
 
 > 💡 The Private edition includes task item 🔨 Build All CMakeUserPresets.json: **Ctrl+Alt+P** to build all presets on all systems.  
 
 > 💡 **conanfile.py** ensures the injection of a uuid into the name value of each CMakePreset.json to prevent the generation of presets with duplicate names.  
 
-[👆🏻](#index)
+## Cross-Compilation
 
-## Template Structure
+To enable cross-compilation, we first need an existing Conan 2 profile configured with the toolchain used for cross-compilation. Setting up such a profile is beyond the scope of this document, but you can find all the necessary details in the Conan 2 documentation.
 
-```txt
-├── include/
+Once we have an existing Conan 2 profile for our target platform, the name of this profile can be added to our template in the **task.json** file. This ensures that the profile will appear in the menu when building our template. And that's all that is needed to make this solution work with cross-compilation. The rest depends on the Conan 2 profile.
+
+Example of my own **task.json** on my system:
+```json
+{
+"default",
+"default-clang",
+"x86_64-w64-mingw32",
+"rpi4_glibc2.17_gcc10.5",
+"rpi4_glibc2.36_gcc12.4",
+"rpi4_glibc2.41_gcc14.2",
+"fedora_glibc2.17_gcc10.5",
+"fedora_glibc2.36_gcc12.4",
+"fedora_glibc2.41_gcc14.2"
+}
 ```
-- public header files (.hpp) accessible from others
-
-```txt
-├── src/
-```
-
-- source files (.cpp) and header files (.hpp) that are not intended for public use
-
-```txt
-├── standalone/
-```
-- standalone part of project
-
-```txt
-├── assets/
-```
-
-All content included in assets folder is accessible via file path by the macro ASSET_PATH. The path to the assets folder is passed to the library through the constructor. ASSET_PATH is generated by CMake.
-
+   
 [👆🏻](#index)
+---
 
-## Standalone Source
+### Library Reusability
 
-#### [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) enables argument management
+The advantage of this template lies in the fact that it essentially creates a library. This library can be used anywhere else. You can easily reuse the library from the first project in a second, third, or any other project.
 
-```bash
-DotNameStandalone
-Usage:
-  ./build/standalone/default/debug/./DotNameStandalone [OPTION...]
-
-  -h, --help      Show help
-  -1, --omit      Omit library loading
-  -2, --log2file  Log to file
-  ```
-
-[👆🏻](#index)
-
-## Google Tests integration
-
-Inside the standalone folder, there is a **/tests** directory where tests can be created. Default **LibTester.cpp** already exists.
-
-CMake configuration for test may be enable/disable by Standalone CMakeLists.txt, where you will find the option **ENABLE_GTESTS [ON | OFF]**. Default ON.
-
-Tests output is generated in:
-`./build/standalone/default/debug/tests`
-
-To start test launch executable or use folowwing command:
-```bash
-ctest
-```
-
-[👆🏻](#index)
-
-## Library Source
-
-The library is connected to the main Standalone project using the CMake CPM.cmake wrapper in Standalone/CMakeLists.txt
-
-```cmake
-CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
-```
-
-[👆🏻](#index)
-
-## Logger Class
-
-The Logger ensures output to the console. It supports **iostream** streams, **fmt**, and constructor-based calls. The output is sent to **cout** or **cerr**, depending on the set level. To finalize the log entry, the string must be terminated with **std::endl**.
-
->💡 The Name, Time, Caller, and Level fields in the header can each be disabled individually by calling *LOG.showHeaderTime(false, ...)*, etc. Refer to the Logger class declaration for a detailed understanding of the intended behavior.
-
-[👆🏻](#index)
-
-
-## Reusability in another projects
-
-One of the **advantages** of the chosen design is that the project you are currently working on can later be utilized as a library in another project. 🎯
-
-> 💡 Keep in mind that one of the overloaded class constructors of linked libraries may receive the path to the assets folder to enable all classes interested in using the folder's content to access it.
-
-### CMake Configuration
-
-#### With CPM.cmake
+#### linking by CPM.cmake
 
 ```cmake
 CPMAddPackage(
@@ -341,7 +289,7 @@ target_link_libraries(
     )
 ```
 
-#### With CMake FetchContent
+#### linking by CMake FetchContent
 
 ```cmake
 include(FetchContent)
@@ -355,7 +303,7 @@ file(COPY...
 target_link_libraries(...
 ```
 
-#### With CMake add_subdirectory
+#### linking by CMake add_subdirectory
 
 ```cmake
 add_subdirectory(path/to/DotNameCppFreeFree)
@@ -364,10 +312,11 @@ target_link_libraries(...
 ```
 
 [👆🏻](#index)
+---
 
 ## VSCode Tasks and Keybindings
 
-> 💡 For the keyboard shortcuts to work, the contents of keybindings.json must be copied into the system configuration.
+> 💡 For the keyboard shortcuts to work, the contents of keybindings.json attached in template must be copied into the system configuration.
 
 **Building Tasks** dependent on build type invoked by **Shift+F7** or **Ctrl+Shift+C**  
 
@@ -388,11 +337,11 @@ target_link_libraries(...
 
 **Other Tasks** independent on build type invoked by **Ctrl+F7** or **Ctrl+Shift+V**   
 
-- 🔨 Build All CMakeUserPresets.json : **Ctrl+Alt+P**
-- 🚀 Launch Standalone binary : **Ctrl+Alt+R**
-- 📐 clang-format : **Ctrl+Alt+F**
-- 📏 cmake-format : **Ctrl+Alt+M**
-- ⚔️ Conan create library recipe
+- 🔨 Build All CMakeUserPresets.json : **Ctrl+Alt+P**  
+- 🚀 Launch Standalone binary : **Ctrl+Alt+R**  
+- 📐 clang-format : **Ctrl+Alt+F**  
+- 📏 cmake-format : **Ctrl+Alt+M**  
+- ⚔️ Conan create library recipe  
 - 📊 Conan dependencies in graph.html  
 
 **Other shortcuts**  
@@ -425,19 +374,7 @@ jeff-hykin.better-cpp-syntax
 
 [👆🏻](#index)
 
-## CMake Options
 
-You need advanced knowledge to use these options. 
-
-- `BUILD_SHARED_LIBS`: Build shared libraries instead of static ones.
-- `USE_STATIC_RUNTIME`: Use the static runtime library.
-- `SANITIZE_ADDRESS`: Enable address sanitizer.
-- `SANITIZE_UNDEFINED`: Enable undefined behavior sanitizer.
-- `SANITIZE_THREAD`: Enable thread sanitizer.
-- `SANITIZE_MEMORY`: Enable memory sanitizer.
-- `ENABLE_HARDENING`: Enable hardening options for increased security.
-- `ENABLE_IPO`: Enable interprocedural optimization.
-- `ENABLE_CCACHE`: Enable ccache for faster recompilation.
 
 [👆🏻](#index)
 
@@ -518,23 +455,7 @@ rm .git/hooks/post-commit
 ```
 [👆🏻](#index)
 
-## Cross-Compilation by Conan profiles
 
-Architectures for which you want to use the Conan tool profile can be entered in the field below. They will then appear in the list of architectures in the VSCode menu.
-
-example snippet of toolchains from task.json
-```json
-{
-  "default",
-  "default-clang",
-  "x86_64-w64-mingw32",
-  "rpi4_glibc2.17_gcc10.5",
-  "rpi4_glibc2.36_gcc12.4",
-  "rpi4_glibc2.41_gcc14.2",
-  "fedora_glibc2.17_gcc10.5",
-  "fedora_glibc2.36_gcc12.4",
-  "fedora_glibc2.41_gcc14.2"
-}
 ```
 
 [👆🏻](#index)
@@ -547,6 +468,26 @@ example snippet of toolchains from task.json
 
 [👆🏻](#index)
 
+## Few words 💎✨
+
+**Why does this exist when there are official CMake extensions for VSCode?**  
+Great question. While official extensions are helpful, creating and building an application for architecture **X86** targeting, for example, **Arch64**, requires more than just the basics. You need to provide a toolchain, a minimal system file tree (sysroot), and integrate everything into a functional whole. That’s precisely what this solution does. 😎 - Essentially, all you need to do is supply the toolchain and sysroot, and this solution is ready to produce applications for other platforms.
+
+**What scenarios is this template suitable for?**  
+This solution is suitable for a wide range of projects of varying sizes. Thanks to its versatility, it can be used either as a standalone application or for creating modules and libraries for other applications. The solution is designed to adapt to different needs throughout the development cycle. Significant attention and effort have been devoted to finding a balance between optimization, clarity, and the potential for future code flexibility.
+
+**What makes this solution unique?**  
+This project combines several modern and unique features. First, the design of the project as a standalone application/library allows the project you are working on to later be used as a component in another project. This, of course, assumes that the main functionality of the application is properly implemented in the library part, while the standalone part can be used, for example, as a starting point for testing the library or simply as a launcher with minimal dependencies on the library. Second, the uniqueness of this solution lies in the fact that the Private version effectively transforms into a professional development IDE thanks to extended tasks in VSCode, making development highly enjoyable.
+
+**Why are CPM.cmake, CPMLicenses, and PackageProject used in this solution?**  
+Conan sometimes reacts more slowly to the development of certain projects, while CPM.cmake allows for conveniently using the latest iterations directly from GitHub. Many modern CMake projects use CPM.cmake for dependency management due to its flexibility and efficiency.
+
+**What is the future direction of this solution?**  
+While this solution could be endlessly improved, such efforts require significant time and dedication. Therefore, its future development will depend solely on my personal needs. Alternatively, it may evolve based on contributions from others who wish to collaborate on the project, request updates, or report bugs that need fixing.
+
+**What is still missing from this solution?**  
+At this moment, I am not certain that anything specific is missing.
+
 ## Thanks
 
 **To everyone** who supported me in creating this template.  
@@ -558,5 +499,7 @@ Thank you very much!
 
 MIT License  
 Copyright (c) 2024-2025 Tomáš Mark
+
+This template is provided "as is," without any guarantees regarding its functionality.
 
 [👆🏻](#index)
