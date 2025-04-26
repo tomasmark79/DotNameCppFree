@@ -197,6 +197,7 @@ You need advanced knowledge to use these options.
 - `ENABLE_IPO`: Enable interprocedural optimization.
 - `ENABLE_CCACHE`: Enable ccache for faster recompilation.
 - `ENABLE_GTESTS`: Google tests.
+- `ENABLE_EMSCRIPTEN_PTHREAD` : Enable pthread for emscripten.
 
 #### Manual Template Build
 
