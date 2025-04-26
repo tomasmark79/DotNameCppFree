@@ -107,6 +107,8 @@ apply_sanitizers(${STANDALONE_NAME})
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     MESSAGE(STATUS "Emscripten detected")
     set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
+    set_target_properties(${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS "-Os -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
+	set_target_properties(${STANDALONE_NAME} PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
 endif()
 
 # ==============================================================================
