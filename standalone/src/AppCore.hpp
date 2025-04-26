@@ -97,6 +97,10 @@ int runApp (int argc, const char* argv[]) {
   LOG.setSkipLine (false);
   LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
+#ifdef EMSCRIPTEN
+  LOG_I_STREAM << "╰➤ Running in Emscripten environment" << std::endl;
+#endif
+
   if (handlesArguments(argc, argv) != 0) {
     return 1;
   }
