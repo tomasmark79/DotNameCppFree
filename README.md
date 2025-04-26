@@ -254,6 +254,7 @@ Example of my own **task.json** on my system:
 {
 "default",
 "default-clang",
+"emscripten",
 "x86_64-w64-mingw32",
 "rpi4_glibc2.17_gcc10.5",
 "rpi4_glibc2.36_gcc12.4",
