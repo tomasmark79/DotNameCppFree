@@ -102,9 +102,12 @@ apply_hardening(${STANDALONE_NAME})
 apply_sanitizers(${STANDALONE_NAME})
 
 # ==============================================================================
-# Set compile properties
+# Set target properties
 # ==============================================================================
-set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NAME}" SUFFIX ".html")
+if(EMSCRIPTEN)
+    STATUS(WARNING "EMSCRIPTEN detected")
+    set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
+endif()
 
 # ==============================================================================
 # Set linking

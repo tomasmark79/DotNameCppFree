@@ -97,15 +97,15 @@ Thank you in advance.
 | `f`    | Future plans                    |
 
 - `o` [git](https://git-scm.com)
-- `o` [conan 2](https://conan.io/center) - [ConanHub](https://conan.io/center)
+- `o` [conan 2](https://conan.io/center) - [hub](https://conan.io/center)
 - `o` [make](https://www.gnu.org/software/make/)
 - `o` [ninja](https://ninja-build.org)
-- `r` [cmake](https://cmake.org/download/)
+- `r` [cmake](https://cmake.org/download/) - [doc 3.31.X](https://cmake.org/cmake/help/v3.31/)
 - `r+` [ccache](https://ccache.dev/download.html)
 - `r+` [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
 - `r+` [pyenv](https://github.com/pyenv/pyenv)
   - `r+` [python 3](https://www.python.org)
-    - `r+` [pip](https://pypi.org/project/pip/) - [PipHub](https://pypi.org)
+    - `r+` [pip](https://pypi.org/project/pip/) - [hub](https://pypi.org)
       - `r+` [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
       - `r+` [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
       - `r+` [clanf-format configurator](https://clang-format-configurator.site)
@@ -455,6 +455,8 @@ There’s quite a lot. Perhaps the biggest advantage is freedom. By leveraging t
 
 **What Does the Future Hold?**  
 The future is always uncertain; however, the plan is to gradually expand this solution. If anyone wishes to get involved, their help will be more than welcome.  
+
+emscripten 
 
 ## Thanks
 
