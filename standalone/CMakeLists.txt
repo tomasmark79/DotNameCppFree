@@ -104,8 +104,8 @@ apply_sanitizers(${STANDALONE_NAME})
 # ==============================================================================
 # Set target properties
 # ==============================================================================
-if(EMSCRIPTEN)
-    STATUS(WARNING "EMSCRIPTEN detected")
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    MESSAGE(STATUS "Emscripten detected")
     set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
 endif()
 
