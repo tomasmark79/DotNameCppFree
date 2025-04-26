@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# MIT License
-# Copyright (c) 2024-2025 Tomáš Mark
+# MIT License Copyright (c) 2024-2025 Tomáš Mark
 
 # +-+-+-+-+-+-+-+-+-+-+
 # |s|t|a|n|d|a|l|o|n|e|
@@ -35,6 +34,8 @@ option(ENABLE_CCACHE "Enable ccache" ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # === gtest
 option(ENABLE_GTESTS "Enable gtests" ON)
+# === emscripten pthread
+option(ENABLE_EMSCRIPTEN_PTHREAD "Enable pthread for emscripten" ON)
 
 # ==============================================================================
 # Project attributes
@@ -105,10 +106,16 @@ apply_sanitizers(${STANDALONE_NAME})
 # Set target properties
 # ==============================================================================
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-    MESSAGE(STATUS "Emscripten detected")
+    message(STATUS "Emscripten detected")
     set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
-    set_target_properties(${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS "-Os -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
-	set_target_properties(${STANDALONE_NAME} PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
+    if(ENABLE_EMSCRIPTEN_PTHREAD)
+        set_target_properties(
+            ${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS
+                                          "-Os -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
+        set_target_properties(
+            ${STANDALONE_NAME}
+            PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1")
+    endif()
 endif()
 
 # ==============================================================================
