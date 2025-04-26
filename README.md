@@ -249,20 +249,28 @@ To enable cross-compilation, we first need an existing Conan 2 profile configure
 
 Once we have an existing Conan 2 profile for our target platform, the name of this profile can be added to our template in the **task.json** file. This ensures that the profile will appear in the menu when building our template. And that's all that is needed to make this solution work with cross-compilation. The rest depends on the Conan 2 profile.
 
-Example of my own **task.json** on my system:
+Example of my own **task.json** on my fedora system:
 ```json
 {
-"default",
-"default-clang",
-"emscripten",
-"x86_64-w64-mingw32",
-"rpi4_glibc2.17_gcc10.5",
-"rpi4_glibc2.36_gcc12.4",
-"rpi4_glibc2.41_gcc14.2",
-"fedora_glibc2.17_gcc10.5",
-"fedora_glibc2.36_gcc12.4",
-"fedora_glibc2.41_gcc14.2"
-}
+            /* ARCH ITEMS */
+            "id": "buildArch",
+            "type": "pickString",
+            "description": "Select target architecture",
+            "options": [
+                "default",
+                "default-gcc",
+                "default-clang",
+                "emscripten",
+                "x86_64-w64-mingw32",
+                "rpi4_glibc2.17_gcc10.5",
+                "rpi4_glibc2.36_gcc12.4",
+                "rpi4_glibc2.41_gcc14.2",
+                "fedora_glibc2.17_gcc10.5",
+                "fedora_glibc2.36_gcc12.4",
+                "fedora_glibc2.41_gcc14.2"
+            ],
+            "default": "default"
+        }
 ```
    
 [👆🏻](#index)
