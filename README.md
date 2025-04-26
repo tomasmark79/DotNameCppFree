@@ -98,6 +98,7 @@ Thank you in advance.
 
 - `o` [git](https://git-scm.com)
 - `o` [conan 2](https://conan.io/center) - [hub](https://conan.io/center)
+- `o` [emscripten](https://emscripten.org/) - [doc](https://emscripten.org/docs/index.html)
 - `o` [make](https://www.gnu.org/software/make/)
 - `o` [ninja](https://ninja-build.org)
 - `r` [cmake](https://cmake.org/download/) - [doc 3.31.X](https://cmake.org/cmake/help/v3.31/)
@@ -347,7 +348,7 @@ target_link_libraries(...
 - 📊 Conan dependencies in graph.html  
 
 **Other shortcuts**  
-
+- Launch Standalone Emscripten (emrun Target.html) : **Ctrl+Alt+E**
 - **F8** or **Shift+F8** jumps to the next or previous error  
 
 ## VSCode Recomended Extensions
