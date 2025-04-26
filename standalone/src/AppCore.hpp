@@ -100,6 +100,9 @@ int runApp (int argc, const char* argv[]) {
 #ifdef EMSCRIPTEN
   LOG_I_STREAM << "╰➤ Running in Emscripten environment" << std::endl;
 #endif
+#ifdef __EMSCRIPTEN_PTHREADS__
+  LOG_I_STREAM << "╰➤ with pthreads support" << std::endl;
+#endif
 
   if (handlesArguments(argc, argv) != 0) {
     return 1;
