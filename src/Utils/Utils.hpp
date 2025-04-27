@@ -151,7 +151,14 @@ namespace DotNameUtils {
       auto end = start + duration;
       long int iterations = 0;
       while (std::chrono::high_resolution_clock::now () < end) {
-        asm volatile ("nop");
+        #if defined(__GNUC__) || defined(__clang__)
+          asm volatile ("nop");
+        #elif defined(_MSC_VER)
+          __nop();
+        #else
+          // Fallback for unsupported platforms
+          std::this_thread::yield();
+        #endif
         ++iterations;
       }
       auto actualEnd = std::chrono::high_resolution_clock::now ();
