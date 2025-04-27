@@ -38,7 +38,7 @@
   #include <unistd.h>
 #endif
 
-namespace Utils {
+namespace DotNameUtils {
 
   namespace FileIO {
     inline std::string readFile (const std::filesystem::path& filePath) {
@@ -120,6 +120,48 @@ namespace Utils {
       return files;
     }
   } // namespace FileManager
-} // namespace Utils
+
+  namespace Dots {
+    inline std::string addDots (const std::string& str) {
+      std::string result;
+      for (size_t i = 0; i < str.length (); ++i) {
+        result += str[i];
+        if ((str.length () - i - 1) % 3 == 0 && i != str.length () - 1) {
+          result += '.';
+        }
+      }
+      return result;
+    }
+    inline std::string removeDots (const std::string& str) {
+      std::string result;
+      for (size_t i = 0; i < str.length (); ++i) {
+        if (str[i] != '.') {
+          result += str[i];
+        }
+      }
+      return result;
+    }
+  } // namespace Dots 
+
+  namespace Performance {
+    inline void simpleCpuBenchmark (std::chrono::microseconds duration = std::chrono::microseconds (1000000)) {
+      LOG_I_STREAM << "╰➤ Simple CPU benchmark" << std::endl;
+      LOG_I_STREAM << " ⤷ CPU cores: " << std::thread::hardware_concurrency () << std::endl;
+      auto start = std::chrono::high_resolution_clock::now ();
+      auto end = start + duration;
+      long int iterations = 0;
+      while (std::chrono::high_resolution_clock::now () < end) {
+        asm volatile ("nop");
+        ++iterations;
+      }
+      auto actualEnd = std::chrono::high_resolution_clock::now ();
+      auto actualDuration = std::chrono::duration_cast<std::chrono::milliseconds> (actualEnd - start);
+      std::string iterationsStr = std::to_string (iterations);
+      LOG_I_STREAM << " ⤷ CPU benchmark duration: " << actualDuration.count () << " ms" << std::endl;
+      LOG_I_STREAM << " ⤷ Total iterations: " << Dots::addDots (iterationsStr) << std::endl;
+    }
+  } // namespace Performance
+
+} // namespace DotNameUtils
 
 #endif // UTILS_HPP

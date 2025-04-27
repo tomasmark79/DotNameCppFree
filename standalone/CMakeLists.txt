@@ -112,9 +112,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         set_target_properties(
             ${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS
                                           "-Os -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
-        set_target_properties(
-            ${STANDALONE_NAME}
-            PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1")
+        set_target_properties(${STANDALONE_NAME}
+                              PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1")
     endif()
 endif()
 
