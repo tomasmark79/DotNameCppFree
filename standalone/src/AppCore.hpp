@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-using namespace Utils;
+using namespace DotNameUtils;
 
 namespace AppContext {
   constexpr char standaloneName[] = "DotNameStandalone";
@@ -92,26 +92,28 @@ int printAssets (const std::filesystem::path& assetsPath) {
 }
 
 int runApp (int argc, const char* argv[]) {
-  
+
   LOG.noHeader (true);
   LOG.setSkipLine (false);
   LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
 #ifdef EMSCRIPTEN
-  LOG_I_STREAM << "╰➤ Running in Emscripten environment" << std::endl;
+  LOG_I_STREAM << "╰➤ C++ Running in Emscripten environment" << std::endl;
 #endif
 #ifdef __EMSCRIPTEN_PTHREADS__
-  LOG_I_STREAM << "╰➤ with pthreads support" << std::endl;
+  LOG_I_STREAM << " ⤷ Emscripten C++ with pthreads support" << std::endl;
 #endif
 
-  if (handlesArguments(argc, argv) != 0) {
+  if (handlesArguments (argc, argv) != 0) {
     return 1;
   }
 
-  // i know it is smartpointer
+  Performance::simpleCpuBenchmark ();
+
+  // I know it is smartpointer, but we need to free it before exit scope bracelet
   uniqueLib = nullptr;
-  
-  // bye  
+
+  // bye
   LOG_I_STREAM << "Sucessfully exited " << AppContext::standaloneName << std::endl;
   return 0;
 }
