@@ -39,6 +39,8 @@ The D🌀tName C++ Template is a modern and versatile foundation for cross-platf
 ╰➤[linking by CMake add_subdirectory](#linking-by-cmake-add_subdirectory)  
 
 **VSCode Integration**  
+
+╰➤[VSCode Intellisense configuration](#vscode-intellisense-configuration)  
 ╰➤[VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
 ╰➤[VSCode Recomended Extensions](#vscode-recomended-extensions)  
 
@@ -324,6 +326,23 @@ target_link_libraries(...
 
 [👆🏻](#index)
 ---
+
+## VSCode Intellisense configuration
+
+Intellisense in VSCode is supported through the C++ extension by creators and is one of the most resource-intensive tasks happening in the background during development, aside from compiling. Proper configuration is crucial to prevent prolonged CPU core overload caused by endless database building for Intellisense features.
+
+The template already includes the best default settings in the **c_cpp_settings.json** file.
+
+> 💡 If you want to direct Intellisense to sources provided by CPM and/or Conan, adjust the settings and uncomment the required paths.
+
+> 💡 Be aware that If your Conan cache contains a large number of packages, the Intellisense database may take up to 30 minutes to build.
+
+```json
+"includePath": [
+      "${workspaceFolder}/**"
+      //"/home/tomas/.cache/CPM/**", 
+      //"/home/tomas/.conan2/p/b/**"
+```
 
 ## VSCode Tasks and Keybindings
 
