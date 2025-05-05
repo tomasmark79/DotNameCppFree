@@ -33,7 +33,7 @@ The D🌀tName C++ Template is a modern and versatile foundation for cross-platf
 ╰➤[Cross-Compilation](#cross-compilation)  
 
 **Library Reusability**  
-╰➤[Library Reusability](#reusability)  
+╰➤[Library Reusability](#library-reusability)  
 ╰➤[linking by CPM.cmake](#linking-by-cpmcmake)  
 ╰➤[linking by CMake FetchContent](#linking-by-cmake-fetchcontent)  
 ╰➤[linking by CMake add_subdirectory](#linking-by-cmake-add_subdirectory)  
