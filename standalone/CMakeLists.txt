@@ -102,7 +102,6 @@ apply_ccache(${STANDALONE_NAME})
 apply_hardening(${STANDALONE_NAME})
 apply_sanitizers(${STANDALONE_NAME})
 
-
 # ==============================================================================
 # Set target properties
 # ==============================================================================

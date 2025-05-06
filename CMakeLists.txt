@@ -118,6 +118,12 @@ apply_hardening(${LIBRARY_NAME})
 apply_sanitizers(${LIBRARY_NAME})
 
 # ==============================================================================
+# Set target properties
+# ==============================================================================
+include(cmake/tmplt-emscripten.cmake)
+emscripten(${LIBRARY_NAME})
+
+# ==============================================================================
 # Set headers
 # ==============================================================================
 # header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
