@@ -13,6 +13,10 @@
 #include <string>
 #include <vector>
 
+#if defined(PLATFORM_WEB)
+  #include <emscripten/emscripten.h>
+#endif
+
 using namespace DotNameUtils;
 
 namespace AppContext {

@@ -6,6 +6,10 @@
 #include <Logger/Logger.hpp>
 #include <Utils/Utils.hpp>
 
+#if defined(PLATFORM_WEB)
+  #include <emscripten/emscripten.h>
+#endif
+
 namespace dotname {
 
   DotNameLib::DotNameLib () {

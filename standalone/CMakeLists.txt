@@ -108,12 +108,22 @@ apply_sanitizers(${STANDALONE_NAME})
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     message(STATUS "Emscripten detected")
     set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
+    set_target_properties(
+        ${STANDALONE_NAME}
+        PROPERTIES
+            COMPILE_FLAGS
+            "-s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1")
+
+    set_target_properties(
+        ${STANDALONE_NAME}
+        PROPERTIES
+            LINK_FLAGS
+            "-s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1")
+
     if(ENABLE_EMSCRIPTEN_PTHREAD)
-        set_target_properties(
-            ${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS
-                                          "-Os -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4")
-        set_target_properties(${STANDALONE_NAME}
-                              PROPERTIES LINK_FLAGS "-Os -s WASM=1 -pthread -s USE_PTHREADS=1")
+        set_target_properties(${STANDALONE_NAME} PROPERTIES COMPILE_FLAGS
+                                                            "-s USE_PTHREADS=1 -pthread")
+        set_target_properties(${STANDALONE_NAME} PROPERTIES LINK_FLAGS "-s USE_PTHREADS=1 -pthread")
     endif()
 endif()
 
