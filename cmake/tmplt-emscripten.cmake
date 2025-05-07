@@ -5,7 +5,7 @@ function(emscripten target isRequiredHtml)
 
         if(isRequiredHtml EQUAL 1)
             message(STATUS "html target requested")
-            set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
+            set_target_properties(${target} PROPERTIES SUFFIX ".html")
         endif()
 
         set_target_properties(
@@ -24,9 +24,9 @@ function(emscripten target isRequiredHtml)
 
     # Checks if OSX and links appropriate frameworks (Only required on MacOS)
     if(APPLE)
-        target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-        target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-        target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+        target_link_libraries(${target} "-framework IOKit")
+        target_link_libraries(${target} "-framework Cocoa")
+        target_link_libraries(${target} "-framework OpenGL")
     endif()
 
 endfunction()
