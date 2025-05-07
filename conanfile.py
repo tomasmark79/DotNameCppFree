@@ -4,31 +4,50 @@ from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps
 from conan.tools.system import package_manager
 from conan.tools.files import copy
 
-# DO NOT use cmake_layout(self) in the recipe.
-# ----------------------------------------- --
-    # DotNameCpp is using self layout       --
-    # to define build ouput layout!         --
-    # ├── Build                             --
-    #     ├── Artefacts - tarballs          --
-    #     ├── Install - final installation  --
-    #     ├── Library - library build       --
-    #     └── Standalone - standalone build --
-# ----------------------------------------- --
+# DO NOT use cmake_layout(self) HERE!
+# ------------------------------------------------- --
+    # DotNameCpp is using self layout               --
+    # to define build ouput layout!                 --
+    # ├── Build                                     --
+    #     ├── Artefacts - tarballs of installation  --
+    #     ├── Install - final installation          --
+    #     ├── Library - library build               --
+    #     └── Standalone - standalone build         --
+# ------------------------------------------------- --
 
 class DotNameCppRecipe(ConanFile):
     name = "dotnamelib"
     version = "1.0"
     settings = "os", "compiler", "build_type", "arch"
-    generators = "CMakeToolchain", "CMakeDeps"
+    generators = "CMakeDeps"
 
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
     def generate(self): 
-        cmake_toolchain = CMakeToolchain(self)
-    
-        # Dynamic change of names of CMakePresets.json
-        preset_file = "CMakePresets.json"
+        tc = CMakeToolchain(self)
+        self.update_cmake_presets("CMakePresets.json")
+        tc.generate()
+        
+    # Consuming recipe
+    def configure(self):
+        self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
+
+    def requirements(self):
+        self.requires("fmt/[~11.1]") # required by cpm package
+        # self.requires("gtest/1.16.0") # if cpm not used
+        # self.requires("zlib/[~1.3]")
+        # self.requires("nlohmann_json/[~3.11]")
+        # self.requires("yaml-cpp/0.8.0")
+
+    def build_requirements(self):
+        self.tool_requires("cmake/[>3.14]")
+
+    def imports(self):
+        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
+
+    # Dynamic change of names of CMakePresets.json - avoid name conflicts
+    def update_cmake_presets(self, preset_file):
         if os.path.exists(preset_file):
             with open(preset_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -51,23 +70,6 @@ class DotNameCppRecipe(ConanFile):
             with open(preset_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
 
-    # Consuming recipe
-    def configure(self):
-        self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
-
-    def requirements(self):
-        # self.requires("gtest/1.16.0") # if cpm not used
-        self.requires("fmt/[~11.1]") # required by cpm package
-        # self.requires("zlib/[~1.3]")
-        # self.requires("nlohmann_json/[~3.11]")
-        # self.requires("yaml-cpp/0.8.0")
-
-    def build_requirements(self):
-        self.tool_requires("cmake/[>3.14]")
-
-    def imports(self):
-        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
-
     # def system_requirements(self):
         # dnf = package_manager.Dnf(self)
         # dnf.install("SDL2-devel")
@@ -81,30 +83,5 @@ class DotNameCppRecipe(ConanFile):
     # TO DO 
     # # ----------------------------------------------------------    
     # # Creating basic library recipe
+    # # Not recomended due complexity of this project template
     # # ----------------------------------------------------------
-    
-    # # Optional metadata
-    # license = "<Put the package license here>"
-    # author = "<Put your name here> <And your email here>"
-    # url = "<Package recipe repository url here, for issues about the package>"
-    # description = "<Description of hello package here>"
-    # topics = ("<Put some tag here>", "<here>", "<and here>")
-   
-    # # Sources are located in the same place as this recipe, copy them to the recipe
-    # exports_sources = "CMakeLists.txt", "src/*", "include/*", "cmake/*", "LICENSE", "README.md"
-    
-    # def config_options(self):
-    #     if self.settings.os == "Windows":
-    #         del self.options.fPIC
-
-    # def build(self):
-    #     cmake = CMake(self)
-    #     cmake.configure()
-    #     cmake.build()
-
-    # def package(self):
-    #     cmake = CMake(self)
-    #     cmake.install()
-
-    # def package_info(self):
-    #     self.cpp_info.libs = ["dotnamelib"]

@@ -1,20 +1,12 @@
-
 # MIT License Copyright (c) 2024-2025 Tomáš Mark
-
-function(emscripten target)
-    # ==============================================================================
-    # Set target properties
-    # ==============================================================================
+function(emscripten target isRequiredHtml)
     if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         message(STATUS "Emscripten detected")
-        set(raylib_VERBOSE 1)
-        set_target_properties(${target} PROPERTIES SUFFIX ".html")
-        set_target_properties(
-            ${target}
-            PROPERTIES
-                COMPILE_FLAGS
-                "-s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1"
-        )
+
+        if(isRequiredHtml EQUAL 1)
+            message(STATUS "html target requested")
+            set_target_properties(${STANDALONE_NAME} PROPERTIES SUFFIX ".html")
+        endif()
 
         set_target_properties(
             ${target}
@@ -24,10 +16,9 @@ function(emscripten target)
         )
 
         if(ENABLE_EMSCRIPTEN_PTHREAD)
-        message(STATUS "Emscripten pthread enabled")
-        set(raylib_VERBOSE 1)
-        set_target_properties(${target} PROPERTIES COMPILE_FLAGS "-s USE_PTHREADS=1 -pthread")
-        set_target_properties(${target} PROPERTIES LINK_FLAGS "-s USE_PTHREADS=1 -pthread")
+            message(STATUS "Emscripten pthread enabled")
+            set_target_properties(${target} PROPERTIES COMPILE_FLAGS "-s USE_PTHREADS=1 -pthread")
+            set_target_properties(${target} PROPERTIES LINK_FLAGS "-s USE_PTHREADS=1 -pthread")
         endif()
     endif()
 
