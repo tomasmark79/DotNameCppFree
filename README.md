@@ -1,7 +1,6 @@
 <img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
 
-
-The D🌀tName C++ Template is a modern and versatile foundation for cross-platform ***C++*** development. It creates a starting point from zero to hero for C++ developers who need to quickly build a robust application.  
+The D🌀tName C++ Template is a modern and versatile foundation for cross-platform development. It provides a robust starting point for C++ developers who need to quickly build reliable applications.
 
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
@@ -67,8 +66,9 @@ The D🌀tName C++ Template is a modern and versatile foundation for cross-platf
 
 - Develop on **Linux**, **MacOS**, and **Windows**
 - Template utilizes a **Standalone** & **Library** structure
-- Integrates **Conan 2** with a ready-to-use `conanfile.py`
-- Includes [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake) and [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
+- Integrates [**Conan 2**](https://conan.io/center) with a ready-to-use `conanfile.py`
+- [**Emscripten**](https://emscripten.org/index.html#) compatible configuration for run code on **html5**/**wasm**
+- Includes [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake) and [CPM.license](https://github.com/cpm-cmake/CPMLicenses.cmake)
 - Integrates [**cxxopts**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxopts wiki](https://github.com/jarro2783/cxxopts/wiki))
 - Provides Helper Classes
 - Includes predefined GitHub [Actions](https://docs.github.com/en/actions)
@@ -339,9 +339,11 @@ The template already includes the best default settings in the **c_cpp_settings.
 
 ```json
 "includePath": [
-      "${workspaceFolder}/**"
-      //"/home/tomas/.cache/CPM/**", 
-      //"/home/tomas/.conan2/p/b/**"
+    "${workspaceFolder}/**",
+    "/home/tomas/.cache/CPM/cxxopts/**"
+    //"/home/tomas/.cache/CPM/**",
+    //"/home/tomas/.conan2/p/b/**"
+],
 ```
 
 ## VSCode Tasks and Keybindings
@@ -486,7 +488,7 @@ There’s quite a lot. Perhaps the biggest advantage is freedom. By leveraging t
 **What Does the Future Hold?**  
 The future is always uncertain; however, the plan is to gradually expand this solution. If anyone wishes to get involved, their help will be more than welcome.  
 
-emscripten 
+emscripten support - ✔️ already added
 
 ## Thanks
 
