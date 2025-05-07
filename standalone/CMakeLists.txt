@@ -105,8 +105,10 @@ apply_sanitizers(${STANDALONE_NAME})
 # ==============================================================================
 # Set target properties
 # ==============================================================================
+
+# Emscripten handler
 include(../cmake/tmplt-emscripten.cmake)
-emscripten(${STANDALONE_NAME})
+emscripten(${STANDALONE_NAME} 1) # 1 = html target requested
 
 # ==============================================================================
 # Set linking

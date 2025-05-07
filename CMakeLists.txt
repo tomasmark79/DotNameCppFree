@@ -120,8 +120,10 @@ apply_sanitizers(${LIBRARY_NAME})
 # ==============================================================================
 # Set target properties
 # ==============================================================================
+
+# Emscripten handler
 include(cmake/tmplt-emscripten.cmake)
-emscripten(${LIBRARY_NAME})
+emscripten(${LIBRARY_NAME} 0)
 
 # ==============================================================================
 # Set headers
@@ -184,7 +186,6 @@ packageProject(
     # (optional) option to install only header files with matching pattern
     INCLUDE_HEADER_PATTERN "*.h;*.hpp;*.hh;*.hxx"
     # semicolon separated list of the project's dependencies
-    # DEPENDENCIES "zlib#1.2.11;fmt#11.1.1;CPMLicenses.cmake@0.0.7;nlohmann_json#3.11.2"
     DEPENDENCIES "fmt#11.1.0;CPMLicenses.cmake@0.0.7"
     # (optional) create a header containing the version info
     # Note: that the path to headers should be lowercase, but is not enforced
