@@ -3,6 +3,9 @@ function(emscripten target isRequiredHtml)
     if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         message(STATUS "Emscripten detected")
 
+        # define PLATFORM_WEB
+        target_compile_definitions(${target} PRIVATE PLATFORM_WEB)
+
         if(isRequiredHtml EQUAL 1)
             message(STATUS "html target requested")
             set_target_properties(${target} PROPERTIES SUFFIX ".html")
