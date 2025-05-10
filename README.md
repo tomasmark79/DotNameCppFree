@@ -276,7 +276,7 @@ Example of my own **task.json** on my fedora system:
         }
 ```
 
->💡 Building with **Emscripten** is managed by the CMake module `tmplt-emscripten.cmake`. The module includes additional switches to handle the activation of necessary linkages, such as for the raylib or SDL2 framework. To connect the file system in the Emscripten environment, the following argument is used: `--preload-file ../../../../assets@share/${target}/assets`
+>💡 Building with **Emscripten** is managed by the CMake module `tmplt-emscripten.cmake`. The module includes additional switches to user handle the activation of necessary linkages, such as for the raylib or SDL2 framework, etc. To connect the file system in the Emscripten environment, the following argument is used: `--preload-file ../../../../assets@share/${target}/assets`. Path may be changed by argument passed to emscripten function.
    
 [👆🏻](#index)
 ---
