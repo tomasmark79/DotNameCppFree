@@ -29,9 +29,9 @@ function(emscripten target isRequiredHtml)
         set(_pthread "-s USE_PTHREADS=1 -pthread")
 
         # manually set flags is the best way
-        set_target_properties(${target} PROPERTIES COMPILE_FLAGS "${_o3} ${_pthread}")
+        set_target_properties(${target} PROPERTIES COMPILE_FLAGS "${_pthread}")
         set_target_properties(${target} PROPERTIES LINK_FLAGS
-                                                   "${_wasm} ${_pthread}")
+                                                   "${_raylib} ${_wasm} ${_o3} ${_pthread} --preload-file ../../../../assets@share/${target}/assets")
 
     endif()
 

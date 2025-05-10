@@ -122,6 +122,7 @@ apply_assets_processing_standalone()
 # ==============================================================================
 
 # Emscripten handler must have prepared assets
+# note: /share/inheritance from Standalone target name
 include(../cmake/tmplt-emscripten.cmake)
 emscripten(${STANDALONE_NAME} 1) # 1 = html target requested
 
