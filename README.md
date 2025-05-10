@@ -275,6 +275,8 @@ Example of my own **task.json** on my fedora system:
             "default": "default"
         }
 ```
+
+>💡 Building with **Emscripten** is managed by the CMake module `tmplt-emscripten.cmake`. The module includes additional switches to handle the activation of necessary linkages, such as for the raylib or SDL2 framework. To connect the file system in the Emscripten environment, the following argument is used: `--preload-file ../../../../assets@share/${target}/assets`
    
 [👆🏻](#index)
 ---
