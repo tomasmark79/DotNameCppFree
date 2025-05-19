@@ -31,6 +31,7 @@ parse:
         DISABLE_VERSION_SUFFIX: 1
         ARCH_INDEPENDENT: 1
         CPACK: 1
+        RUNTIME_DESTINATION: 1
         DEPENDENCIES: +
     cpmaddpackage:
       pargs:
