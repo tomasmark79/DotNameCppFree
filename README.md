@@ -453,7 +453,7 @@ For contributors, we offer the option to share your own source code project in a
 
 So how does it work? It's simple.
 
-When you clone the template, it includes git script hooks that allow you to call special commands to create a clone of the clone with the suffix **"Free"**. For example, a repository named **"MyProject"** will become **"MyProjectFree"** and will be automatically kept up to date. This is managed using the commands listed below.
+When you clone the full private template, it includes git script hooks that allow you to call special commands to create a clone of the clone with the suffix **"Free"**. For example, a repository named **"MyProject"** will become **"MyProjectFree"** and will be automatically kept up to date. This is managed using the commands listed below.
 
 #### Start Automatic Sync Free Clone of Clone
 
@@ -463,11 +463,13 @@ When you clone the template, it includes git script hooks that allow you to call
 .init/initializers/MakeFreeClone.sh init
 ```
 
-2. Hooks will automatically sync local and remote free repositories during commit and push.
+2. Hooks will automatically sync local and remote free repositories during **commit** and **push** operations.
 
 3. Commits will update **README.md** to add "Free" to relevant strings.
 
 4. Customize exclusions with **--exclude='fileOrFolderEtc** in the **.init/initializers/MakeFreeClone.sh**.
+
+> Since May 29, 2025, individual commit messages are also copied to the free repositories.
 
 #### Stop Automatic Sync Free Clone of Clone
 
