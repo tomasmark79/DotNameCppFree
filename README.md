@@ -9,8 +9,8 @@ The D🌀tName C++ Template is a modern and versatile foundation for cross-platf
 ## Index
 
 **Template Editions**  
-╰➤[🚀 Free edition](#-key-features-free-for-all)  
-╰➤[🛸 Private edition for](#-key-features-in-private-edition) - [***Contributors***](#contributors---sponsors)
+╰➤[🚀 Free edition](#-free-edition)  
+╰➤[🛸 Private edition for](#-private-edition-for-contributors) - [***Contributors***](#contributors---sponsors)
 
 **Ready to go**  
 ╰➤[Used 3rd parties](#used-3rd-parties)  
@@ -115,7 +115,7 @@ Thank you in advance.
       - `r+` [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
       - `r+` [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
 - `f` [vcpkg](https://vcpkg.io/en/)
-- `f` [doxygen](https://www.doxygen.nl)
+- `o` [doxygen](https://www.doxygen.nl)
 - `f` [gcovr](https://gcovr.com/en/stable/)
 
 #### Compilers
@@ -379,6 +379,8 @@ The template already includes the best default settings in the **c_cpp_settings.
 - 📏 cmake-format : **Ctrl+Alt+M** *(.cmake-format)*  
 - ⚔️ Conan create library recipe  
 - 📊 Conan dependencies in graph.html  
+- 📖 Doxygen documentation  
+
 
 **Other shortcuts**  
 - Launch Standalone Emscripten (emrun Target.html) : **Ctrl+Alt+E**
