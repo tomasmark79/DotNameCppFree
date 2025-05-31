@@ -104,7 +104,7 @@ Thank you in advance.
 - `o` [make](https://www.gnu.org/software/make/)
 - `o` [ninja](https://ninja-build.org)
 - `r` [cmake](https://cmake.org/download/) - [doc 3.31.X](https://cmake.org/cmake/help/v3.31/)
-- `r+` [ccache](https://ccache.dev/download.html)
+- `r` [ccache](https://ccache.dev/download.html)
 - `r+` [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
 - `r+` [pyenv](https://github.com/pyenv/pyenv)
   - `r+` [python 3](https://www.python.org)
