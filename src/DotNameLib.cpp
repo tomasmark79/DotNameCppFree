@@ -35,11 +35,16 @@ namespace dotname {
 
         if (email)
           LOG_I_STREAM << "Email: " << *email << std::endl;
+        else
+          LOG_I_STREAM << "No email provided." << std::endl;
         if (phone)
           LOG_I_STREAM << "Phone: " << *phone << std::endl;
+        else
+          LOG_I_STREAM << "No phone provided." << std::endl;
         if (website)
           LOG_I_STREAM << "Website: " << *website << std::endl;
-
+        else
+          LOG_I_STREAM << "No website provided." << std::endl;
       } catch (const std::exception& e) {
         LOG_E_STREAM << "Failed to load custom strings: " << e.what () << std::endl;
         throw std::runtime_error ("Failed to load custom strings: " + std::string (e.what ()));
