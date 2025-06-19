@@ -69,7 +69,8 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME}/
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 find_package(fmt REQUIRED)
-# find_package(ZLIB REQUIRED) find_package(nlohmann_json REQUIRED) find_package(yaml-cpp REQUIRED)
+find_package(nlohmann_json REQUIRED)
+# find_package(ZLIB REQUIRED) find_package(yaml-cpp REQUIRED)
 
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
@@ -165,8 +166,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Set linking
 # ==============================================================================
 target_link_libraries(
-    ${LIBRARY_NAME} PUBLIC fmt::fmt # PRIVATE ZLIB::ZLIB PRIVATE nlohmann_json::nlohmann_json
-                                    # PRIVATE yaml-cpp
+    ${LIBRARY_NAME}
+    PUBLIC fmt::fmt
+    PUBLIC nlohmann_json::nlohmann_json
+    # PRIVATE ZLIB::ZLIB
+    # PRIVATE yaml-cpp
 )
 
 # ==============================================================================
@@ -179,7 +183,7 @@ packageProject(
     INCLUDE_DIR "/include"
     INCLUDE_DESTINATION "include"
     INCLUDE_HEADER_PATTERN "*.h;*.hpp;*.hh;*.hxx"
-    DEPENDENCIES "fmt#11.1.0;CPMLicenses.cmake@0.0.7"
+    DEPENDENCIES "fmt#11.1.0;nlohmann_json#3.12.0;CPMLicenses.cmake@0.0.7"
     VERSION_HEADER "${LIBRARY_NAME}/version.h"
     EXPORT_HEADER "${LIBRARY_NAME}/export.h"
     NAMESPACE ${LIBRARY_NAMESPACE}
