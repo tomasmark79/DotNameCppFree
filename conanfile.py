@@ -34,10 +34,10 @@ class DotNameCppRecipe(ConanFile):
         self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
 
     def requirements(self):
-        self.requires("fmt/[~11.1]") # required by cpm package
+        self.requires("fmt/[~11.1]")            # required by cpm package
+        self.requires("nlohmann_json/[~3.12]")  # required by DotNameUtils::JsonUtils
         # self.requires("gtest/1.16.0") # if cpm not used
         # self.requires("zlib/[~1.3]")
-        # self.requires("nlohmann_json/[~3.11]")
         # self.requires("yaml-cpp/0.8.0")
 
     def build_requirements(self):
