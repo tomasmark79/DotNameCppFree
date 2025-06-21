@@ -4,6 +4,8 @@
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
 
+#define CUSTOM_STRINGS_FILE "customstrings.json"
+
 #include "Logger/Logger.hpp"
 #include <nlohmann/json.hpp>
 #include <Assets/AssetContext.hpp>
@@ -351,12 +353,12 @@ namespace DotNameUtils {
       return result;
     }
 
-    // Get custom string sign from customstrings.json
+    // Just for debugging purposes
     // (Author, Email, Phone, Website)
     inline std::string getCustomStringSign () {
       std::string result;
       try {
-        auto customStrings = loadFromFile (AssetContext::getAssetsPath () / "customstrings.json");
+        auto customStrings = loadFromFile (AssetContext::getAssetsPath () / CUSTOM_STRINGS_FILE);
         auto authorEn = getLocalizedString (customStrings, "Author", "en");
         auto authorCs = getLocalizedString (customStrings, "Author", "cs");
         auto email = getEmail (customStrings, "Email");
@@ -367,17 +369,19 @@ namespace DotNameUtils {
           result += "Email: " + *email + "\n";
         else
           result += "No email provided.\n";
+
         if (phone)
           result += "Phone: " + *phone + "\n";
         else
           result += "No phone provided.\n";
+
         if (website)
-          result += "Website: " + *website + "\n";
+          result += "Website: " + *website;
         else
-          result += "No website provided.\n";
+          result += "No website provided.";
+
       } catch (const std::exception& e) {
-        LOG_E_STREAM << "Failed to load custom strings: " << e.what () << std::endl;
-        result = "Failed to load custom strings.\n";
+        result = "Error loading custom strings: " + std::string (e.what ());
       }
       return result;
     }
@@ -407,8 +411,7 @@ namespace DotNameUtils {
       auto actualDuration
           = std::chrono::duration_cast<std::chrono::milliseconds> (actualEnd - start);
       std::string iterationsStr = std::to_string (iterations);
-      LOG_I_STREAM << "CPU benchmark duration: " << actualDuration.count () << " ms"
-                   << std::endl;
+      LOG_I_STREAM << "CPU benchmark duration: " << actualDuration.count () << " ms" << std::endl;
       LOG_I_STREAM << "Total iterations: " << Dots::addDots (iterationsStr) << std::endl;
     }
   } // namespace Performance
