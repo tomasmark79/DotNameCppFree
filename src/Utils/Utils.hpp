@@ -6,6 +6,7 @@
 
 #include "Logger/Logger.hpp"
 #include <nlohmann/json.hpp>
+#include <Assets/AssetContext.hpp>
 
 #include <filesystem>
 #include <fstream>
@@ -327,6 +328,37 @@ namespace DotNameUtils {
         result.update (overlay);
       } catch (const std::exception&) {
         // Return base on error
+      }
+      return result;
+    }
+
+    // Get custom string sign from customstrings.json
+    // (Author, Email, Phone, Website)
+    inline std::string getCustomStringSign () {
+      std::string result;
+      try {
+        auto customStrings = loadFromFile (AssetContext::getAssetsPath () / "customstrings.json");
+        auto authorEn = getLocalizedString (customStrings, "Author", "en");
+        auto authorCs = getLocalizedString (customStrings, "Author", "cs");
+        auto email = getUrl (customStrings, "Email");
+        auto phone = getTel (customStrings, "Phone");
+        auto website = getUrl (customStrings, "Website");
+
+        if (email)
+          result += "Email: " + *email + "\n";
+        else
+          result += "No email provided.\n";
+        if (phone)
+          result += "Phone: " + *phone + "\n";
+        else
+          result += "No phone provided.\n";
+        if (website)
+          result += "Website: " + *website + "\n";
+        else
+          result += "No website provided.\n";
+      } catch (const std::exception& e) {
+        LOG_E_STREAM << "Failed to load custom strings: " << e.what () << std::endl;
+        result = "Failed to load custom strings.\n";
       }
       return result;
     }
