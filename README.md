@@ -1,7 +1,6 @@
 <img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
 
-The D🌀tName is my own C++ template for building cross-platform applications.  
-It includes everything I typically need to kick off a project fast and cleanly.
+The D🌀tNameCpp is my own C++ template for building cross-platform applications. It includes almost everything I typically need to kick off a project fast and cleanly.
 
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
@@ -10,13 +9,14 @@ It includes everything I typically need to kick off a project fast and cleanly.
 ## Index
 
 **Template Editions**  
-╰➤[🚀 Free edition](#-free-edition)  
+╰➤[🚀 Free edition](#-free-edition) Very limited public free version  
 ╰➤[🛸 Private edition for](#-private-edition-for-contributors) - [***Contributors***](#contributors---sponsors)
 
 **Ready to go**  
 ╰➤[Used 3rd parties](#used-3rd-parties)  
-╰➤[**Clone to local development**](#clone-to-local-development)  
-╰➤[Github Codespace to dev on the Web](#using-github-codespace)  
+╰➤[Not-Used 3rd parties](#not-used-3rd-parties)  
+╰➤[⭐ **Clone to local development**](#clone-to-local-development) ⭐   
+╰➤[Using Github Codespace](#using-github-codespace)  
 
 **Helper Classes**  
 ╰➤[AssetContext Class](#assetcontext-class)  
@@ -42,7 +42,7 @@ It includes everything I typically need to kick off a project fast and cleanly.
 
 ╰➤[VSCode Intellisense configuration](#vscode-intellisense-configuration)  
 ╰➤[VSCode Tasks and Keybindings](#vscode-tasks-and-keybindings)  
-╰➤[VSCode Recomended Extensions](#vscode-recomended-extensions)  
+╰➤[Recomended VSCode Extensions I am using](#recomended-vscode-extensions-i-am-using)  
 
 **Maintenance**  
 ╰➤[Installers](#installers)  
@@ -65,6 +65,8 @@ It includes everything I typically need to kick off a project fast and cleanly.
 
 ### 🚀 Free Edition
 
+The free edition of the project template is available in all my public repositories on GitHub. The free edition contains essentially the complete application or library source code, but lacks the actual tools for working with the code. It essentially lacks the exposed interactive components that are only available in the private version and are used in conjunction with the VSCode editor. D🌀tNameCpp is therefore not just a project template, as it might appear at first glance, but rather my comprehensive development solution. Through a sophisticated approach and thoughtful configuration setup, it also handles processes for configuration, compilation, debugging, and other code development tasks.
+
 - Develop on **Linux**, **MacOS**, and **Windows**
 - Template utilizes a **Standalone** & **Library** structure
 - Integrates [**Conan 2**](https://conan.io/center) with a ready-to-use `conanfile.py`
@@ -77,11 +79,11 @@ It includes everything I typically need to kick off a project fast and cleanly.
 
 ### 🛸 Private Edition for Contributors
 
-- Provides everything else  
+- Provides everything else - as an extension for VSCode and more
 
 ### Contributors - Sponsors  
 
-Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the DotNameCppFree template project.
+Please consider contributing via [PayPal 💶](https://paypal.me/TomasMark) or by sponsoring me directly on GitHub to support future development. Once you have made your contribution, kindly contact me at [tomas@digitalspace.name](mailto:tomas@digitalspace.name) so that I can grant you access to the full version of the D🌀tNameCpp repository.
 
 Thank you in advance.
 
@@ -92,45 +94,40 @@ Thank you in advance.
 
 ### Used 3rd parties
 
-| Symbol | Description                     |
-|--------|---------------------------------|
-| `r`    | Required for free edition       |
-| `r+`   | Required for private edition    |
-| `o`    | Optional                        |
-| `f`    | Future plans                    |
-
-- `o` [git](https://git-scm.com)
-- `o` [conan 2](https://conan.io/center) - [hub](https://conan.io/center)
-- `o` [emscripten](https://emscripten.org/) - [doc](https://emscripten.org/docs/index.html)
-- `o` [make](https://www.gnu.org/software/make/)
-- `o` [ninja](https://ninja-build.org)
-- `r` [cmake](https://cmake.org/download/) - [doc 3.31.X](https://cmake.org/cmake/help/v3.31/)
-- `r` [ccache](https://ccache.dev/download.html)
-- `r+` [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
-- `r+` [pyenv](https://github.com/pyenv/pyenv)
-  - `r+` [python 3](https://www.python.org)
-    - `r+` [pip](https://pypi.org/project/pip/) - [hub](https://pypi.org)
-      - `r+` [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
-      - `r+` [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
-      - `r+` [clanf-format configurator](https://clang-format-configurator.site)
-      - `r+` [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
-      - `r+` [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
-- `f` [vcpkg](https://vcpkg.io/en/)
-- `o` [doxygen](https://www.doxygen.nl)
-- `f` [gcovr](https://gcovr.com/en/stable/)
+- [git](https://git-scm.com)
+- [conan 2](https://conan.io/center) - [hub](https://conan.io/center)
+- [emscripten](https://emscripten.org/) - [doc](https://emscripten.org/docs/index.html)
+- [make](https://www.gnu.org/software/make/)
+- [ninja](https://ninja-build.org)
+- [cmake](https://cmake.org/download/) - [doc 3.31.X](https://cmake.org/cmake/help/v3.31/)
+- [ccache](https://ccache.dev/download.html)
+- [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
+- [pyenv](https://github.com/pyenv/pyenv)
+  - [python 3](https://www.python.org)
+    - [pip](https://pypi.org/project/pip/) - [hub](https://pypi.org)
+      - [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)
+      - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0
+      - [clanf-format configurator](https://clang-format-configurator.site)
+      - [clang-format style options](https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html)
+      - [cmake-format](https://cmake-format.readthedocs.io/en/latest/)
+- [doxygen](https://www.doxygen.nl)
 
 #### Compilers
 
-- `o` [mingw](https://www.mingw-w64.org)
-- `o` [llvm](https://llvm.org)
-- `o` [clang](https://clang.llvm.org)
-- `o` [gcc](https://gcc.gnu.org)
-- `o` [msvc](https://visualstudio.microsoft.com/vs/features/cplusplus/)
-- `o` [intel C++ compiler](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/dpc-compiler.html)
+- [mingw](https://www.mingw-w64.org)
+- [llvm](https://llvm.org)
+- [clang](https://clang.llvm.org)
+- [gcc](https://gcc.gnu.org)
+- [msvc](https://visualstudio.microsoft.com/vs/features/cplusplus/)
+- [intel C++ compiler](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/dpc-compiler.html)
 
 #### Crosstools
 
-- `r+` [crosstool-ng](https://crosstool-ng.github.io)
+- [crosstool-ng](https://crosstool-ng.github.io)
+
+### Not-Used 3rd parties
+- [vcpkg](https://vcpkg.io/en/)
+- [gcovr](https://gcovr.com/en/stable/)
 
 ### Clone to local development
 
@@ -141,7 +138,18 @@ git clone git@github.com:tomasmark79/DotNameCppFree.git ./
 
 ### Using Github Codespace
 
-  Open the free edition template directly in a GitHub Codespace and start working immediately in the web-based VSCode. Simply run "pip install conan" in the terminal to install Conan 2 and then use the "build_default_debug.sh" script for basic command-line compilation or your own commands to specify build needs. 🤓
+  Open directly in a GitHub Codespace and start working immediately in the web-based VSCode.
+
+  First time before build, install dependencies in the Web Based environment.
+  
+  ```bash
+  pip install conan ccache
+  ```
+  and or 
+
+  ```bash
+  ./build_default_debug.sh
+  ```
 
 [👆🏻](#index)
 ---
@@ -149,6 +157,7 @@ git clone git@github.com:tomasmark79/DotNameCppFree.git ./
 ## Helper Classes
 
 ### AssetContext Class
+
 To ensure proper access to the **assets** folder, the solution relies on the CMake configurator. During project configuration, it generates and sets the preprocessor definition **#define UTILS_ASSET_PATH ""** to point to the current **assets** folder. Behind the scenes, certain adjustments are made to guarantee that the folder remains accessible, regardless of whether the project is being debugged or deployed to a production Linux environment. Minor modifications might be required for other platforms, but perhaps not. In the Standalone section, **constexpr std::string_view utilsAssetPath** is finalized and passed to the library via a constructor, where the **AssetContext** class awaits this string. The **AssetContext** class later enables access to the **assets** folder path from anywhere within the library part project.
 
 ### CustomStrings NameSpace
@@ -345,12 +354,14 @@ The template already includes the best default settings in the **c_cpp_settings.
 > 💡 Be aware that If your Conan cache contains a large number of packages, the Intellisense database may take up to 30 minutes to build.
 
 ```json
-"includePath": [
-    "${workspaceFolder}/**",
-    "/home/tomas/.cache/CPM/cxxopts/**"
-    //"/home/tomas/.cache/CPM/**",
-    //"/home/tomas/.conan2/p/b/**"
-],
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/tomas/.cache/CPM/cxxopts/**",
+                "/home/tomas/.cache/CPM/fmt*/**",
+                "/home/tomas/.conan2/p/b/imgui*/**",
+                "/home/tomas/.conan2/p/glm*/**",
+                "/home/tomas/.conan2/p/nlohm*/**"
+            ],
 ```
 
 ## VSCode Tasks and Keybindings
@@ -391,7 +402,7 @@ The template already includes the best default settings in the **c_cpp_settings.
 - Launch Standalone Emscripten (emrun Target.html) : **Ctrl+Alt+E**
 - **F8** or **Shift+F8** jumps to the next or previous error  
 
-## VSCode Recomended Extensions
+## Recomended VSCode Extensions I am using
 
 ```url
 https://marketplace.visualstudio.com/items?itemName=chekweitan.compare-view
