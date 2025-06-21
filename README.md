@@ -9,7 +9,7 @@ The D🌀tNameCpp is my own C++ template for building cross-platform application
 ## Index
 
 **Template Editions**  
-╰➤[🚀 Free edition](#-free-edition) Very limited public free version  
+╰➤[🚀 Free edition](#-free-edition) - lacks process tools and additional project extensions  
 ╰➤[🛸 Private edition for](#-private-edition-for-contributors) - [***Contributors***](#contributors---sponsors)
 
 **Ready to go**  
