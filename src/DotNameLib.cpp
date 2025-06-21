@@ -20,10 +20,9 @@ namespace dotname {
   DotNameLib::DotNameLib (const std::filesystem::path& assetsPath) : DotNameLib () {
     if (!assetsPath.empty ()) {
       AssetContext::setAssetsPath (assetsPath);
-      LOG_D_STREAM << "Assets path given to the library\n"
-                   << "╰➤ " << AssetContext::getAssetsPath () << std::endl;
-      auto logo = std::ifstream (AssetContext::getAssetsPath () / "logo.png");
+      LOG_D_STREAM << "Assets: " << AssetContext::getAssetsPath () << std::endl;
       LOG_I_STREAM << DotNameUtils::JsonUtils::getCustomStringSign () << std::endl;
+      auto logo = std::ifstream (AssetContext::getAssetsPath () / "logo.png");
     }
   }
 
