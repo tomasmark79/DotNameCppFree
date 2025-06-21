@@ -67,6 +67,8 @@ The D🌀tNameCpp is my own C++ template for building cross-platform application
 
 The free edition of the project template is available in all my public repositories on GitHub. The free edition contains essentially the complete application or library source code, but lacks the actual tools for working with the code. It essentially lacks the exposed interactive components that are only available in the private version and are used in conjunction with the VSCode editor. D🌀tNameCpp is therefore not just a project template, as it might appear at first glance, but rather my comprehensive development solution. Through a sophisticated approach and thoughtful configuration setup, it also handles processes for configuration, compilation, debugging, and other code development tasks.
 
+> Free Edition contain
+
 - Develop on **Linux**, **MacOS**, and **Windows**
 - Template utilizes a **Standalone** & **Library** structure
 - Integrates [**Conan 2**](https://conan.io/center) with a ready-to-use `conanfile.py`
