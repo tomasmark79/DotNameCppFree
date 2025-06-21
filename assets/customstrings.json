@@ -11,7 +11,7 @@
             "id": "Email",
             "data": {
                 "en": "Email",
-                "url": "mailto:tomas@digitalspace.name"
+                "email": "tomas@digitalspace.name"
             }
         },
         {
@@ -19,7 +19,7 @@
             "data": {
                 "en": "Phone",
                 "cs": "Telefon",
-                "tel": "+420731-122-800"
+                "tel": "+420731122800"
             }
         },
         {

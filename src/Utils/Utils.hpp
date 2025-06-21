@@ -267,6 +267,25 @@ namespace DotNameUtils {
       return std::nullopt;
     }
 
+    // Get EMAIL from your custom format
+    inline std::optional<std::string> getEmail (const nlohmann::json& stringsJson,
+                                                const std::string& id) {
+      try {
+        if (stringsJson.contains ("strings") && stringsJson["strings"].is_array ()) {
+          auto item = findById (stringsJson["strings"], id);
+          if (item && item->contains ("data")) {
+            const auto& data = (*item)["data"];
+            if (data.contains ("email")) {
+              return data["email"].get<std::string> ();
+            }
+          }
+        }
+      } catch (const std::exception&) {
+        // Return nullopt on any error
+      }
+      return std::nullopt;
+    }
+
     // Get URL from your custom format
     inline std::optional<std::string> getUrl (const nlohmann::json& stringsJson,
                                               const std::string& id) {
@@ -340,7 +359,7 @@ namespace DotNameUtils {
         auto customStrings = loadFromFile (AssetContext::getAssetsPath () / "customstrings.json");
         auto authorEn = getLocalizedString (customStrings, "Author", "en");
         auto authorCs = getLocalizedString (customStrings, "Author", "cs");
-        auto email = getUrl (customStrings, "Email");
+        auto email = getEmail (customStrings, "Email");
         auto phone = getTel (customStrings, "Phone");
         auto website = getUrl (customStrings, "Website");
 
