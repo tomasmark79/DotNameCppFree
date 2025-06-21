@@ -1,6 +1,7 @@
 <img src="assets/logo.png" alt="DotNameCppFree Logo" width="20%">
 
-The D🌀tName C++ Template is a modern and versatile foundation for cross-platform development. It provides a robust starting point for C++ developers who need to quickly build reliable applications.
+The D🌀tName is my own C++ template for building cross-platform applications.  
+It includes everything I typically need to kick off a project fast and cleanly.
 
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
