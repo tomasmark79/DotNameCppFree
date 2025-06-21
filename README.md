@@ -152,7 +152,7 @@ To ensure proper access to the **assets** folder, the solution relies on the CMa
 
 ### CustomStrings NameSpace
 
-The template works with an external **customstrings.json** file, which can contain declared text strings and their foreign language variants. For simplicity, a simple parsing implementation is defined, and the example in DotNameLib.cpp interface shows how to work with accessing the content.
+The template works with an external **customstrings.json** file, which can contain declared text strings and their foreign language variants. For simplicity, a simple parsing implementation is defined, and the example in **DotNameUtils::JsonUtils::getCustomStringSign ()** method shows how to work with accessing the content.
 
 ### Logger Class
 
