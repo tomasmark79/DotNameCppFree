@@ -18,29 +18,26 @@ function(emscripten target isHtml reqPthreads customPrePath)
             set_target_properties(${target} PROPERTIES SUFFIX ".html")
         endif()
 
-        # available switches
-        set(_wasm "-s WASM=1")
+        # available switches - updated for newer Emscripten versions
+        set(_wasm "-sWASM=1")
         set(_o3 "-O3")
-        set(_raylib "-s USE_GLFW=3")
-        set(_sdl2_sdl2 "-s USE_SDL=2")
-        set(_sdl2_image "-s USE_SDL_IMAGE=2")
-        set(_sdl2_ttf "-s USE_SDL_TTF=2")
-        set(_sdl2_net "-s USE_SDL_NET=2")
-        set(_sdl2_mixer "-s USE_SDL_MIXER=2")
+        set(_raylib "-sUSE_GLFW=3")
+        set(_sdl2_sdl2 "-sUSE_SDL=2")
+        set(_sdl2_image "-sUSE_SDL_IMAGE=2")
+        set(_sdl2_ttf "-sUSE_SDL_TTF=2")
+        # SDL_NET has been deprecated in newer Emscripten versions, removing it
+        # set(_sdl2_net "-sUSE_SDL_NET=2")  
+        set(_sdl2_mixer "-sUSE_SDL_MIXER=2")
 
         # not used yet
-
         # set(_gl_egpaddress "-s GL_ENABLE_GET_PROC_ADDRESS=1")
-
         # set(_assertions "-s ASSERTIONS=1")
-
         # set(_asyncify "-s ASYNCIFY")
-
         # set(_memory_growth "-s ALLOW_MEMORY_GROWTH=1")
 
         if(reqPthreads EQUAL 1)
-            set(_pthread "-s USE_PTHREADS=1 -pthread")
-            set(_pthread_pool_size "-s PTHREAD_POOL_SIZE=4")
+            set(_pthread "-sUSE_PTHREADS=1 -pthread")
+            set(_pthread_pool_size "-sPTHREAD_POOL_SIZE=4")
         else()
             set(_pthread "")
             set(_pthread_pool_size "")
@@ -65,13 +62,13 @@ function(emscripten target isHtml reqPthreads customPrePath)
             ${target}
             PROPERTIES
                 COMPILE_FLAGS
-                "${_o3} ${_pthread} ${_sdl2_sdl2} ${_sdl2_image} ${_sdl2_ttf} ${_sdl2_net} ${_sdl2_mixer} "
+                "${_o3} ${_pthread} ${_sdl2_sdl2} ${_sdl2_image} ${_sdl2_ttf} ${_sdl2_mixer} "
         )
         set_target_properties(
             ${target}
             PROPERTIES
                 LINK_FLAGS
-                "${_wasm} ${_pthread} ${_pthread_pool_size} ${_sdl2_sdl2} ${_sdl2_image} ${_sdl2_ttf} ${_sdl2_net} ${_sdl2_mixer} ${customPrePath} ${customHtmlPath}"
+                "${_wasm} ${_pthread} ${_pthread_pool_size} ${_sdl2_sdl2} ${_sdl2_image} ${_sdl2_ttf} ${_sdl2_mixer} ${customPrePath} ${customHtmlPath}"
         )
 
     endif()
