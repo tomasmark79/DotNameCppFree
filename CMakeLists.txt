@@ -29,9 +29,24 @@ include(cmake/tmplt-runtime.cmake)
 include(cmake/tmplt-sanitizer.cmake)
 include(cmake/tmplt-hardening.cmake)
 include(cmake/tmplt-ipo.cmake)
+include(cmake/tmplt-debug.cmake)
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Remove debug info for Release builds by default
+if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+    message(STATUS "Release build detected - configuring for minimal debug info")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DNDEBUG")
+    if(NOT MSVC)
+        # Remove any debug flags and add -g0 to explicitly disable debug info
+        string(REGEX REPLACE "-g[0-9]?" "" CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
+        string(REGEX REPLACE "-g[0-9]?" "" CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g0")
+        set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -g0")
+    endif()
+endif()
 
 # ==============================================================================
 # Library attributes - case size will reflect resource files case size
@@ -118,6 +133,7 @@ apply_ipo(${LIBRARY_NAME})
 apply_hardening(${LIBRARY_NAME})
 apply_sanitizers(${LIBRARY_NAME})
 apply_static_runtime(${LIBRARY_NAME})
+apply_debug_info_control(${LIBRARY_NAME})
 
 # ==============================================================================
 # Set target properties
