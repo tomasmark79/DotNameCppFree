@@ -27,8 +27,8 @@ function(apply_debug_info_control target)
         # For GCC/Clang, explicitly disable debug info generation
         target_compile_options(${target} PRIVATE -DNDEBUG -g0)
         
-        # Strip executables after build
-        if(TARGET_TYPE STREQUAL "EXECUTABLE")
+        # Strip executables after build (exclude Emscripten)
+        if(TARGET_TYPE STREQUAL "EXECUTABLE" AND NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
             find_program(STRIP_PROGRAM NAMES strip)
             if(STRIP_PROGRAM)
                 add_custom_command(TARGET ${target} POST_BUILD
