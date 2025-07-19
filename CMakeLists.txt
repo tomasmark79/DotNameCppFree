@@ -1,38 +1,34 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-cmake_policy(SET CMP0048 NEW) # project() command manages VERSION variables
-cmake_policy(SET CMP0076 NEW) # target_sources() command creates usage requirements
-cmake_policy(SET CMP0091 NEW) # MSVC runtime library flags are selected by an abstraction
-
 # MIT License Copyright (c) 2024-2025 Tomáš Mark
 
-# +-+-+-+-+-+-+-+
-# |l|i|b|r|a|r|y|
-# +-+-+-+-+-+-+-+
+# +-+-+-+-+-+-+-+-+-+-+
+# LIBRARY
+# +-+-+-+-+-+-+-+-+-+-+
 
-# === shared libraries
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-# === runtime
-include(cmake/tmplt-runtime.cmake)
-option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
-# === sanitizer
-include(cmake/tmplt-sanitizer.cmake)
-option(SANITIZE_ADDRESS "Enable Address sanitizer" OFF)
-option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
-option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
-option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
-# === hardening
-include(cmake/tmplt-hardening.cmake)
-option(ENABLE_HARDENING "Enable security hardening options" OFF)
-# === ipo
-include(cmake/tmplt-ipo.cmake)
-option(ENABLE_IPO "Enable Interprocedural Optimization" OFF)
-# === ccache
-option(ENABLE_CCACHE "Enable ccache" ON)
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0076 NEW)
+cmake_policy(SET CMP0091 NEW)
+
+option(ENABLE_CCACHE "Use ccache compiler cache" ON)
+option(ENABLE_GTESTS "Build and run unit tests" ON)
+option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
+option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
+option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
+option(SANITIZE_UNDEFINED "Enable undefined behavior sanitizer" OFF)
+option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
+option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
+option(ENABLE_HARDENING "Enable security hardening" OFF)
+option(ENABLE_IPO "Enable link-time optimization" OFF)
+
 if(ENABLE_CCACHE)
     set(CMAKE_C_COMPILER_LAUNCHER ccache)
     set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 endif()
+include(cmake/tmplt-runtime.cmake)
+include(cmake/tmplt-sanitizer.cmake)
+include(cmake/tmplt-hardening.cmake)
+include(cmake/tmplt-ipo.cmake)
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -121,6 +117,7 @@ target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 apply_ipo(${LIBRARY_NAME})
 apply_hardening(${LIBRARY_NAME})
 apply_sanitizers(${LIBRARY_NAME})
+apply_static_runtime(${LIBRARY_NAME})
 
 # ==============================================================================
 # Set target properties
@@ -169,8 +166,7 @@ target_link_libraries(
     ${LIBRARY_NAME}
     PUBLIC fmt::fmt
     PUBLIC nlohmann_json::nlohmann_json
-    # PRIVATE ZLIB::ZLIB
-    # PRIVATE yaml-cpp
+    # PRIVATE ZLIB::ZLIB PRIVATE yaml-cpp
 )
 
 # ==============================================================================
