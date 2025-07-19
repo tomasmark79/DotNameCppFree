@@ -106,3 +106,31 @@ class ProjectTemplateRecipe(ConanFile):
             with open(preset_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
 
+    # Patch Conan CMake files to remove stdc++ from SYSTEM_LIBS voiding static linking issues
+    # call it as self.patch_remove_stdcpp_from_system_libs() in generate() or build() method
+    def patch_remove_stdcpp_from_system_libs(self):
+        """Odstranění stdc++ z SYSTEM_LIBS v generovaných Conan CMake souborech"""
+        import glob
+        import re
+        
+        # Najdi všechny *-debug-x86_64-data.cmake soubory
+        pattern = os.path.join(self.generators_folder or ".", "*-debug-x86_64-data.cmake")
+        for cmake_file in glob.glob(pattern):
+            try:
+                with open(cmake_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Nahraď "m stdc++" za "m" v SYSTEM_LIBS_DEBUG
+                modified_content = re.sub(
+                    r'(set\([^_]*_SYSTEM_LIBS_DEBUG\s+[^)]*?)stdc\+\+([^)]*\))',
+                    r'\1\2',
+                    content
+                )
+                
+                if modified_content != content:
+                    with open(cmake_file, 'w', encoding='utf-8') as f:
+                        f.write(modified_content)
+                    print(f"Patched {cmake_file} - removed stdc++ from SYSTEM_LIBS")
+                    
+            except Exception as e:
+                print(f"Warning: Could not patch {cmake_file}: {e}")
