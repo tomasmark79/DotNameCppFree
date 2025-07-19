@@ -35,6 +35,13 @@ function(apply_static_runtime TARGET_NAME)
         endif()
 
         # For executables, prefer static libraries
+        # NOTE: If some dependencies are only available as shared libraries (.so),
+        # comment out the following lines to avoid linking errors.
+        # Alternatively, you can selectively disable static linking for specific targets.
+        # Example: Force shared linking for zlib if only .so is available:
+        #   find_package(ZLIB REQUIRED)
+        #   set_target_properties(ZLIB::ZLIB PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "")
+        #   target_link_libraries(${TARGET_NAME} PRIVATE ${ZLIB_LIBRARIES})
         get_target_property(TARGET_TYPE ${TARGET_NAME} TYPE)
         if(TARGET_TYPE STREQUAL "EXECUTABLE")
             set_target_properties(${TARGET_NAME} PROPERTIES LINK_SEARCH_START_STATIC ON
