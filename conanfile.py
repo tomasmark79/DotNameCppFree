@@ -3,11 +3,21 @@ from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps
 from conan.tools.system import package_manager
 from conan.tools.files import copy
+from conan.errors import ConanInvalidConfiguration
+
+# Template Configuration Notes:
+# ----------------------------------------------------------
+# 1. Change 'name' to match your project
+# 2. Update requirements() with your actual dependencies
+# 3. Uncomment system_requirements() if you need system packages
+# 4. Consider adding validation for critical settings
+# 5. This template avoids cmake_layout() for custom build structure
+# ----------------------------------------------------------
 
 # DO NOT use cmake_layout(self) HERE!
 # ------------------------------------------------- --
-    # DotNameCpp is using self layout               --
-    # to define build ouput layout!                 --
+    # This template is using custom layout          --
+    # to define build output layout!                --
     # ├── Build                                     --
     #     ├── Artefacts - tarballs of installation  --
     #     ├── Install - final installation          --
@@ -15,9 +25,8 @@ from conan.tools.files import copy
     #     └── Standalone - standalone build         --
 # ------------------------------------------------- --
 
-class DotNameCppRecipe(ConanFile):
-    name = "dotnamelib"
-    version = "1.0"
+class ProjectTemplateRecipe(ConanFile):
+    name = "dotnamecpp"  # TODO: Change to your project name
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
 
@@ -31,20 +40,47 @@ class DotNameCppRecipe(ConanFile):
         
     # Consuming recipe
     def configure(self):
-        self.options["*"].shared = False # this replaced shared flag from SolutionController.py and works
+        # Force static linking for all dependencies (recommended for templates)
+        self.options["*"].shared = False
+        
+        # Handle fPIC option for static libraries on non-Windows systems
+        if self.settings.os != "Windows":
+            if self.options.fPIC:
+                self.options["*"].fPIC = True
 
     def requirements(self):
-        self.requires("fmt/[~11.1]")            # required by cpm package
-        self.requires("nlohmann_json/[~3.12]")  # required by DotNameUtils::JsonUtils
-        # self.requires("gtest/1.16.0") # if cpm not used
-        # self.requires("zlib/[~1.3]")
-        # self.requires("yaml-cpp/0.8.0")
+        # Core dependencies - adjust as needed for your project
+        self.requires("fmt/[~11.1]")            # Modern formatting library
+        self.requires("nlohmann_json/[~3.12]")  # JSON parsing library
+        
+        # Additional dependencies - uncomment as needed:
+        # self.requires("gtest/1.16.0")           # Google Test (if CPM not used)
+        # self.requires("spdlog/[~1.12]")         # Logging library
+        # self.requires("zlib/[~1.3]")            # Compression library
+        # self.requires("yaml-cpp/0.8.0")         # YAML parsing
+        # self.requires("boost/[~1.82]")          # Boost libraries
 
-    def build_requirements(self):
-        self.tool_requires("cmake/[>3.14]")
+    #def build_requirements(self):
+        # self.tool_requires("cmake/[>3.14]")
+
+    # def system_requirements(self):
+        # dnf = package_manager.Dnf(self)
+        # dnf.install("SDL2-devel")
+        # apt = package_manager.Apt(self)
+        # apt.install(["libsdl2-dev"])
 
     def imports(self):
         self.copy("license*", dst="licenses", folder=True, ignore_case=True)
+
+
+
+
+
+
+
+    # ###################################################################
+    # Functions Utilities - no need to change
+    # ###################################################################
 
     # Dynamic change of names of CMakePresets.json - avoid name conflicts
     def update_cmake_presets(self, preset_file):
@@ -70,18 +106,3 @@ class DotNameCppRecipe(ConanFile):
             with open(preset_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
 
-    # def system_requirements(self):
-        # dnf = package_manager.Dnf(self)
-        # dnf.install("SDL2-devel")
-        # apt = package_manager.Apt(self)
-        # apt.install(["libsdl2-dev"])
-        # yum = package_manager.Yum(self)
-        # yum.install("SDL2-devel")
-        # brew = package_manager.Brew(self)
-        # brew.install("sdl2")
-
-    # TO DO 
-    # # ----------------------------------------------------------    
-    # # Creating basic library recipe
-    # # Not recomended due complexity of this project template
-    # # ----------------------------------------------------------
