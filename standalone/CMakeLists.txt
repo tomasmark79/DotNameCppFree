@@ -11,7 +11,6 @@ cmake_policy(SET CMP0076 NEW)
 cmake_policy(SET CMP0091 NEW)
 
 option(ENABLE_CCACHE "Use ccache compiler cache" ON)
-option(ENABLE_GTESTS "Build and run unit tests" ON)
 option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
 option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
 option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
@@ -20,6 +19,7 @@ option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
 option(ENABLE_HARDENING "Enable security hardening" OFF)
 option(ENABLE_IPO "Enable link-time optimization" OFF)
+option(ENABLE_GTESTS "Build and run unit tests" ON)
 
 if(ENABLE_CCACHE)
     set(CMAKE_C_COMPILER_LAUNCHER ccache)
@@ -29,6 +29,7 @@ include(../cmake/tmplt-runtime.cmake)
 include(../cmake/tmplt-sanitizer.cmake)
 include(../cmake/tmplt-hardening.cmake)
 include(../cmake/tmplt-ipo.cmake)
+include(../cmake/tmplt-debug.cmake)
 
 # === linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -97,6 +98,7 @@ add_executable(${STANDALONE_NAME} ${sources})
 apply_hardening(${STANDALONE_NAME})
 apply_sanitizers(${STANDALONE_NAME})
 apply_static_runtime(${STANDALONE_NAME})
+apply_debug_info_control(${STANDALONE_NAME})
 
 # ==============================================================================
 # Set linking
