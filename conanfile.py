@@ -106,25 +106,32 @@ class ProjectTemplateRecipe(ConanFile):
             with open(preset_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
 
-    # Patch Conan CMake files to remove stdc++ from SYSTEM_LIBS voiding static linking issues
+   # Patch Conan CMake files to remove stdc++ from SYSTEM_LIBS voiding static linking issues
     # call it as self.patch_remove_stdcpp_from_system_libs() in generate() or build() method
     def patch_remove_stdcpp_from_system_libs(self):
         """Odstranění stdc++ z SYSTEM_LIBS v generovaných Conan CMake souborech"""
         import glob
         import re
         
-        # Najdi všechny *-debug-x86_64-data.cmake soubory
-        pattern = os.path.join(self.generators_folder or ".", "*-debug-x86_64-data.cmake")
+        # Najdi všechny *-*-x86_64-data.cmake soubory
+        pattern = os.path.join(self.generators_folder or ".", "*-*-x86_64-data.cmake")
         for cmake_file in glob.glob(pattern):
             try:
                 with open(cmake_file, 'r', encoding='utf-8') as f:
                     content = f.read()
                 
-                # Nahraď "m stdc++" za "m" v SYSTEM_LIBS_DEBUG
+                # Nahraď "m stdc++" za "m" ve všech SYSTEM_LIBS_* variantách (DEBUG, RELEASE, atd.)
                 modified_content = re.sub(
-                    r'(set\([^_]*_SYSTEM_LIBS_DEBUG\s+[^)]*?)stdc\+\+([^)]*\))',
+                    r'(set\([^_]*_SYSTEM_LIBS_[A-Z]+\s+[^)]*?)stdc\+\+([^)]*\))',
                     r'\1\2',
                     content
+                )
+                
+                # Také nahraď v obecných SYSTEM_LIBS bez suffixu
+                modified_content = re.sub(
+                    r'(set\([^_]*_SYSTEM_LIBS\s+[^)]*?)stdc\+\+([^)]*\))',
+                    r'\1\2',
+                    modified_content
                 )
                 
                 if modified_content != content:
