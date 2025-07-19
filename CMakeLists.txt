@@ -11,7 +11,6 @@ cmake_policy(SET CMP0076 NEW)
 cmake_policy(SET CMP0091 NEW)
 
 option(ENABLE_CCACHE "Use ccache compiler cache" ON)
-option(ENABLE_GTESTS "Build and run unit tests" ON)
 option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
 option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
 option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
@@ -20,6 +19,8 @@ option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
 option(ENABLE_HARDENING "Enable security hardening" OFF)
 option(ENABLE_IPO "Enable link-time optimization" OFF)
+
+option(ENABLE_GTESTS "Build and run unit tests" ON)
 
 if(ENABLE_CCACHE)
     set(CMAKE_C_COMPILER_LAUNCHER ccache)
