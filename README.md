@@ -17,7 +17,7 @@ A comprehensive C++ template for building cross-platform applications with every
 - [Quick Start](#-quick-start)
 - [Dependencies & Tools](#-dependencies--tools)
 - [Helper Classes](#-helper-classes)
-- [Build System](#%EF%B8%8F-build-system)
+- [Build System](#build-system)
 - [Library Reusability](#-library-reusability)
 - [VSCode Integration](#-vscode-integration)
 - [Cross-Platform Support](#-cross-platform-support)
@@ -185,11 +185,15 @@ Comprehensive logging solution supporting:
 
 ---
 
-## ⚙️ Build System
+## Build System
 
-### Conan 2 Configuration
+### Conan 2 Dependency Manager
 
-Create default profile:
+> All required work is done by DotNameCppFree automated tasks in VSCode
+
+#### Usefull Commands for CLI
+
+create profile
 ```bash
 conan profile detect --force
 ```
@@ -201,21 +205,24 @@ conan install "." --output-folder="./build/standalone/default/debug" --deployer=
 
 ### CMake Options
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `BUILD_SHARED_LIBS` | Build shared libraries | OFF |
-| `USE_STATIC_RUNTIME` | Use static runtime library | OFF |
-| `SANITIZE_ADDRESS` | Enable address sanitizer | OFF |
-| `SANITIZE_UNDEFINED` | Enable undefined behavior sanitizer | OFF |
-| `SANITIZE_THREAD` | Enable thread sanitizer | OFF |
-| `SANITIZE_MEMORY` | Enable memory sanitizer | OFF |
-| `ENABLE_HARDENING` | Enable security hardening | OFF |
-| `ENABLE_IPO` | Enable interprocedural optimization | OFF |
-| `ENABLE_CCACHE` | Enable ccache | OFF |
-| `ENABLE_GTESTS` | Enable Google Tests | ON |
-| `ENABLE_EMSCRIPTEN_PTHREAD` | Enable pthread for Emscripten | OFF |
+```cmake
+option(ENABLE_CCACHE "Use ccache compiler cache" ON)
+option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
+option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
+option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
+option(SANITIZE_UNDEFINED "Enable undefined behavior sanitizer" OFF)
+option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
+option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
+option(ENABLE_HARDENING "Enable security hardening" OFF)
+option(ENABLE_IPO "Enable link-time optimization" OFF)
+option(ENABLE_GTESTS "Build and run unit tests" ON)
+```
 
 ### CMake Presets
+
+> Useful when you want to compile multiple target types in one step
+
+#### Usefull Commands for CLI
 
 List available presets:
 ```bash
@@ -314,31 +321,6 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
 - 📏 Cmake format
 - ⚔️ Create conan library recipe
 - 📊 Create conan graph.html
-
-### Recommended Extensions
-
-Essential VSCode extensions for optimal development experience:
-
-```url
-https://marketplace.visualstudio.com/items?itemName=chekweitan.compare-view
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes
-https://marketplace.visualstudio.com/items?itemName=FleeXo.cpp-class-creator
-https://marketplace.visualstudio.com/items?itemName=amiralizadeh9480.cpp-helper
-https://marketplace.visualstudio.com/items?itemName=twxs.cmake
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools
-https://marketplace.visualstudio.com/items?itemName=cheshirekow.cmake-format
-https://marketplace.visualstudio.com/items?itemName=Guyutongxue.cpp-reference
-https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
-https://marketplace.visualstudio.com/items?itemName=github.vscode-github-actions
-https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
-https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
-https://marketplace.visualstudio.com/items?itemName=ms-python.python
-https://marketplace.visualstudio.com/items?itemName=natqe.reload
-https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
-https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
-```
 
 ---
 
