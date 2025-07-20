@@ -165,6 +165,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # ==============================================================================
 # Set linking
 # ==============================================================================
+
+# If CPM.cmake package target is required for just build time, you can use
+# $<BUILD_INTERFACE:...> generator expression to link it only when building the library.
+# target_link_libraries(${LIBRARY_NAME} PRIVATE $<BUILD_INTERFACE:ShaderTranspiler>)
+
 target_link_libraries(
     ${LIBRARY_NAME}
     PUBLIC fmt::fmt
