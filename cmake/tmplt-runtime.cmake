@@ -27,8 +27,11 @@ function(apply_static_runtime TARGET_NAME)
             if(WIN32)
                 # MinGW - full static linking
                 target_link_options(${TARGET_NAME} PRIVATE -static)
+            elseif(APPLE)
+                # MacOS - static C++ runtime only (clang doesn't support -static-libgcc)
+                target_link_options(${TARGET_NAME} PRIVATE -static-libstdc++ -Wl,-dead_strip)
             else()
-                # Linux/macOS - static C++ runtime only
+                # Linux - static C++ runtime only
                 target_link_options(${TARGET_NAME} PRIVATE -static-libgcc -static-libstdc++
                                     -Wl,--as-needed)
             endif()
