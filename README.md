@@ -222,6 +222,8 @@ option(ENABLE_GTESTS "Build and run unit tests" ON)
 
 > Useful when you want to compile multiple target types in one step
 
+> Automatic build process of DotNameCppFree creates unique preset names for each individual build
+
 #### Usefull Commands for CLI
 
 List available presets:
@@ -232,6 +234,8 @@ cmake --list-presets
 Build with preset:
 ```bash
 cmake --build --preset <preset_name>
+cmake --build --preset conan-debug-wasm-6c4b4d43
+cmake --build --preset conan-debug-armv8-2f129a49
 ```
 
 ---
