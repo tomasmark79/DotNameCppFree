@@ -218,24 +218,19 @@ option(ENABLE_IPO "Enable link-time optimization" OFF)
 option(ENABLE_GTESTS "Build and run unit tests" ON)
 ```
 
-### CMake Presets
+#### CMake Presets 
 
-> Useful when you want to compile multiple target types in one step
+> Automatic build process with Conan creates unique preset names for each individual build
 
-> Automatic build process of DotNameCppFree creates unique preset names for each individual build
+`cmake --list-presets output:`
 
-#### Usefull Commands for CLI
-
-List available presets:
-```bash
-cmake --list-presets
-```
-
-Build with preset:
-```bash
-cmake --build --preset <preset_name>
-cmake --build --preset conan-debug-wasm-6c4b4d43
-cmake --build --preset conan-debug-armv8-2f129a49
+```txt
+  "release-linux-x86_64-gcc-14"       - 'release-linux-x86_64-gcc-14' config
+  "debug-linux-x86_64-gcc-14"         - 'debug-linux-x86_64-gcc-14' config
+  "debug-linux-armv8-gcc-12"          - 'debug-linux-armv8-gcc-12' config
+  "debug-linux-x86_64-gcc-10"         - 'debug-linux-x86_64-gcc-10' config
+  "debug-windows-x86_64-gcc-14"       - 'debug-windows-x86_64-gcc-14' config
+  "relwithdebinfo-linux-armv8-gcc-10" - 'relwithdebinfo-linux-armv8-gcc-10' config
 ```
 
 ---
