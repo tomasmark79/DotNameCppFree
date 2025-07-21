@@ -35,8 +35,9 @@ class ProjectTemplateRecipe(ConanFile):
 
     def generate(self): 
         tc = CMakeToolchain(self)
-        tc.generate()
-        # Update preset names to avoid conflicts after presets are generated
+        tc.generate() # <-- here must keep
+
+        # Update preset names behind tc.generate()
         self.update_cmake_presets("CMakePresets.json")
         
     # Consuming recipe
