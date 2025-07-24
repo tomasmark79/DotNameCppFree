@@ -68,7 +68,7 @@ class ProjectTemplateRecipe(ConanFile):
     # Requirements for dependencies
     def requirements(self):
         # self.requires("gtest/1.16.0")           # Google Test (if CPM not used)
-        self.requires("fmt/[~11.1]") 
+        self.requires("fmt/[~11.2]")
         self.requires("nlohmann_json/[~3.12]")
         # self.requires("imgui/1.92.0")
         # self.requires("glm/1.0.1")

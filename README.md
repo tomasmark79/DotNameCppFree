@@ -12,19 +12,19 @@ A comprehensive C++ template for building cross-platform applications with every
 
 ## 📋 Table of Contents
 
-- [Overview](#-overview)
-- [Template Editions](#-template-editions)
-- [Quick Start](#-quick-start)
-- [Dependencies & Tools](#-dependencies--tools)
-- [Helper Classes](#-helper-classes)
-- [Build System](#build-system)
-- [Library Reusability](#-library-reusability)
-- [VSCode Integration](#-vscode-integration)
-- [Cross-Platform Support](#-cross-platform-support)
-- [Maintenance Tools](#-maintenance-tools)
-- [Sharing & Distribution](#-sharing--distribution)
-- [Theory & Philosophy](#-theory--philosophy)
-- [License](#-license)
+- [🚀 Overview](#-overview)
+- [📦 Template Editions](#-template-editions)
+- [⚡ Quick Start](#-quick-start)
+- [🛠️ Dependencies & Tools](#️-dependencies--tools)
+- [🧰 Helper Classes](#-helper-classes)
+- [🏗️ Build System](#️-build-system)
+- [📚 Library Reusability](#-library-reusability)
+- [💻 VSCode Integration](#-vscode-integration)
+- [🌍 Cross-Platform Support](#-cross-platform-support)
+- [🔧 Maintenance Tools](#-maintenance-tools)
+- [📤 Sharing & Distribution](#-sharing--distribution)
+- [💎 Theory & Philosophy](#-theory--philosophy)
+- [📄 License](#-license)
 
 ---
 
@@ -32,26 +32,26 @@ A comprehensive C++ template for building cross-platform applications with every
 
 D🌀tNameCpp is not just a project template — it's a comprehensive development solution that handles configuration, compilation, debugging, and deployment through sophisticated tooling and thoughtful configuration setup.
 
-### Key Features
+### ✨ Key Features
 
-- **Cross-platform development** for Linux, macOS, and Windows
-- **Standalone & Library** structure support
-- **Emscripten** compatibility for HTML5/WebAssembly deployment
-- **Conan 2** integration for dependency management
-- **VSCode** deep integration with custom tasks and shortcuts
-- **Cross-compilation** ready with toolchain support
-- **Google Tests** integration
-- **GitHub Actions** CI/CD pipelines
+- **🔄 Cross-platform development** for Linux, macOS, and Windows
+- **📦 Standalone & Library** structure support
+- **🌐 Emscripten** compatibility for HTML5/WebAssembly deployment
+- **📦 Conan 2** integration for dependency management
+- **🎯 VSCode** deep integration with custom tasks and shortcuts
+- **🔧 Cross-compilation** ready with toolchain support
+- **🧪 Google Tests** integration
+- **🚀 GitHub Actions** CI/CD pipelines
 
 ---
 
 ## 📦 Template Editions
 
-### 🚀 Free Edition
+### 🆓 Free Edition
 
 Available in all public repositories on GitHub. Contains complete application/library source code but lacks interactive development tools.
 
-**Includes:**
+**📋 Includes:**
 - Cross-platform development support (Linux, macOS, Windows)
 - Standalone & Library project structure
 - Conan 2 integration with ready-to-use `conanfile.py`
@@ -65,10 +65,10 @@ Available in all public repositories on GitHub. Contains complete application/li
 ### 🛸 Private Edition for Contributors
 
 Extends the free edition with:
-- VSCode extension and interactive components
-- Advanced development tools and automation
-- Comprehensive task system
-- Enhanced debugging capabilities
+- **🎛️ VSCode extension** and interactive components
+- **🔧 Advanced development tools** and automation
+- **📋 Comprehensive task system**
+- **🐛 Enhanced debugging capabilities**
 
 ### 🤝 Become a Contributor
 
@@ -78,7 +78,7 @@ Support development via [PayPal 💶](https://paypal.me/TomasMark) or GitHub spo
 
 ## ⚡ Quick Start
 
-### Clone the Repository
+### 📥 Clone the Repository
 
 ```bash
 # HTTPS
@@ -88,37 +88,33 @@ git clone https://github.com/tomasmark79/DotNameCppFree.git ./
 git clone git@github.com:tomasmark79/DotNameCppFree.git ./
 ```
 
-### GitHub Codespaces
+### ☁️ GitHub Codespaces
 
 Open directly in GitHub Codespaces for immediate web-based development:
 
 ```bash
-# Install dependencies
-pip install conan ccache
-
-# Or use the build script
 ./build_default_debug.sh
 ```
 
-### Basic Build Process
+### 🔨 Basic Build Process
 
-1. **Install dependencies with Conan:**
-   ```bash
-   conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
-   ```
+**1. Install dependencies with Conan:**
+```bash
+conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
+```
 
-2. **Configure and build:**
-   ```bash
-   source "./build/standalone/default/debug/conanbuild.sh"
-   cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug
-   cmake --build "./build/standalone/default/debug" -j 4
-   ```
+**2. Configure and build:**
+```bash
+source "./build/standalone/default/debug/conanbuild.sh"
+cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug
+cmake --build "./build/standalone/default/debug" -j $(nproc)
+```
 
 ---
 
 ## 🛠️ Dependencies & Tools
 
-### Core Tools
+### 🔧 Core Tools
 
 | Tool | Purpose | Documentation |
 |------|---------|---------------|
@@ -129,7 +125,7 @@ pip install conan ccache
 | [ccache](https://ccache.dev/download.html) | Compilation cache | - |
 | [VSCode](https://code.visualstudio.com/download) | IDE | [C++ Extension](https://marketplace.visualstudio.com/vscode) |
 
-### Development Tools
+### 🛠️ Development Tools
 
 | Tool | Purpose |
 |------|---------|
@@ -139,7 +135,7 @@ pip install conan ccache
 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | Code formatting |
 | [cmake-format](https://cmake-format.readthedocs.io/en/latest/) | CMake formatting |
 
-### Supported Compilers
+### 💻 Supported Compilers
 
 - **GCC** - GNU Compiler Collection
 - **Clang** - LLVM Compiler
@@ -147,7 +143,7 @@ pip install conan ccache
 - **MinGW** - Windows GCC port
 - **Intel C++** - Intel's optimizing compiler
 
-### Python Environment
+### 🐍 Python Environment
 
 The template uses Python 3 with these packages:
 - **pip** - Package installer
@@ -158,15 +154,15 @@ The template uses Python 3 with these packages:
 
 ## 🧰 Helper Classes
 
-### AssetContext Class
+### 📁 AssetContext Class
 
-Provides proper access to the **assets** folder through CMake configuration. Generates `#define UTILS_ASSET_PATH ""` pointing to the current assets directory, ensuring accessibility across debug and production environments.
+Provides proper access to the **assets** folder through CMake configuration. Generates `#define UTILS_ASSET_PATH ""` pointing to the current assets directory, ensuring accessibility across debug and production environments. It works in Linux, macOS, and Windows.
 
-### CustomStrings Namespace
+### 🌐 CustomStrings Namespace
 
 Works with external **customstrings.json** for internationalization support. Simple parsing implementation with example usage in `DotNameUtils::JsonUtils::getCustomStringSign()`.
 
-### Logger Class
+### 📝 Logger Class
 
 Comprehensive logging solution supporting:
 - **iostream** streams
@@ -175,7 +171,7 @@ Comprehensive logging solution supporting:
 - Configurable header fields (Name, Time, Caller, Level)
 - Output to `cout` or `cerr` based on log level
 
-### Google Tests Integration
+### 🧪 Google Tests Integration
 
 - Tests located in `/tests` directory
 - Default **LibTester.cpp** provided
@@ -185,25 +181,25 @@ Comprehensive logging solution supporting:
 
 ---
 
-## Build System
+## 🏗️ Build System
 
-### Conan 2 Dependency Manager
+### 📦 Conan 2 Dependency Manager
 
 > All required work is done by DotNameCppFree automated tasks in VSCode
 
-#### Usefull Commands for CLI
+#### 💻 Useful Commands for CLI
 
-create profile
+**Create profile:**
 ```bash
 conan profile detect --force
 ```
 
-Install dependencies:
+**Install dependencies:**
 ```bash
 conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
 ```
 
-### CMake Options
+### ⚙️ CMake Options
 
 ```cmake
 option(ENABLE_CCACHE "Use ccache compiler cache" ON)
@@ -218,28 +214,26 @@ option(ENABLE_IPO "Enable link-time optimization" OFF)
 option(ENABLE_GTESTS "Build and run unit tests" ON)
 ```
 
-#### CMake Presets 
+### 🎛️ CMake Presets 
 
 > Automatic build process with Conan creates unique preset names for each individual build
 
-`cmake --list-presets output:`
+`cmake --list-presets` output:
 
 ```txt
-  "release-linux-x86_64-gcc-14"       - 'release-linux-x86_64-gcc-14' config
-  "debug-linux-x86_64-gcc-14"         - 'debug-linux-x86_64-gcc-14' config
-  "debug-linux-armv8-gcc-12"          - 'debug-linux-armv8-gcc-12' config
-  "debug-linux-x86_64-gcc-10"         - 'debug-linux-x86_64-gcc-10' config
-  "debug-windows-x86_64-gcc-14"       - 'debug-windows-x86_64-gcc-14' config
-  "relwithdebinfo-linux-armv8-gcc-10" - 'relwithdebinfo-linux-armv8-gcc-10' config
+  "debug-linux-x86_64-gcc-15"      - debug-linux-x86_64-gcc-15
+  "debug-emscripten-wasm-clang-20" - debug-emscripten-wasm-clang-20
+  "debug-windows-x86_64-gcc-14"    - debug-windows-x86_64-gcc-14
+  "release-windows-x86_64-gcc-14"  - release-windows-x86_64-gcc-14
+  "release-linux-armv8-gcc-12"     - release-linux-armv8-gcc-12
 ```
 
 ---
 
 ## 📚 Library Reusability
+When developing a library, it's important to make it easy to use in various projects. This template project provides several methods for integrating the library into other projects:
 
-The template creates a reusable library that can be integrated into other projects using multiple methods:
-
-### CPM.cmake Integration
+### 📦 CPM.cmake Integration
 
 ```cmake
 CPMAddPackage(
@@ -255,7 +249,7 @@ target_link_libraries(
     PUBLIC dotname::DotNameCppFree)
 ```
 
-### FetchContent Integration
+### 🔗 FetchContent Integration
 
 ```cmake
 include(FetchContent)
@@ -266,7 +260,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(DotNameCppFree)
 ```
 
-### Subdirectory Integration
+### 📂 Subdirectory Integration
 
 ```cmake
 add_subdirectory(path/to/DotNameCppFreeFree)
@@ -276,11 +270,11 @@ add_subdirectory(path/to/DotNameCppFreeFree)
 
 ## 💻 VSCode Integration
 
-### Intellisense Configuration
+### 🧠 Intellisense Configuration
 
 Optimized settings in **c_cpp_settings.json** prevent CPU overload during database building. Configurable paths for CPM and Conan packages.
 
-### Keyboard Shortcuts
+### ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
@@ -295,9 +289,9 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
 | **Ctrl+Alt+R** | Launch Standalone binary |
 | **Ctrl+Alt+E** | Launch Emscripten build |
 
-### Task Categories
+### 📋 Task Categories
 
-**Building Tasks (Shift+F7):**
+**🔨 Building Tasks (Shift+F7):**
 - 🚀 Zero to Build (Clean → Install → Configure → Build)
 - 🦸 Zero to Hero (Full workflow with install & package)
 - 🧹 Clean selected folder
@@ -313,7 +307,7 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
 - 🛸 Run CPack  
 - 🔍 clang-tidy linting
 
-**Other Tasks (Ctrl+F7):**
+**🛠️ Other Tasks (Ctrl+F7):**
 - 📖 Doxygen Documentation generation
 - 🔨 Build All CMakeUserPresets.json
 - 📐 Clang format
@@ -325,13 +319,13 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
 
 ## 🌍 Cross-Platform Support
 
-### Cross-Compilation
+### 🔄 Cross-Compilation
 
 1. **Create Conan profile** for target platform
 2. **Add profile** to `task.json` configuration
 3. **Build** using the profile through VSCode tasks
 
-Example `task.json` configuration:
+**Example `task.json` configuration:**
 ```json
 {
     "id": "buildArch",
@@ -346,7 +340,7 @@ Example `task.json` configuration:
 }
 ```
 
-### Emscripten Support
+### 🌐 Emscripten Support
 
 Managed by `tmplt-emscripten.cmake` module with:
 - Framework integration (raylib, SDL2)
@@ -357,9 +351,9 @@ Managed by `tmplt-emscripten.cmake` module with:
 
 ## 🔧 Maintenance Tools
 
-### System Installers
+### 💾 System Installers
 
-**Linux (using setup-cpp):**
+**🐧 Linux (using setup-cpp):**
 ```bash
 # Debian-based
 curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/DebianBasedInstaller.sh | bash
@@ -368,32 +362,32 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.ini
 curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/FedoraInstaller.sh | bash
 ```
 
-**Windows (PowerShell):**
+**🪟 Windows (PowerShell):**
 ```powershell
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 ```
 
-### Template Maintenance
+### 🛠️ Template Maintenance
 
 - **SolutionRenamer.py** - Rename targets, strings, and classes
 - **SolutionUpgrader.py** - Update selected files from remote repository with backup
-- **SolutionController.py** - core of solution processes
+- **SolutionController.py** - Core of solution processes
 - **Solution.log** - Workflow activity logging
 
 ---
 
 ## 📤 Sharing & Distribution
 
-### Free Clone Creation
+### 🆓 Free Clone Creation
 
 For contributors wanting to share source code while keeping private features:
 
-**Start automatic sync:**
+**🚀 Start automatic sync:**
 ```bash
 .init/initializers/MakeFreeClone.sh init
 ```
 
-**Stop automatic sync:**
+**🛑 Stop automatic sync:**
 ```bash
 rm .git/hooks/pre-push
 rm .git/hooks/post-commit
@@ -405,18 +399,18 @@ This creates a "Free" suffixed repository (e.g., "MyProject" → "MyProjectFree"
 
 ## 💎 Theory & Philosophy
 
-### Why This Instead of Official CMake Extensions?
+### 🤔 Why This Instead of Official CMake Extensions?
 
 While official VSCode CMake extensions are useful, they fall short for complex scenarios like cross-compilation. Building for **x86** while targeting **ARM64** requires toolchains, sysroots, and sophisticated integration—this template handles that complexity.
 
-### Additional Value
+### ✨ Additional Value
 
-- **Freedom through Integration** - Transforms VSCode into a full IDE and cross tool
-- **Comprehensive Workflow** - Python scripts + VSCode tasks = complete development center
-- **Minimal Cost Solution** - Professional development environment without expensive tools
-- **Ready and Functional** - Everything works out of the box
+- **🔓 Freedom through Integration** - Transforms VSCode into a full IDE and cross tool
+- **🔄 Comprehensive Workflow** - Python scripts + VSCode tasks = complete development center
+- **💰 Minimal Cost Solution** - Professional development environment without expensive tools
+- **🎯 Ready and Functional** - Everything works out of the box
 
-### Future Vision
+### 🔮 Future Vision
 
 Ongoing reverse updates from sub-projects created using this solution.
 
