@@ -112,6 +112,10 @@ int runApp (int argc, const char* argv[]) {
     return 1;
   }
 
+  // Test debug output
+  LOG_D_STREAM << "Debug output test: This should be visible in debug builds" << std::endl;
+  LOG_I_STREAM << "Info output test: This should always be visible" << std::endl;
+
   // Performance::simpleCpuBenchmark (); // default is off
 
   // I know it is smartpointer, but we need to free it before exit scope bracelet

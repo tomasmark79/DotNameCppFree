@@ -99,7 +99,11 @@ public:
   enum class Level { LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_CRITICAL };
 
 private:
-  Level currentLevel_ = Level::LOG_INFO;
+#ifdef DEBUG
+  Level currentLevel_ = Level::LOG_DEBUG;  // Automatically enable debug logging in debug builds
+#else
+  Level currentLevel_ = Level::LOG_INFO;   // Default to info level in release builds
+#endif
 
 public:
   void debug (const std::string& message, const std::string& caller = "") {
