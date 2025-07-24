@@ -369,8 +369,8 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.ini
 ```
 
 **🪟 Windows (PowerShell):**
-```bash
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
+```powershell
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/MinimalWinDev.ps1' -OutFile 'MinimalWinDev.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\MinimalWinDev.ps1"
 ```
 
 ### 🛠️ Template Maintenance
