@@ -3,6 +3,7 @@ import json
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMakeDeps
 from conan.tools.files import copy
+from conan.tools.system import package_manager
 
 # Template Configuration Notes:
 # ----------------------------------------------------------
