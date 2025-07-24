@@ -98,7 +98,7 @@ int printAssets (const std::filesystem::path& assetsPath) {
 int runApp (int argc, const char* argv[]) {
 
   LOG.noHeader (true);
-  LOG.setSkipLine (false);
+  LOG.setAddNewLine (false);
   LOG_I_STREAM << "Starting " << AppContext::standaloneName << " ..." << std::endl;
 
 #ifdef EMSCRIPTEN
@@ -112,7 +112,7 @@ int runApp (int argc, const char* argv[]) {
     return 1;
   }
 
-  Performance::simpleCpuBenchmark ();
+  // Performance::simpleCpuBenchmark (); // default is off
 
   // I know it is smartpointer, but we need to free it before exit scope bracelet
   uniqueLib = nullptr;
