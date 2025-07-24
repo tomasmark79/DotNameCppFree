@@ -30,7 +30,7 @@ A comprehensive C++ template for building cross-platform applications with every
 
 ## 🚀 Overview
 
-D🌀tNameCpp is not just a project template — it's a comprehensive development solution that handles configuration, compilation, debugging, and deployment through sophisticated tooling and thoughtful configuration setup.
+**DotNameCppFree** is more than just a project template—it's a complete development solution that manages configuration, compilation, debugging, and deployment with advanced tooling and carefully designed setup. It's my personal playground for C++ development.
 
 ### ✨ Key Features
 
@@ -116,24 +116,24 @@ cmake --build "./build/standalone/default/debug" -j $(nproc)
 
 ### 🔧 Core Tools
 
-| Tool | Purpose | Documentation |
-|------|---------|---------------|
-| [Git](https://git-scm.com) | Version control | - |
-| [Conan 2](https://conan.io/center) | Package management | [Hub](https://conan.io/center) |
-| [CMake](https://cmake.org/download/) | Build system | [Docs 3.31.X](https://cmake.org/cmake/help/v3.31/) |
-| [Ninja](https://ninja-build.org) | Build tool | - |
-| [ccache](https://ccache.dev/download.html) | Compilation cache | - |
-| [VSCode](https://code.visualstudio.com/download) | IDE | [C++ Extension](https://marketplace.visualstudio.com/vscode) |
+| Tool | Purpose | Version | Documentation |
+|------|---------|---------|---------------|
+| [Git](https://git-scm.com) | Version control | 2.x+ | [Official Docs](https://git-scm.com/docs) |
+| [Conan 2](https://conan.io/center) | Package management | 2.x | [Hub](https://conan.io/center) |
+| [CMake](https://cmake.org/download/) | Build system | 3.31+ | [Docs 3.31.X](https://cmake.org/cmake/help/v3.31/) |
+| [Ninja](https://ninja-build.org) | Build tool | Latest | [Manual](https://ninja-build.org/manual.html) |
+| [ccache](https://ccache.dev/download.html) | Compilation cache | 4.x+ | [Documentation](https://ccache.dev/documentation.html) |
+| [VSCode](https://code.visualstudio.com/download) | IDE | Latest | [C++ Extension](https://marketplace.visualstudio.com/vscode) |
 
 ### 🛠️ Development Tools
 
-| Tool | Purpose |
-|------|---------|
-| [Emscripten](https://emscripten.org/) | WebAssembly compilation |
-| [Doxygen](https://www.doxygen.nl) | Documentation generation |
-| [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | Static analysis |
-| [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | Code formatting |
-| [cmake-format](https://cmake-format.readthedocs.io/en/latest/) | CMake formatting |
+| Tool | Purpose | Documentation |
+|------|---------|---------------|
+| [Emscripten](https://emscripten.org/) | WebAssembly compilation | [Docs](https://emscripten.org/docs/) |
+| [Doxygen](https://www.doxygen.nl) | Documentation generation | [Manual](https://www.doxygen.nl/manual/) |
+| [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | Static analysis | [Guide](https://clang.llvm.org/extra/clang-tidy/) |
+| [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | Code formatting | [Style Guide](https://clang.llvm.org/docs/ClangFormat.html) |
+| [cmake-format](https://cmake-format.readthedocs.io/en/latest/) | CMake formatting | [ReadTheDocs](https://cmake-format.readthedocs.io/en/latest/) |
 
 ### 💻 Supported Compilers
 
@@ -325,9 +325,10 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
 2. **Add profile** to `task.json` configuration
 3. **Build** using the profile through VSCode tasks
 
-**Example `task.json` configuration:**
+**My current `task.json` configuration:**
 ```json
 {
+    /* ARCH ITEMS */
     "id": "buildArch",
     "type": "pickString",
     "description": "Select target architecture",
@@ -335,9 +336,13 @@ Optimized settings in **c_cpp_settings.json** prevent CPU overload during databa
         "default",
         "emscripten",
         "x86_64-w64-mingw32",
-        "rpi4_glibc2.17_gcc10.5"
-    ]
-}
+        "rpi4_glibc2.17_gcc10.5",
+        "rpi4_glibc2.36_gcc12.4",
+        "clang19"
+    ],
+    "default": "default"
+},
+   
 ```
 
 ### 🌐 Emscripten Support
@@ -351,28 +356,33 @@ Managed by `tmplt-emscripten.cmake` module with:
 
 ## 🔧 Maintenance Tools
 
-### 💾 System Installers
+### 💾 Automatic Tools Installers
 
-**🐧 Linux (using setup-cpp):**
+**🐧 Fedora**
 ```bash
-# Debian-based
-curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/DebianBasedInstaller.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/MinimalFedoraDev.sh | bash
+```
 
-# Fedora
-curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/FedoraInstaller.sh | bash
+**🐧 Ubuntu/Debian**
+```bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/MinimalDebianDev.sh | bash
 ```
 
 **🪟 Windows (PowerShell):**
-```powershell
+```bash
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/DotNameCppFree/main/.init/initializers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 ```
 
 ### 🛠️ Template Maintenance
 
-- **SolutionRenamer.py** - Rename targets, strings, and classes
-- **SolutionUpgrader.py** - Update selected files from remote repository with backup
-- **SolutionController.py** - Core of solution processes
-- **Solution.log** - Workflow activity logging
+- **SolutionRenamer.py** - Rename targets, strings, and classes.  
+This will rename all occurrences of the project name in the source code, including CMake files, source files, and documentation.
+- **SolutionUpgrader.py** - Update selected files from remote repository with backup.  
+For update file from remote repository comment out char `#` in the script.
+- **SolutionController.py** - Core of solution processes.  
+This script manages the entire solution, including building, testing, and packaging.
+
+- **Solution.log** - Log file for all solution processes.
 
 ---
 
@@ -380,7 +390,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/t
 
 ### 🆓 Free Clone Creation
 
-For contributors wanting to share source code while keeping private features:
+For owners of the full DotNameCppFree template who want to share their projects, a simple script is available to create a "Free" clone of the project. This clone includes all necessary files and configurations, but excludes interactive development tools.
 
 **🚀 Start automatic sync:**
 ```bash
@@ -396,19 +406,6 @@ rm .git/hooks/post-commit
 This creates a "Free" suffixed repository (e.g., "MyProject" → "MyProjectFree") with automatic synchronization during commits and pushes to the private repo.
 
 ---
-
-## 💎 Theory & Philosophy
-
-### 🤔 Why This Instead of Official CMake Extensions?
-
-While official VSCode CMake extensions are useful, they fall short for complex scenarios like cross-compilation. Building for **x86** while targeting **ARM64** requires toolchains, sysroots, and sophisticated integration—this template handles that complexity.
-
-### ✨ Additional Value
-
-- **🔓 Freedom through Integration** - Transforms VSCode into a full IDE and cross tool
-- **🔄 Comprehensive Workflow** - Python scripts + VSCode tasks = complete development center
-- **💰 Minimal Cost Solution** - Professional development environment without expensive tools
-- **🎯 Ready and Functional** - Everything works out of the box
 
 ### 🔮 Future Vision
 
