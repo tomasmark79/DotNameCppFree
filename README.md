@@ -9,7 +9,7 @@ A comprehensive C++ template for building cross-platform applications with every
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)
 
 ---
-
+test
 ## 📋 Table of Contents
 
 - [🚀 Overview](#-overview)
