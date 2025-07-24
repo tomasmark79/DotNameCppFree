@@ -58,11 +58,6 @@ class ProjectTemplateRecipe(ConanFile):
     def configure(self):
         self.options["*"].shared = False
        
-        # Handle fPIC option for static libraries on non-Windows systems    
-        if self.settings.os != "Windows":
-            if self.options.fPIC:
-                self.options["*"].fPIC = True
-
         # if self.settings.os == "Windows" and self.settings.compiler == "gcc":
         #     self.options["freetype"].with_png = False
         #     self.options["freetype"].with_brotli = False
