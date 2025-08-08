@@ -30,7 +30,7 @@
   </head>
   <body>
     <div id="logo-container" style="position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:10;">
-      <img src="assets/DotNameLogoV2.svg" alt="DotName Logo" style="max-width:30vw;max-height:30vh;opacity:0.8;" />
+      <img id="logo-img" alt="DotName Logo" style="max-width:30vw;max-height:30vh;opacity:0.8;" />
     </div>
     <canvas id="canvas" tabindex="-1"></canvas>
     <script type="text/javascript">
@@ -43,7 +43,20 @@
       resizeCanvas();
 
       var Module = {
-        canvas: canvas
+        canvas: canvas,
+        onRuntimeInitialized: function() {
+          // Load SVG from Emscripten virtual filesystem
+          try {
+            const svgData = FS.readFile('assets/DotNameLogoV2.svg', { encoding: 'utf8' });
+            const dataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
+            const logoImg = document.getElementById('logo-img');
+            if (logoImg) {
+              logoImg.src = dataUrl;
+            }
+          } catch (error) {
+            console.warn('Could not load SVG from virtual filesystem:', error);
+          }
+        }
       };
     </script>
     {{{ SCRIPT }}}

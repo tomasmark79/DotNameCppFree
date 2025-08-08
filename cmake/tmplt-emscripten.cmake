@@ -111,24 +111,8 @@ function(emscripten target isHtml reqPthreads customPrePath)
         LINK_FLAGS "${LINK_FLAGS_STRING}"
     )
 
-    # Copy assets to build directory for web server access (only for main targets, not libraries)
-    if(target MATCHES "Standalone|Tester")
-        if(target MATCHES "LibTester")
-            set(ASSET_SOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../assets")
-        else()
-            set(ASSET_SOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../assets")
-        endif()
-        
-        # Only copy if assets directory exists
-        if(EXISTS "${ASSET_SOURCE_PATH}")
-            add_custom_command(TARGET ${target} POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                "${ASSET_SOURCE_PATH}"
-                "$<TARGET_FILE_DIR:${target}>/assets"
-                COMMENT "Copying assets for web server access"
-            )
-        endif()
-    endif()
+    # Note: Assets are now accessed only through Emscripten virtual filesystem
+    # No redundant copying needed - HTML loads assets via FS.readFile()
 
     # macOS specific frameworks (only required on macOS)
     if(APPLE)
