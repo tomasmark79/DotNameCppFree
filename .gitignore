@@ -2,6 +2,6 @@
 /doc/latex
 /build/
 /dotnamebackup/
-Solution.log
+*.log
 CMakeUserPresets.json
 
