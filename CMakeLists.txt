@@ -62,6 +62,29 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # ==============================================================================
+# Cross-compilation indicator (global)
+# ==============================================================================
+# Expose a single cached boolean that reliably indicates cross builds, including
+# cases like Emscripten or mismatched host/target systems.
+set(DOTNAME_CROSSCOMPILING OFF)
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    set(DOTNAME_CROSSCOMPILING ON)
+elseif(CMAKE_CROSSCOMPILING)
+    set(DOTNAME_CROSSCOMPILING ON)
+elseif(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL CMAKE_SYSTEM_NAME)
+    # Heuristic: different host vs target system implies cross
+    set(DOTNAME_CROSSCOMPILING ON)
+endif()
+set(DOTNAME_CROSSCOMPILING "${DOTNAME_CROSSCOMPILING}" CACHE BOOL "Building with cross-compilation")
+
+# Provide a preprocessor define for all translation units
+if(DOTNAME_CROSSCOMPILING)
+    add_compile_definitions(DOTNAME_CROSSCOMPILING=1)
+else()
+    add_compile_definitions(DOTNAME_CROSSCOMPILING=0)
+endif()
+
+# ==============================================================================
 # Library installation attributes
 # ==============================================================================
 set(INSTALL_INCLUDE_DIR include/${LIBRARY_NAME})

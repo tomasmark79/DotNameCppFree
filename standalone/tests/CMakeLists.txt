@@ -34,10 +34,10 @@ add_executable(${TEST_NAME} ${TEST_SOURCES})
 target_link_libraries(${TEST_NAME} PRIVATE GTest::gtest GTest::gtest_main
                                            dotname::standalone_common)
 set_target_properties(${TEST_NAME} PROPERTIES OUTPUT_NAME "${TEST_NAME}")
-# On Emscripten, the test target may be produced as an HTML/JS artifact and cannot
-# be executed during the build for test discovery. Skip discovery in that case.
-if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-    message(STATUS "Skipping gtest_discover_tests for ${TEST_NAME} on Emscripten")
+
+# Skip test discovery when cross-compiling (includes Emscripten)
+if(DOTNAME_CROSSCOMPILING)
+    message(STATUS "Skipping gtest_discover_tests for ${TEST_NAME} (cross-compiling)")
 else()
     gtest_discover_tests(${TEST_NAME})
 endif()
