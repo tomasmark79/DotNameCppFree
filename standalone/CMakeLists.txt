@@ -9,7 +9,9 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0076 NEW)
 cmake_policy(SET CMP0091 NEW)
-add_compile_options(-fdiagnostics-color=always)
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+    add_compile_options(-fdiagnostics-color=always)
+endif()
 
 option(ENABLE_CCACHE "Use ccache compiler cache" ON)
 option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
@@ -23,9 +25,13 @@ option(ENABLE_IPO "Enable link-time optimization" OFF)
 option(ENABLE_GTESTS "Build and run unit tests" ON)
 
 if(ENABLE_CCACHE)
-    set(CMAKE_C_COMPILER_LAUNCHER ccache)
-    set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
+    find_program(CCACHE_PROGRAM ccache)
+    if(CCACHE_PROGRAM)
+        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+    endif()
 endif()
+include(GNUInstallDirs)
 include(../cmake/tmplt-runtime.cmake)
 include(../cmake/tmplt-sanitizer.cmake)
 include(../cmake/tmplt-hardening.cmake)
@@ -109,8 +115,8 @@ target_link_libraries(${STANDALONE_NAME} PRIVATE dotname::DotNameLib cxxopts)
 # ==============================================================================
 # Add missing installation exports
 # ==============================================================================
-set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION bin)
-install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
+set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # ==============================================================================
 # Asset files processing must be before Emscripten filesystem mounting
