@@ -22,7 +22,8 @@ namespace dotname {
       AssetContext::setAssetsPath (assetsPath);
       LOG_D_STREAM << "Assets: " << AssetContext::getAssetsPath () << std::endl;
       LOG_I_STREAM << DotNameUtils::JsonUtils::getCustomStringSign () << std::endl;
-      auto logo = std::ifstream (AssetContext::getAssetsPath () / "logo.png");
+      auto logo = std::ifstream (AssetContext::getAssetsPath () / "DotNameLogoV2.svg");
+      LOG_D_STREAM << "path: " << (AssetContext::getAssetsPath () / "DotNameLogoV2.svg") << std::endl;
     }
   }
 
