@@ -1,4 +1,4 @@
-<img src="assets/DotNameLogoV2" alt="DotNameCppFree Logo" width="20%">
+<img src="assets/DotNameLogoV2.svg" alt="DotNameCppFree Logo" width="100%">
 
 # DotNameCppFree
 
