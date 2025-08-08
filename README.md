@@ -352,12 +352,12 @@ Managed by `tmplt-emscripten.cmake` module with:
 - File system preloading: `--preload-file ../../../../assets@share/${target}/assets`
 - WebAssembly optimization options
 
-Demo project live preview:
+#### Demo project live preview:
 
 [debug/DotNameStandalone.html](https://digitalspace.name/dotnamecpp/preview/debug/DotNameStandalone.html)  
 [release/DotNameStandalone.html](https://digitalspace.name/dotnamecpp/preview/release/DotNameStandalone.html)  
 
-Project in Emscripten screenshot:  
+#### Project in Emscripten screenshot:  
 
 ![Project in Emscripten](doc/DotNameAppInWeb.png)  
 
