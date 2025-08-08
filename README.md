@@ -382,7 +382,7 @@ For update file from remote repository comment out char `#` in the script.
 - **SolutionController.py** - Core of solution processes.  
 This script manages the entire solution, including building, testing, and packaging.
 
-- **Solution.log** - Log file for all solution processes.
+- **SolutionController.log** - Log file for all solution processes.
 
 ---
 
