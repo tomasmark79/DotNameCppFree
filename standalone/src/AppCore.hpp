@@ -117,6 +117,9 @@ int runApp (int argc, const char* argv[]) {
   // I know it is smartpointer, but ... why not
   uniqueLib = nullptr;
 
+  // demo error
+  LOG_E_STREAM << "This is a demo error message" << std::endl;
+
   // bye
   LOG_I_STREAM << "Sucessfully exited " << AppContext::standaloneName << std::endl;
   return 0;
