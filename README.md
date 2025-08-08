@@ -93,7 +93,7 @@ git clone git@github.com:tomasmark79/DotNameCppFree.git ./
 Open directly in GitHub Codespaces for immediate web-based development:
 
 ```bash
-./build_default_debug.sh
+./build.sh
 ```
 
 ### 🔨 Basic Build Process
