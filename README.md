@@ -352,6 +352,10 @@ Managed by `tmplt-emscripten.cmake` module with:
 - File system preloading: `--preload-file ../../../../assets@share/${target}/assets`
 - WebAssembly optimization options
 
+Project in Emscripten screenshot:
+
+![Project in Emscripten](doc/DotNameAppInWeb.png)
+
 ---
 
 ## 🔧 Maintenance Tools

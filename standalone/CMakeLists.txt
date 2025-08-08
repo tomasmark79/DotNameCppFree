@@ -130,7 +130,7 @@ apply_assets_processing_standalone()
 
 # emscripten handler
 include(../cmake/tmplt-emscripten.cmake)
-emscripten(${STANDALONE_NAME} 1 1 "--preload-file ../../../../assets@assets")
+emscripten(${STANDALONE_NAME} 1 1 "")
 
 # ==============================================================================
 # GTests processing via interface
