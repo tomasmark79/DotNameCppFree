@@ -114,7 +114,7 @@ int runApp (int argc, const char* argv[]) {
 
   Performance::simpleCpuBenchmark (); // default is off
 
-  // I know it is smartpointer, but we need to free it before exit scope bracelet
+  // I know it is smartpointer, but ... why not
   uniqueLib = nullptr;
 
   // bye

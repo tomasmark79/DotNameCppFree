@@ -75,7 +75,9 @@ elseif(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL CMAKE_SYSTEM_NAME)
     # Heuristic: different host vs target system implies cross
     set(DOTNAME_CROSSCOMPILING ON)
 endif()
-set(DOTNAME_CROSSCOMPILING "${DOTNAME_CROSSCOMPILING}" CACHE BOOL "Building with cross-compilation")
+set(DOTNAME_CROSSCOMPILING
+    "${DOTNAME_CROSSCOMPILING}"
+    CACHE BOOL "Building with cross-compilation")
 
 # Provide a preprocessor define for all translation units
 if(DOTNAME_CROSSCOMPILING)
