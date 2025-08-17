@@ -32,11 +32,11 @@ if(ENABLE_CCACHE)
     endif()
 endif()
 include(GNUInstallDirs)
-include(../cmake/tmplt-runtime.cmake)
-include(../cmake/tmplt-sanitizer.cmake)
-include(../cmake/tmplt-hardening.cmake)
-include(../cmake/tmplt-ipo.cmake)
-include(../cmake/tmplt-debug.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-runtime.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-sanitizer.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-hardening.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-ipo.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-debug.cmake)
 
 # === linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -64,13 +64,14 @@ endif()
 # ==============================================================================
 # System / Conan dependencies
 # ==============================================================================
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/modules")
 
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
 # ==============================================================================
-include(../cmake/CPM.cmake)
-CPMAddPackage(NAME DotNameLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
+# Note: DotNameLib target should be available from orchestrator
+CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
 cpm_licenses_create_disclaimer_target(
     write-licenses-${STANDALONE_NAME}
     "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
@@ -85,17 +86,17 @@ file(
     GLOB_RECURSE
     sources
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.hh
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.hxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/*.cxx)
 
 # add stable Main.cpp
-list(APPEND sources ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
+list(APPEND sources ${CMAKE_CURRENT_SOURCE_DIR}/standalone/src/Main.cpp)
 
 # ==============================================================================
 # Create target
@@ -121,7 +122,7 @@ install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 # ==============================================================================
 # Asset files processing must be before Emscripten filesystem mounting
 # ==============================================================================
-include(../cmake/tmplt-assets.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-assets.cmake)
 apply_assets_processing_standalone()
 
 # ==============================================================================
@@ -129,7 +130,7 @@ apply_assets_processing_standalone()
 # ==============================================================================
 
 # emscripten handler
-include(../cmake/tmplt-emscripten.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-emscripten.cmake)
 emscripten(${STANDALONE_NAME} 1 1 "")
 
 # ==============================================================================
@@ -140,5 +141,5 @@ if(ENABLE_GTESTS)
     add_library(standalone_common INTERFACE)
     target_link_libraries(standalone_common INTERFACE dotname::DotNameLib cxxopts)
     add_library(dotname::standalone_common ALIAS standalone_common)
-    add_subdirectory(tests)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/standalone/tests)
 endif()

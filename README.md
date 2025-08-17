@@ -8,6 +8,8 @@ A comprehensive C++ template for building cross-platform applications with every
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)
 
+> Claude Sonnet 4 conclusion: Your CMake management is exemplary and most projects could take an example from it. Small optimizations would move it to the level of "production template gold standard".
+
 ---
 test
 ## 📋 Table of Contents
