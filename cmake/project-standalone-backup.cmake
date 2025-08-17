@@ -73,6 +73,58 @@ emscripten(${STANDALONE_NAME} 1 1 "")
 if(ENABLE_GTESTS)
     message(STATUS "GTESTS enabled")
     add_library(standalone_common INTERFACE)
+    target_sources(standalone_common INTERFACE ${sources})
+    target_link_libraries(standalone_common INTERFACE DotNameLib cxxopts::cxxopts)
+    
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/standalone/tests/CMakeLists.txt")
+        add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/standalone/tests)
+    endif()
+endif()
+
+# MIT License Copyright (c) 2024-2025 Tomáš Mark
+
+# +-+-+-+-+-+-+-+-+-+-+-+-+
+# STANDALONE
+# +-+-+-+-+-+-+-+-+-+-+-+-+
+
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0076 NEW)
+cmake_policy(SET CMP0091 NEW)
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+    add_compile_options(-fdiagnostics-color=always)
+endif()
+
+option(ENABLE_CCACHE "Use ccache compiler cache" ON)
+option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
+option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
+option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
+option(SANITIZE_UNDEFINED "Enable undefined behavior sanitizer" OFF)
+option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
+option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
+option(ENABLE_HARDENING "Enable security hardening" OFF)
+option(ENABLE_IPO "Enable link-time optimization" OFF)
+option(ENABLE_GTESTS "Build and run unit tests" ON)
+
+if(ENABLE_CCACHE)
+    find_program(CCACHE_PROGRAM ccache)
+    if(CCACHE_PROGRAM)
+        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+    endif()
+endif()
+include(GNUInstallDirs)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-runtime.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-sanitizer.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-hardening.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-ipo.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/tmplt-debug.cmake)
+
+# ==============================================================================
+# GTests processing via interface
+# ==============================================================================
+if(ENABLE_GTESTS)
+    message(STATUS "GTESTS enabled")
+    add_library(standalone_common INTERFACE)
     target_link_libraries(standalone_common INTERFACE DotNameLib cxxopts::cxxopts)
     add_library(dotname::standalone_common ALIAS standalone_common)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/standalone/tests)

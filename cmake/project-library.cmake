@@ -1,52 +1,18 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
-
 # MIT License Copyright (c) 2024-2025 Tomáš Mark
 
-# +-+-+-+-+-+-+-+-+-+-+
-# LIBRARY
-# +-+-+-+-+-+-+-+-+-+-+
+# ==============================================================================
+# LIBRARY-SPECIFIC CONFIGURATION
+# ==============================================================================
 
-cmake_policy(SET CMP0048 NEW)
-cmake_policy(SET CMP0076 NEW)
-cmake_policy(SET CMP0091 NEW)
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
-    add_compile_options(-fdiagnostics-color=always)
-endif()
-
-option(ENABLE_CCACHE "Use ccache compiler cache" ON)
-option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
-option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
-option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
-option(SANITIZE_UNDEFINED "Enable undefined behavior sanitizer" OFF)
-option(SANITIZE_THREAD "Enable thread sanitizer" OFF)
-option(SANITIZE_MEMORY "Enable memory sanitizer" OFF)
-option(ENABLE_HARDENING "Enable security hardening" OFF)
-option(ENABLE_IPO "Enable link-time optimization" OFF)
-
-option(ENABLE_GTESTS "Build and run unit tests" ON)
-
-if(ENABLE_CCACHE)
-    find_program(CCACHE_PROGRAM ccache)
-    if(CCACHE_PROGRAM)
-        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
-        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
-    endif()
-endif()
-include(GNUInstallDirs)
-include(${CMAKE_CURRENT_LIST_DIR}/tmplt-runtime.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tmplt-sanitizer.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tmplt-hardening.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tmplt-ipo.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tmplt-debug.cmake)
-
-# Linting C/C++ code
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Load common settings
+include(${CMAKE_CURRENT_LIST_DIR}/project-common.cmake)
 
 # ==============================================================================
-# Library attributes - case size will reflect resource files case size
+# Library attributes
 # ==============================================================================
 set(LIBRARY_NAME DotNameLib)
 set(LIBRARY_NAMESPACE dotname)
+
 project(
     ${LIBRARY_NAME}
     VERSION 0.0.1
@@ -54,36 +20,11 @@ project(
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
+# ==============================================================================
+# Build guards
+# ==============================================================================
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(
-        WARNING
-            "In-source builds. Please make a new directory (called a Build directory) and run CMake from there."
-    )
-endif()
-
-# ==============================================================================
-# Cross-compilation indicator (global)
-# ==============================================================================
-# Expose a single cached boolean that reliably indicates cross builds, including
-# cases like Emscripten or mismatched host/target systems.
-set(DOTNAME_CROSSCOMPILING OFF)
-if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-    set(DOTNAME_CROSSCOMPILING ON)
-elseif(CMAKE_CROSSCOMPILING)
-    set(DOTNAME_CROSSCOMPILING ON)
-elseif(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL CMAKE_SYSTEM_NAME)
-    # Heuristic: different host vs target system implies cross
-    set(DOTNAME_CROSSCOMPILING ON)
-endif()
-set(DOTNAME_CROSSCOMPILING
-    "${DOTNAME_CROSSCOMPILING}"
-    CACHE BOOL "Building with cross-compilation")
-
-# Provide a preprocessor define for all translation units
-if(DOTNAME_CROSSCOMPILING)
-    add_compile_definitions(DOTNAME_CROSSCOMPILING=1)
-else()
-    add_compile_definitions(DOTNAME_CROSSCOMPILING=0)
+    message(WARNING "In-source builds. Please make a new directory (called a Build directory) and run CMake from there.")
 endif()
 
 # ==============================================================================
@@ -94,20 +35,12 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME}/
         DESTINATION ${INSTALL_INCLUDE_DIR})
 
 # ==============================================================================
-# System / Conan dependencies
+# Library dependencies
 # ==============================================================================
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/modules")
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
-# find_package(ZLIB REQUIRED) find_package(yaml-cpp REQUIRED)
 
-# ==============================================================================
-# CPM.cmake dependencies - take care conflicts
-# ==============================================================================
-# export CPM_SOURCE_CACHE=$HOME/.cache/CPM # for localy caching CPM packages
-# ==============================================================================
-include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
+# CPM packages specific to library
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
 cpm_licenses_create_disclaimer_target(
@@ -115,102 +48,57 @@ cpm_licenses_create_disclaimer_target(
     "${CPM_PACKAGES}")
 
 # ==============================================================================
-# public header files
+# Library source files
 # ==============================================================================
-file(
-    GLOB_RECURSE
-    headers
-    CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
+gather_sources(headers ${CMAKE_CURRENT_SOURCE_DIR}/include)
+gather_sources(sources ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # ==============================================================================
-# source files and `internal` header files that are not intended for public use
-# ==============================================================================
-file(
-    GLOB_RECURSE
-    sources
-    CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
-
-# ==============================================================================
-# Create target
+# Create library target
 # ==============================================================================
 add_library(${LIBRARY_NAME})
 target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
-apply_ipo(${LIBRARY_NAME})
-apply_hardening(${LIBRARY_NAME})
-apply_sanitizers(${LIBRARY_NAME})
-apply_static_runtime(${LIBRARY_NAME})
-apply_debug_info_control(${LIBRARY_NAME})
+# Apply common target settings
+apply_common_target_settings(${LIBRARY_NAME})
 
 # ==============================================================================
-# Set target properties
+# Library-specific configuration
 # ==============================================================================
-# emscripten handler
+# Emscripten handler
 include(${CMAKE_CURRENT_LIST_DIR}/tmplt-emscripten.cmake)
 emscripten(${LIBRARY_NAME} 0 1 "")
 
-# ==============================================================================
-# Set headers
-# ==============================================================================
-# header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
-# <add_library(${LIBRARY_NAME} INTERFACE)>
+# Headers
 target_include_directories(
     ${LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
     PUBLIC $<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}>)
 
-# ==============================================================================
-# Set compile options
-# ==============================================================================
-# note: generator expressions are evaluated during generation of the buildsystem, and not during
-# processing of CMakeLists.txt files
+# Compile options
 target_compile_options(
     ${LIBRARY_NAME}
     PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/W4>"
     PUBLIC
         "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<NOT:$<PLATFORM_ID:Darwin>>,$<NOT:$<CXX_COMPILER_ID:Clang>>>:-Wall;-Wextra;-Wpedantic;-MMD;-MP>"
     PUBLIC
-        "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<PLATFORM_ID:Darwin>>:-Wall;-Wextra;-Wpedantic>"
-)
+        "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<PLATFORM_ID:Darwin>>:-Wall;-Wextra;-Wpedantic>")
 
-# ==============================================================================
-# Set compile features C++ version from Conan Profile has priority over this setting
-# ==============================================================================
+# C++ standard
 target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# ==============================================================================
-# Set linking
-# ==============================================================================
-
-# If CPM.cmake package target is required for just build time, you can use
-# $<BUILD_INTERFACE:...> generator expression to link it only when building the library.
-# target_link_libraries(${LIBRARY_NAME} PRIVATE $<BUILD_INTERFACE:ShaderTranspiler>)
-
+# Linking
 target_link_libraries(
     ${LIBRARY_NAME}
     PUBLIC fmt::fmt
-    PUBLIC nlohmann_json::nlohmann_json
-    # PRIVATE ZLIB::ZLIB PRIVATE yaml-cpp
-)
+    PUBLIC nlohmann_json::nlohmann_json)
 
 # ==============================================================================
-# set packageProject arttributes for library
+# Package configuration
 # ==============================================================================
 packageProject(
     NAME ${LIBRARY_NAME}
@@ -223,10 +111,8 @@ packageProject(
     VERSION_HEADER "${LIBRARY_NAME}/version.h"
     EXPORT_HEADER "${LIBRARY_NAME}/export.h"
     NAMESPACE ${LIBRARY_NAMESPACE}
-    # `AnyNewerVersion|SameMajorVersion|SameMinorVersion'
     COMPATIBILITY AnyNewerVersion
     DISABLE_VERSION_SUFFIX YES
-    # YES for header only (i.e. INTERFACE) libraries
     ARCH_INDEPENDENT NO
     CPACK YES
     RUNTIME_DESTINATION /)
