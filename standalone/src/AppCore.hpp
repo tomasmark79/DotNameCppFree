@@ -4,6 +4,7 @@
 #include "DotNameLib/DotNameLib.hpp"
 #include "Logger/Logger.hpp"
 #include "Utils/Utils.hpp"
+#include "Assets/AssetContext.hpp"
 
 #include <cxxopts.hpp>
 #include <filesystem>
@@ -21,11 +22,10 @@ using namespace DotNameUtils;
 
 namespace AppContext {
   constexpr char standaloneName[] = "DotNameStandalone";
-  const std::filesystem::path standalonePath
-      = PathUtils::getParentPath (PathUtils::getStandalonePath ());
-  constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
+  const std::filesystem::path standalonePath = PathUtils::getStandalonePath();
+  // Use dynamic asset path finding instead of compile-time path
+  const std::filesystem::path assetsPath = AssetContext::findAssetsPath(standalonePath, standaloneName);
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
-  const std::filesystem::path assetsPath = standalonePath / utilsAssetPath;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
 }
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
-# Root project orchestrator
+# DotNameCpp Root project orchestrator
 project(DotNameCpp 
     VERSION 0.0.1
     LANGUAGES C CXX

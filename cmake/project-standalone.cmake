@@ -18,7 +18,7 @@ project(
     ${STANDALONE_NAME}
     LANGUAGES C CXX ASM
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
-    HOMEPAGE_URL "https://github.com/tomasmark79")
+    HOMEPAGE_URL "https://github.com/tomasmark79/DotNameCpp")
 
 # ==============================================================================
 # Build guards
