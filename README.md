@@ -2,13 +2,22 @@
 
 # DotNameCppFree
 
+## since 2025/08/18 - replaced by new DotNameCppFreeIde
+
+**This repository was archived as unmaintained/unsupported and is no longer actively developed.**
+
+**This project has been replaced by a more modern version, which is now developed privately.**
+
+**If you are interested to buy 💰 my latest modern solution for C++ development, feel free to contact me.
+Price of comprehensive template is starting at 2000€.**
+
+---
+
 A comprehensive C++ template for building cross-platform applications with everything you need to start projects fast and cleanly.
 
 [![Linux](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/linux.yml)
 [![MacOS](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/DotNameCppFree/actions/workflows/windows.yml)
-
-> Claude Sonnet 4 conclusion: Your CMake management is exemplary and most projects could take an example from it. Small optimizations would move it to the level of "production template gold standard".
 
 ---
 test

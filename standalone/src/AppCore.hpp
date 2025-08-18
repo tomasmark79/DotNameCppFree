@@ -4,7 +4,6 @@
 #include "DotNameLib/DotNameLib.hpp"
 #include "Logger/Logger.hpp"
 #include "Utils/Utils.hpp"
-#include "Assets/AssetContext.hpp"
 
 #include <cxxopts.hpp>
 #include <filesystem>
@@ -22,10 +21,11 @@ using namespace DotNameUtils;
 
 namespace AppContext {
   constexpr char standaloneName[] = "DotNameStandalone";
-  const std::filesystem::path standalonePath = PathUtils::getStandalonePath ();
-  const std::filesystem::path assetsPath
-      = AssetContext::findAssetsPath (standalonePath, standaloneName);
+  const std::filesystem::path standalonePath
+      = PathUtils::getParentPath (PathUtils::getStandalonePath ());
+  constexpr std::string_view utilsAssetPath = UTILS_ASSET_PATH;
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
+  const std::filesystem::path assetsPath = standalonePath / utilsAssetPath;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
 }
 
@@ -112,7 +112,7 @@ int runApp (int argc, const char* argv[]) {
     return 1;
   }
 
-  //Performance::simpleCpuBenchmark (); // default is off
+  Performance::simpleCpuBenchmark (); // default is off
 
   // I know it is smartpointer, but ... why not
   uniqueLib = nullptr;

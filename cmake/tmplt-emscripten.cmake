@@ -64,14 +64,14 @@ function(emscripten target isHtml reqPthreads customPrePath)
 
     # Default assets directory is share/${target}/assets
     if(NOT DEFINED customPrePath OR customPrePath STREQUAL "")
-        set(customPrePath "--preload-file ${CMAKE_SOURCE_DIR}/assets@share/${target}/assets")
+        set(customPrePath "--preload-file ../../../../assets@share/${target}/assets")
     endif()
 
-    # Custom assets path - use CMAKE_SOURCE_DIR for modular structure
+    # Custom assets path
     if(target MATCHES "LibTester")
-        set(customHtmlPath "--shell-file ${CMAKE_SOURCE_DIR}/assets/ems-mini.html")
+        set(customHtmlPath "--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/../../assets/ems-mini.html")
     else()
-        set(customHtmlPath "--shell-file ${CMAKE_SOURCE_DIR}/assets/ems-mini.html")
+        set(customHtmlPath "--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/../assets/ems-mini.html")
     endif()
 
     # Build compile flags
