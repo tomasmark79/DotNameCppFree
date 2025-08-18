@@ -37,8 +37,29 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME}/
 # ==============================================================================
 # Library dependencies
 # ==============================================================================
-find_package(fmt REQUIRED)
-find_package(nlohmann_json REQUIRED)
+# Try to find dependencies via find_package (Conan/system), fallback to CPM
+
+# Try fmt via find_package first (for Conan users)
+find_package(fmt QUIET)
+if(NOT fmt_FOUND)
+    # Fallback to CPM for standalone usage
+    CPMAddPackage(
+        NAME fmt
+        GITHUB_REPOSITORY fmtlib/fmt
+        VERSION 11.2.0
+    )
+endif()
+
+# Try nlohmann_json via find_package first (for Conan users)  
+find_package(nlohmann_json QUIET)
+if(NOT nlohmann_json_FOUND)
+    # Fallback to CPM for standalone usage
+    CPMAddPackage(
+        NAME nlohmann_json
+        GITHUB_REPOSITORY nlohmann/json
+        VERSION 3.12.0
+    )
+endif()
 
 # CPM packages specific to library
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
