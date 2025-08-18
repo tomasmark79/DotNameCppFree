@@ -142,12 +142,11 @@ packageProject(
 
 # Workaround: Ensure .dll files go to bin/ on Windows, not bin/LibraryName/
 if(WIN32 AND BUILD_SHARED_LIBS)
-    install(TARGETS ${LIBRARY_NAME} 
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT Runtime)
-    
+    install(TARGETS ${LIBRARY_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Runtime)
+
     # Remove duplicate DLL created by packageProject
-    install(CODE "
+    install(
+        CODE "
         file(REMOVE_RECURSE \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/${LIBRARY_NAME}\")
         message(STATUS \"Removed duplicate DLL directory: ${CMAKE_INSTALL_BINDIR}/${LIBRARY_NAME}\")
     ")

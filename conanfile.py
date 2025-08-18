@@ -1,3 +1,5 @@
+# DO NOT use Conan cmake_layout(self) HERE!
+# This template uses custom layout to define build output structure.
 import os
 import json
 from conan import ConanFile
@@ -8,190 +10,168 @@ from conan.tools.system import package_manager
 # Template Configuration Notes:
 # ----------------------------------------------------------
 # 1. Change 'name' to match your project
-# 2. Update requirements() with your actual dependencies
+# 2. Update requirements() with your actual dependencies  
 # 3. Uncomment system_requirements() if you need system packages
 # 4. Consider adding validation for critical settings
 # 5. This template avoids cmake_layout() for custom build structure
 # ----------------------------------------------------------
 
-# DO NOT use cmake_layout(self) HERE!
-# ------------------------------------------------- --
-    # This template is using custom layout          --
-    # to define build output layout!                --
-    # ├── Build                                     --
-    #     ├── Artefacts - tarballs of installation  --
-    #     ├── Install - final installation          --
-    #     ├── Library - library build               --
-    #     └── Standalone - standalone build         --
-# ------------------------------------------------- --
+# Optional: Import utility classes if available
+try:
+    from conan_tools import CMakePresetsManager, CMakePatches
+    UTILITIES_AVAILABLE = True
+except ImportError:
+    UTILITIES_AVAILABLE = False
 
 class ProjectTemplateRecipe(ConanFile):
+    """
+    Conan recipe template for C++ projects.
+    
+    Features:
+    - Custom build layout (no cmake_layout)
+    - CMake presets integration
+    - Cross-platform support
+                    
+            except (IOError, OSError) as e:
+                self.conan.output.warn(f"Could not patch {cmake_file}: {e}")
+        
+        return patched_count
+
+    - Optional utility functions for common fixes
+    """
     name = "DotNameLib"
-    exports_sources = "patches/*"
+    version = "1.0.0"
+    description = "Template library for C++ projects"
+    topics = ("cpp", "template", "cmake")
+    url = "https://github.com/youruser/yourproject"
+    license = "MIT"
+    
+    exports_sources = "patches/*", "include/*", "src/*", "CMakeLists.txt"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
-
+    
     options = {"fPIC": [True, False]}
     default_options = {"fPIC": True}
 
-    # Imports
     def imports(self):
+        """Import licenses from dependencies"""
         self.copy("license*", dst="licenses", folder=True, ignore_case=True)
 
-    # Generate CMake toolchain and presets
-    def generate(self): 
+    def generate(self):
+        """Generate CMake files and apply customizations"""
+        # Generate CMake toolchain
         tc = CMakeToolchain(self)
         tc.variables["CMAKE_BUILD_TYPE"] = str(self.settings.build_type)
-        # BUILD_SHARED_LIBS is now controlled only by CMake configuration
+        # BUILD_SHARED_LIBS is controlled by CMake configuration
         tc.generate()
 
-        self.dotnameintegrated_update_cmake_presets()
-        self.dotnameintegrated_patch_remove_stdcpp_from_system_libs()
-
-        # Copy ImGui bindings after tc.generate()
-        # copy(self, "*opengl3*", 
-        #      os.path.join(self.dependencies["imgui"].package_folder, "res", "bindings"), 
-        #      os.path.join(self.source_folder, "src/bindings"))
-        # copy(self, "*sdl2*", 
-        #      os.path.join(self.dependencies["imgui"].package_folder, "res", "bindings"), 
-        #      os.path.join(self.source_folder, "src/bindings"))
+        # Apply utility functions if available
+        if UTILITIES_AVAILABLE:
+            self._apply_cmake_utilities()
+        else:
+            self.output.info("Utility functions not available - skipping custom fixes")
+            
+        # Copy additional files (example for ImGui bindings)
+        self._copy_additional_files()
         
-    # Configure options and settings
+    def _apply_cmake_utilities(self):
+        """Apply utility functions for CMake customization"""
+        presets_manager = CMakePresetsManager(self)
+        presets_manager.update_presets()
+        
+        cmake_patches = CMakePatches(self)
+        cmake_patches.remove_stdcpp_from_system_libs()
+        
+    def _copy_additional_files(self):
+        """Copy additional files from dependencies (customize as needed)"""
+        # Example: Copy ImGui bindings
+        # if "imgui" in self.deps_cpp_info.deps:
+        #     copy(self, "*opengl3*", 
+        #          os.path.join(self.dependencies["imgui"].package_folder, "res", "bindings"), 
+        #          os.path.join(self.source_folder, "src/bindings"))
+        #     copy(self, "*sdl2*", 
+        #          os.path.join(self.dependencies["imgui"].package_folder, "res", "bindings"), 
+        #          os.path.join(self.source_folder, "src/bindings"))
+        pass
+        
     def configure(self):
+        """Configure options and settings"""
+        # Force static libraries for all dependencies
         self.options["*"].shared = False
        
-        # if self.settings.os == "Windows" and self.settings.compiler == "gcc":
-        #     self.options["freetype"].with_png = False
-        #     self.options["freetype"].with_brotli = False
-        #     self.options["freetype"].with_zlib = False
-        #     self.options["freetype"].with_bzip2 = False
+        # Platform-specific configurations (examples)
+        if self.settings.os == "Windows" and self.settings.compiler == "gcc":
+            # Example: Configure freetype for MinGW
+            # self.options["freetype"].with_png = False
+            # self.options["freetype"].with_brotli = False
+            # self.options["freetype"].with_zlib = False
+            # self.options["freetype"].with_bzip2 = False
+            pass
 
-    # Requirements for dependencies
     def requirements(self):
-        # self.requires("gtest/1.16.0")           # Google Test (if CPM not used)
-        self.requires("fmt/[~11.2]")
-        self.requires("nlohmann_json/[~3.12]")
-        # self.requires("imgui/1.92.0")
-        # self.requires("glm/1.0.1")
+        """Define project dependencies"""
+        # Core dependencies - customize for your project
+        self.requires("fmt/[~11.2]")                    # Formatting library
+        self.requires("nlohmann_json/[~3.12]")          # JSON library
         
-        # Additional dependencies - uncomment as needed:
-        # self.requires("m4/1.4.20", override=True)  # Custom build with upstream fix
-        # self.requires("spdlog/[~1.12]")         # Logging library
-        # self.requires("zlib/[~1.3]")            # Compression library
-        # self.requires("yaml-cpp/0.8.0")         # YAML parsing
-        # self.requires("boost/[~1.82]")          # Boost libraries
-
-        # More specific requirements
-        # if self.settings.os != "Emscripten":
-            # self.requires("sdl/2.32.2", override=True)  # Latest stable SDL version
+        # Testing framework (uncomment if needed)
+        # self.requires("gtest/1.16.0")                 # Google Test
+        
+        # Additional common dependencies (uncomment as needed)
+        # self.requires("spdlog/[~1.12]")               # Logging library
+        # self.requires("zlib/[~1.3]")                  # Compression library
+        # self.requires("yaml-cpp/0.8.0")               # YAML parsing
+        # self.requires("boost/[~1.82]")                # Boost libraries
+        
+        # GUI/Graphics libraries
+        # self.requires("imgui/1.92.0")                 # Dear ImGui
+        # self.requires("glm/1.0.1")                    # Math library
+        
+        # Platform-specific dependencies
+        if self.settings.os != "Emscripten":
+            # SDL dependencies (uncomment if needed)
+            # self.requires("sdl/2.32.2", override=True)   # Latest stable SDL
             # self.requires("sdl_image/2.8.2")
-            # self.requires("sdl_ttf/2.24.0")
+            # self.requires("sdl_ttf/2.24.0") 
             # self.requires("sdl_mixer/2.8.0")
             # self.requires("sdl_net/2.2.0")
-
-            # if self.settings.os == "Windows" and self.settings.compiler == "gcc":
+            
+            # Windows MinGW specific
+            if self.settings.os == "Windows" and self.settings.compiler == "gcc":
                 # self.requires("glew/2.2.0")
+                pass
 
-            # ARM-specific requirements (commented out)
-            # if self.settings.arch == "armv8":            
-            #     self.requires("libunwind/1.7.0", override=True)  # 1.8.0 has __asm__ errors
-            #     self.requires("libffi/3.4.8", override=True)  # Foreign Function Interface
+        # ARM-specific requirements
+        if self.settings.arch == "armv8":
+            # Specific versions to avoid build errors
+            # self.requires("libunwind/1.7.0", override=True)  # 1.8.0 has __asm__ errors
+            # self.requires("libffi/3.4.8", override=True)     # Foreign Function Interface
+            pass
 
-    # Define build requirements (optional)
-    #def build_requirements(self):
-        # self.tool_requires("cmake/[>3.14]")
+    def build_requirements(self):
+        """Define build-time dependencies (optional)"""
+        # Build tools (uncomment if needed)
+        # self.tool_requires("cmake/[>=3.15]")          # Minimum CMake version
+        # self.tool_requires("ninja/[>=1.10]")          # Ninja build system
+        pass
 
-    # Handle system requirements (optional)
-    # def system_requirements(self):
-        # dnf = package_manager.Dnf(self)
-        # dnf.install("SDL2-devel")
+    def system_requirements(self):
+        """Install system packages (optional)"""
+        # System package manager integration
         # apt = package_manager.Apt(self)
-        # apt.install(["libsdl2-dev"])
-
-    # ---------------------------------------------------------------------
-    # Utility Functions - no need to change
-    # ---------------------------------------------------------------------
-
-    def dotnameintegrated_update_cmake_presets(self):
-        """Dynamic change of names in CMakePresets.json to avoid name conflicts"""
-        preset_file = "CMakePresets.json"
-        if not os.path.exists(preset_file):
-            return
-            
-        try:
-            with open(preset_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                
-            preset_name = (f"{str(self.settings.build_type).lower()}-"
-                          f"{str(self.settings.os).lower()}-"
-                          f"{self.settings.arch}-"
-                          f"{self.settings.compiler}-"
-                          f"{self.settings.compiler.version}")
-            
-            # Collect old names from configurePresets for mapping
-            name_mapping = {}
-            for preset in data.get("configurePresets", []):
-                old_name = preset["name"]
-                preset["name"] = preset["displayName"] = preset_name
-                name_mapping[old_name] = preset_name
-                
-            # Update buildPresets and testPresets in one pass
-            for preset_type in ["buildPresets", "testPresets"]:
-                for preset in data.get(preset_type, []):
-                    if preset.get("configurePreset") in name_mapping:
-                        preset["name"] = preset["configurePreset"] = preset_name
-                        
-            with open(preset_file, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=4)
-                
-        except (json.JSONDecodeError, IOError) as e:
-            self.output.warn(f"Failed to update CMake presets: {e}")
-
-    def dotnameintegrated_patch_remove_stdcpp_from_system_libs(self):
-        """Remove stdc++ from SYSTEM_LIBS in generated Conan CMake files"""
-        import glob
-        import re
+        # apt.install(["libsdl2-dev", "libgl1-mesa-dev"])
         
-        # Find all *-data.cmake files for all platforms and architectures
-        generators_path = self.generators_folder or "."
-        patterns = [
-            "*-data.cmake",          # General pattern for all files
-            "*-*-*-data.cmake",      # Pattern for specific platforms (name-os-arch-data.cmake)
-        ]
+        # dnf = package_manager.Dnf(self)  
+        # dnf.install(["SDL2-devel", "mesa-libGL-devel"])
         
-        cmake_files = []
-        for pattern in patterns:
-            cmake_files.extend(glob.glob(os.path.join(generators_path, pattern)))
-            
-        # Remove duplicates
-        cmake_files = list(set(cmake_files))
+        # pacman = package_manager.PacMan(self)
+        # pacman.install(["sdl2", "mesa"])
+        pass
         
-        if not cmake_files:
-            return
-            
-        # Compile regex pattern once for better performance
-        system_libs_pattern = re.compile(
-            r'(set\([^_]*_SYSTEM_LIBS(?:_[A-Z]+)?\s+[^)]*?)stdc\+\+([^)]*\))', 
-            re.MULTILINE
-        )
-        
-        patched_count = 0
-        for cmake_file in cmake_files:
-            try:
-                with open(cmake_file, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # Replace all occurrences of stdc++ in SYSTEM_LIBS
-                modified_content = system_libs_pattern.sub(r'\1\2', content)
-                
-                if modified_content != content:
-                    with open(cmake_file, 'w', encoding='utf-8') as f:
-                        f.write(modified_content)
-                    self.output.info(f"Patched {cmake_file} - removed stdc++ from SYSTEM_LIBS")
-                    patched_count += 1
-                    
-            except (IOError, OSError) as e:
-                self.output.warn(f"Could not patch {cmake_file}: {e}")
-        
-        if patched_count > 0:
-            self.output.info(f"Successfully patched {patched_count} CMake files")
+    def validate(self):
+        """Validate configuration (optional)"""
+        # Add validation logic here
+        # Example: Check for incompatible settings
+        # if self.settings.os == "Windows" and self.settings.compiler.libcxx == "libstdc++11":
+        #     raise ConanInvalidConfiguration("libstdc++11 not supported on Windows")
+        pass
