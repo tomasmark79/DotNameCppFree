@@ -112,7 +112,7 @@ int runApp (int argc, const char* argv[]) {
     return 1;
   }
 
-  Performance::simpleCpuBenchmark (); // default is off
+  //Performance::simpleCpuBenchmark (); // default is off
 
   // I know it is smartpointer, but ... why not
   uniqueLib = nullptr;
