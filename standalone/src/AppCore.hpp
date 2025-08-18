@@ -22,9 +22,9 @@ using namespace DotNameUtils;
 
 namespace AppContext {
   constexpr char standaloneName[] = "DotNameStandalone";
-  const std::filesystem::path standalonePath = PathUtils::getStandalonePath();
-  // Use dynamic asset path finding instead of compile-time path
-  const std::filesystem::path assetsPath = AssetContext::findAssetsPath(standalonePath, standaloneName);
+  const std::filesystem::path standalonePath = PathUtils::getStandalonePath ();
+  const std::filesystem::path assetsPath
+      = AssetContext::findAssetsPath (standalonePath, standaloneName);
   constexpr std::string_view utilsFirstAssetFile = UTILS_FIRST_ASSET_FILE;
   const std::filesystem::path assetsPathFirstFile = assetsPath / utilsFirstAssetFile;
 }

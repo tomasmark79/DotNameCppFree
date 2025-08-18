@@ -24,7 +24,10 @@ project(
 # Build guards
 # ==============================================================================
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(WARNING "In-source builds. Please make a new directory (called a Build directory) and run CMake from there.")
+    message(
+        WARNING
+            "In-source builds. Please make a new directory (called a Build directory) and run CMake from there."
+    )
 endif()
 
 # ==============================================================================
@@ -46,19 +49,17 @@ if(NOT fmt_FOUND)
     CPMAddPackage(
         NAME fmt
         GITHUB_REPOSITORY fmtlib/fmt
-        VERSION 11.2.0
-    )
+        VERSION 11.2.0)
 endif()
 
-# Try nlohmann_json via find_package first (for Conan users)  
+# Try nlohmann_json via find_package first (for Conan users)
 find_package(nlohmann_json QUIET)
 if(NOT nlohmann_json_FOUND)
     # Fallback to CPM for standalone usage
     CPMAddPackage(
         NAME nlohmann_json
         GITHUB_REPOSITORY nlohmann/json
-        VERSION 3.12.0
-    )
+        VERSION 3.12.0)
 endif()
 
 # CPM packages specific to library
@@ -104,7 +105,8 @@ target_compile_options(
     PUBLIC
         "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<NOT:$<PLATFORM_ID:Darwin>>,$<NOT:$<CXX_COMPILER_ID:Clang>>>:-Wall;-Wextra;-Wpedantic;-MMD;-MP>"
     PUBLIC
-        "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<PLATFORM_ID:Darwin>>:-Wall;-Wextra;-Wpedantic>")
+        "$<$<AND:$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>,$<PLATFORM_ID:Darwin>>:-Wall;-Wextra;-Wpedantic>"
+)
 
 # C++ standard
 target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)

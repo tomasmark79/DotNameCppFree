@@ -18,7 +18,7 @@ endif()
 # Common build options
 # ==============================================================================
 option(ENABLE_CCACHE "Use ccache compiler cache" ON)
-option(BUILD_SHARED_LIBS "Build shared (.so) libraries" OFF)
+option(BUILD_SHARED_LIBS "Build shared (.so) libraries" ON)
 option(USE_STATIC_RUNTIME "Link C++ runtime statically" OFF)
 option(SANITIZE_ADDRESS "Enable address sanitizer" OFF)
 option(SANITIZE_UNDEFINED "Enable undefined behavior sanitizer" OFF)
@@ -112,5 +112,7 @@ function(gather_sources OUTPUT_VAR SOURCE_DIR)
         ${SOURCE_DIR}/*.cpp
         ${SOURCE_DIR}/*.cc
         ${SOURCE_DIR}/*.cxx)
-    set(${OUTPUT_VAR} ${sources} PARENT_SCOPE)
+    set(${OUTPUT_VAR}
+        ${sources}
+        PARENT_SCOPE)
 endfunction()

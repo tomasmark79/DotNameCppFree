@@ -138,3 +138,87 @@ source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/
 source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --target install -j 16
 source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
 source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --target install -j 16
+Remove: build/standalone/x86_64-w64-mingw32/debug
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug" --deployer=full_deploy --build=missing --profile:host=x86_64-w64-mingw32 --profile:build=default --settings build_type=Debug
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/x86_64-w64-mingw32/debug"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/debug" --target install -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/DotNameLib.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/include/DotNameLib/DotNameLib.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/AppCore.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/Main.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LibTester.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LoggerTest.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/DotNameLib.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/include/DotNameLib/DotNameLib.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/AppCore.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/Main.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LibTester.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LoggerTest.cpp"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/CMakeLists.txt"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-library.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-standalone.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-common.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/CMakeLists.txt"
+Remove: build/standalone/default/debug
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --deployer=full_deploy --build=missing --profile:host=default --profile:build=default --settings build_type=Debug
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/default/debug"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --target install -j 16
+Remove: build/standalone/x86_64-w64-mingw32/relwithdebinfo
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo" --deployer=full_deploy --build=missing --profile:host=x86_64-w64-mingw32 --profile:build=default --settings build_type=RelWithDebInfo
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/x86_64-w64-mingw32/relwithdebinfo"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/relwithdebinfo" --target install -j 16
+Remove: build/standalone/x86_64-w64-mingw32/release
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release" --deployer=full_deploy --build=missing --profile:host=x86_64-w64-mingw32 --profile:build=default --settings build_type=Release
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/x86_64-w64-mingw32/release"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/release" --target install -j 16
+Remove: build/standalone/x86_64-w64-mingw32/minsizerel
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel" --deployer=full_deploy --build=missing --profile:host=x86_64-w64-mingw32 --profile:build=default --settings build_type=MinSizeRel
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/x86_64-w64-mingw32/minsizerel"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/x86_64-w64-mingw32/minsizerel" --target install -j 16
+Remove: build/standalone/default/release
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release" --deployer=full_deploy --build=missing --profile:host=default --profile:build=default --settings build_type=Release
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/default/release"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/release" --target install -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
+cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
+Remove: build/standalone/default/debug
+conan install "/home/tomas/dev/cpp/templates/DotNameCpp" --output-folder="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --deployer=full_deploy --build=missing --profile:host=default --profile:build=default --settings build_type=Debug
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conan_toolchain.cmake" -DBUILD_LIBRARY=OFF -DBUILD_STANDALONE=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/templates/DotNameCpp/build/installation/default/debug"
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug"  -j 16
+source "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/templates/DotNameCpp/build/standalone/default/debug" --target install -j 16
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/CMakeLists.txt"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-library.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-standalone.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/cmake/project-common.cmake"
+cmake-format --enable-markup -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/CMakeLists.txt"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/DotNameLib.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Utils/Utils.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Logger/Logger.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/src/Assets/AssetContext.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/include/DotNameLib/DotNameLib.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/AppCore.hpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/src/Main.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LibTester.cpp"
+clang-format-20 -i "/home/tomas/dev/cpp/templates/DotNameCpp/standalone/tests/LoggerTest.cpp"

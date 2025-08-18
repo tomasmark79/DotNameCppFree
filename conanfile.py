@@ -31,8 +31,8 @@ class ProjectTemplateRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
 
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False, "fPIC": True}
+    options = {"fPIC": [True, False]}
+    default_options = {"fPIC": True}
 
     # Imports
     def imports(self):
@@ -42,6 +42,7 @@ class ProjectTemplateRecipe(ConanFile):
     def generate(self): 
         tc = CMakeToolchain(self)
         tc.variables["CMAKE_BUILD_TYPE"] = str(self.settings.build_type)
+        # BUILD_SHARED_LIBS is now controlled only by CMake configuration
         tc.generate()
 
         self.dotnameintegrated_update_cmake_presets()

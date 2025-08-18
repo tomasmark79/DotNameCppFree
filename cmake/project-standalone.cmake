@@ -1,7 +1,7 @@
 # MIT License Copyright (c) 2024-2025 Tomáš Mark
 
 # ==============================================================================
-# STANDALONE-SPECIFIC CONFIGURATION  
+# STANDALONE-SPECIFIC CONFIGURATION
 # ==============================================================================
 
 # Load common settings
@@ -24,7 +24,10 @@ project(
 # Build guards
 # ==============================================================================
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(WARNING "In-source builds. Please make a new directory (called a Build directory) and run CMake from there.")
+    message(
+        WARNING
+            "In-source builds. Please make a new directory (called a Build directory) and run CMake from there."
+    )
 endif()
 
 # ==============================================================================
