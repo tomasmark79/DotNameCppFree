@@ -54,4 +54,4 @@ if(NOT DEFINED target)
     # Ensure the emscripten() helper has a default 'target' variable to reference
     set(target ${TEST_NAME})
 endif()
-emscripten(${TEST_NAME} 1 0 "--preload-file ../../../../../assets@share/${target}/assets")
+emscripten(${TEST_NAME} 1 0 "--preload-file ${CMAKE_SOURCE_DIR}/assets@share/${target}/assets")
