@@ -1,3 +1,5 @@
 # DotNameCpp
 was replaced by
-https://github.com/tomasmark79/DotNameCpp-Doc
+https://github.com/tomasmark79/DotNameCpp-Pub
+
+
